@@ -6,7 +6,7 @@
 public enum SceneType 
 {
     TitleScene,
-    MainScene,
+    MenuScene,
     GameScene
 }
 

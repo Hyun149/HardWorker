@@ -14,7 +14,7 @@ public class SceneLoader : MonoBehaviour
     /// </summary>
     private static readonly Dictionary<SceneType, string> sceneMap = new Dictionary<SceneType, string>
     {
-        { SceneType.MainScene, "MainMenu"}
+        { SceneType.MenuScene, "MainMenu"}
     };
 
     /// <summary>
@@ -39,5 +39,18 @@ public class SceneLoader : MonoBehaviour
     public static string GetCurrentSceneName()
     {
         return SceneManager.GetActiveScene().name;
+    }
+
+    public static SceneType? GetSceneType(string sceneName)
+    {
+        foreach (var kvp in sceneMap)
+        {
+            if (kvp.Value == sceneName)
+            {
+                return kvp.Key;
+            }
+        }
+
+        return null;
     }
 }
