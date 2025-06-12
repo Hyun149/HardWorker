@@ -7,7 +7,7 @@ public class WeaponData : ScriptableObject
 {
     public string id;   //id
     
-    public string name;     //칼 이름
+    public string name;     // 이름
     
     public string description;      //설명
     
