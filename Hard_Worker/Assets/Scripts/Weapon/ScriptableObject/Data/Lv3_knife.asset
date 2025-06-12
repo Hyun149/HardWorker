@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15e9d2317fa4ec4da6fac839b3353f1, type: 3}
+  m_Name: Lv3_knife
+  m_EditorClassIdentifier: 
+  id: 3
+  name: "\uD669\uAE08\uBE5B \uCE7C"
+  description: "\uC804\uC124\uC758 \uC170\uD504\uAC00 \uC37C\uB2E4\uACE0 \uC54C\uB824\uC9C0\uB294
+    \uCE7C.\uBB34\uC5C7\uD558\uB098 \uBE60\uC9C0\uB294\uAC8C \uC5C6\uB2E4."
+  icon: {fileID: -200604454, guid: 87618393348bce34db7e1edafd4c1458, type: 3}
