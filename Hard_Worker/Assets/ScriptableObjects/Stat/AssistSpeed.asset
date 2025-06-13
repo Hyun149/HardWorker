@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: AssistSpeed
   m_EditorClassIdentifier: 
   statType: 4
-  baseValue: 0
-  upgradeValues: []
-  upgradeCosts: 
+  baseValue: 10.1
+  upgradeValues:
+  - -0.1
+  upgradeCosts: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  maxLevel: 100
