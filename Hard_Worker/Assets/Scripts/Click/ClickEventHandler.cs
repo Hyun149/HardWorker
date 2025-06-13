@@ -7,9 +7,14 @@ public class ClickEventHandler : MonoBehaviour
     [Header("클릭 설정")]
     [SerializeField] private bool isPaused = false;
 
+    [Header("플레이어 레벨")]
+    [SerializeField] private int playerLevel = 1;
+    [SerializeField] private int autoAttackUnlockLevel = 5; // 자동 공격 해금 레벨
+
     [Header("자동 공격 설정")]
     [SerializeField] private int autoAttackLevel = 0;
     [SerializeField] private float baseAutoAttackInterval = 1.0f;
+    [SerializeField] private bool isAutoAttackUnlocked = false;
 
     [Header("치명타 설정")]
     [SerializeField] private float criticalChance = 0.1f; // 10% 기본 치명타 확률
@@ -25,16 +30,15 @@ public class ClickEventHandler : MonoBehaviour
 
     private Camera mainCamera;
     private Coroutine autoAttackCoroutine;
+    private AutoAttackManager autoAttackManager; // 추가
 
     void Start()
     {
         mainCamera = Camera.main;
+        autoAttackManager = FindObjectOfType<AutoAttackManager>(); // 추가
 
-        // 자동 공격 시작
-        if (autoAttackLevel > 0)
-        {
-            StartAutoAttack();
-        }
+        // 플레이어 레벨 체크하여 자동 공격 해금
+        CheckAutoAttackUnlock();
     }
 
     void Update()
@@ -126,6 +130,25 @@ public class ClickEventHandler : MonoBehaviour
         // GameManager.Instance.OnPlayerCriticalAttack(criticalDamage);
     }
 
+    // 자동 공격 해금 체크
+    void CheckAutoAttackUnlock()
+    {
+        if (playerLevel >= autoAttackUnlockLevel && !isAutoAttackUnlocked)
+        {
+            isAutoAttackUnlocked = true;
+            Debug.Log($"레벨 {autoAttackUnlockLevel} 달성! 자동 공격이 해금되었습니다!");
+
+            // 자동 공격 레벨 1로 설정하여 시작
+            SetAutoAttackLevel(1);
+
+            // AutoAttackManager에게 해금 알림 - 추가
+            if (autoAttackManager != null)
+            {
+                autoAttackManager.OnAutoAttackUnlocked();
+            }
+        }
+    }
+
     // 자동 공격 시작
     public void StartAutoAttack()
     {
@@ -134,7 +157,7 @@ public class ClickEventHandler : MonoBehaviour
             StopCoroutine(autoAttackCoroutine);
         }
 
-        if (autoAttackLevel > 0)
+        if (autoAttackLevel > 0 && isAutoAttackUnlocked)
         {
             autoAttackCoroutine = StartCoroutine(AutoAttackCoroutine());
         }
@@ -178,6 +201,12 @@ public class ClickEventHandler : MonoBehaviour
     // 자동 공격 레벨 설정
     public void SetAutoAttackLevel(int level)
     {
+        if (!isAutoAttackUnlocked && level > 0)
+        {
+            Debug.Log($"자동 공격은 레벨 {autoAttackUnlockLevel}에 해금됩니다!");
+            return;
+        }
+
         autoAttackLevel = level;
 
         if (level > 0)
@@ -194,5 +223,25 @@ public class ClickEventHandler : MonoBehaviour
     public void SetCriticalChance(float chance)
     {
         criticalChance = Mathf.Clamp01(chance);
+    }
+
+    // 플레이어 레벨 설정 (GameManager에서 호출)
+    public void SetPlayerLevel(int level)
+    {
+        playerLevel = level;
+        CheckAutoAttackUnlock();
+    }
+
+    // 자동 공격 간격 정보 가져오기
+    public float GetCurrentAutoAttackInterval()
+    {
+        if (autoAttackLevel <= 0) return 0f;
+        return baseAutoAttackInterval / (1 + (autoAttackLevel - 1) * 0.1f);
+    }
+
+    // 자동 공격 해금 상태 확인
+    public bool IsAutoAttackUnlocked()
+    {
+        return isAutoAttackUnlocked;
     }
 }
