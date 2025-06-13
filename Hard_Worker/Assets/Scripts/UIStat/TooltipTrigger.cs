@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    //툴팁을 직접 드래그해서 넣을 수 있게 필드 선언
+    // 툴팁을 직접 드래그해서 넣을 수 있게 필드 선언
     [SerializeField] private GameObject tooltipObject;
 
 

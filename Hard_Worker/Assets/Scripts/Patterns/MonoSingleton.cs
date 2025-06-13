@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -56,7 +54,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             instance = this as T;
             DontDestroyOnLoad(gameObject);
         }
-        else if (instance == null)
+        else
         {
             Destroy(gameObject);
         }

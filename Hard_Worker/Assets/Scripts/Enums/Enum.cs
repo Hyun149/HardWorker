@@ -5,22 +5,8 @@
 /// </summary>
 public enum SceneType 
 {
-    MainScene,
-    // 추후 추가 가능
-    // Chapter1,
-    // BattleScene,
-    // EndingScene,
-    // LoadingScene
+    TitleScene,
+    MenuScene,
+    GameScene
 }
 
-/// <summary>
-/// 게임의 상태를 정의한 열거형입니다.<br/>
-/// 상태별로 GameManager가 각기 다른 흐름을 제어합니다.
-/// </summary>
-public enum GameState
-{
-    None,
-    Title,
-    InGame,
-    // Pause, Resume, Clear    
-}
