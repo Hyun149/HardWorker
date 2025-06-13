@@ -10,8 +10,8 @@ public class StatButtonUI : MonoBehaviour
     [SerializeField] private GameObject statCanvas;
     [SerializeField] private Button backButton;
     [SerializeField] private Button statButton;
+    [SerializeField] private StatUIManager uiManager;
 
-    private StatUI StatUI;
 
     private void Awake()
     {
@@ -19,12 +19,16 @@ public class StatButtonUI : MonoBehaviour
         backButton.onClick.AddListener(HideStatCanvas);
     }
 
+   
+
     /// <summary>
     /// StatCanvas를 활성화합니다.
     /// </summary>
     private void ShowStatCanvas()
     {
-        StatUI.RefreshUI();
+        uiManager.InitializeAll();
+        uiManager.RefreshAllUI();
+
         statCanvas.SetActive(true);
         gameCanvas.SetActive(false);
     }
