@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,7 +54,7 @@ public class StatUI : MonoBehaviour
     /// <summary>
     /// 현재 능력치 수치, 레벨, 비용 정보를 가져와 UI에 출력
     /// </summary>
-    private void RefreshUI()
+    public void RefreshUI()
     {
         int level = playerStat.GetStatLevel(statType);     // 현재 강화 레벨
         float value = playerStat.GetStatValue(statType);   // 최종 능력치 값
