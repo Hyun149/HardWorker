@@ -14,5 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statType: 5
   baseValue: 0
-  upgradeValues: []
-  upgradeCosts: 
+  upgradeValues:
+  - 100
+  - 200
+  - 300
+  - 400
+  - 500
+  upgradeCosts: 0000000000000000000000000000000000000000
+  maxLevel: 50

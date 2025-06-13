@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: CritChance
   m_EditorClassIdentifier: 
   statType: 1
-  baseValue: 1
-  upgradeValues: []
-  upgradeCosts: 
+  baseValue: 0
+  upgradeValues:
+  - 0.5
+  upgradeCosts: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  maxLevel: 100

@@ -63,6 +63,7 @@ public class StatUI : MonoBehaviour
         // 능력치별 표시 형식 지정
         switch (statType)
         {
+            case StatType.Income:
             case StatType.CritChance:
             case StatType.CritBonus:
                 valueText.text = $"{value}%";              // 퍼센트 형식
