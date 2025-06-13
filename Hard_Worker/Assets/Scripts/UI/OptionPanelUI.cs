@@ -1,0 +1,34 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// 설정 버튼과 돌아가기 버튼을 통해 옵션 패널의 활성/비활성화를 제어합니다.
+/// </summary>
+public class OptionPanelUI : MonoBehaviour
+{
+    [SerializeField] private GameObject optionPanel;
+    [SerializeField] private Button openButton;
+    [SerializeField] private Button closeButton;
+
+    private void Awake()
+    {
+        openButton.onClick.AddListener(OpenOptionPanel);
+        closeButton.onClick.AddListener(CloseOptionPanel);
+    }
+
+    /// <summary>
+    /// 옵션 패널을 화면에 표시합니다.
+    /// </summary>
+    private void OpenOptionPanel()
+    {
+        optionPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// 옵션 패널을 화면에서 숨깁니다.
+    /// </summary>
+    private void CloseOptionPanel()
+    {
+        optionPanel.SetActive(false);
+    }
+}
