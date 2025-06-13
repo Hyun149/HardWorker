@@ -5,7 +5,7 @@ public class SkillPointManager : MonoBehaviour
 {
     public static SkillPointManager Instance;
 
-    private int currentSP = 1000;
+    public int currentSP = 1000;
 
     public UnityEvent OnSPChanged;
 

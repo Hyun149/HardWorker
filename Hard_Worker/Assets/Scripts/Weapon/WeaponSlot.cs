@@ -19,6 +19,10 @@ public class WeaponSlot : MonoBehaviour
     public Button upgradeButton;
     public Button equipButton;
     public TextMeshProUGUI maxUpgradeText;
+    public TextMeshProUGUI[] requireSPTexts;
+    
+    
+    
     private Weapon weapon;
     private WeaponDataSO data;
     
@@ -38,8 +42,18 @@ public class WeaponSlot : MonoBehaviour
         icon.sprite = data.icon;
         AdjustIconSize(data.icon);
         
+        int costToShow = 0;
+        if (isOwned)
+            costToShow = weapon.GetEnhanceCost();
+        else
+            costToShow = data.enhancementTable[0].cost; // 0레벨 강화비용 (구매 비용) 사용
+
+        foreach (var text in requireSPTexts)
+            text.text = $"X {costToShow}";
+        
         upgradeButton.gameObject.SetActive(false);
         equipButton.gameObject.SetActive(false);
+        
         if (isOwned || isDefault)
         {
             icon.color = Color.white;
@@ -98,18 +112,16 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryPurchase()
     {
-        // if (SkillPointManager.Instance.HasEnough(data.enhancementTable[0].cost))
-        // {
-        //     //SkillPointManager.Instance.SpendSP(data.enhancementTable[0].cost);
-        //     WeaponInventory.Instance.AddWeapon(data);
-        //     FindObjectOfType<WeaponInventoryUI>().RenderInventory();
-        // }
-        // else
-        // {
-        //     Debug.Log("Not enough SP");
-        // }
-        WeaponInventory.Instance.AddWeapon(data);
-        FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+        if (SkillPointManager.Instance.HasEnough(data.enhancementTable[0].cost))
+        {
+            SkillPointManager.Instance.SpendSP(data.enhancementTable[0].cost);
+            WeaponInventory.Instance.AddWeapon(data);
+            FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+        }
+        else
+        {
+            Debug.Log("Not enough SP");
+        }
     }
     
     
@@ -118,20 +130,17 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryEnhance()
     {
-        // int cost = weapon.GetEnhanceCost();
-        // if (SkillPointManager.Instance.HasEnough(cost))
-        // {
-        //     SkillPointManager.Instance.SpendSP(cost);
-        //     weapon.Enhance();
-        //     attackValue.text = weapon.GetAttack().ToString();
-        //     criticalValue.text = weapon.GetCriticalRate().ToString()+"%";
-        // }
-        // else
-        // {
-        //     Debug.Log("Not enough SP");
-        // }
-        weapon.Enhance();
-        FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+        int cost = weapon.GetEnhanceCost();
+        if (SkillPointManager.Instance.HasEnough(cost))
+        {
+            SkillPointManager.Instance.SpendSP(cost);
+            weapon.Enhance();
+            FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+        }
+        else
+        {
+            Debug.Log("Not enough SP");
+        }
     }
     /// <summary>
     /// 무기 장착시 

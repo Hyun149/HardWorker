@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WeaponInventoryUI : MonoBehaviour
 {
     public Transform slotContainer; // SlotContainer
     public GameObject slotPrefab;
-    
+    public TextMeshProUGUI spAmountText;
     /// <summary>
     /// 무기 장착될때 이벤트 구독하여 자동 업뎃 
     /// </summary>
@@ -34,5 +35,7 @@ public class WeaponInventoryUI : MonoBehaviour
             WeaponSlot slot = slotObj.GetComponent<WeaponSlot>();
             slot.SetupSlot(data, owned);
         }
+
+        spAmountText.text = SkillPointManager.Instance.currentSP.ToString();
     }
 }

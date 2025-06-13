@@ -21,7 +21,7 @@ MonoBehaviour:
   - level: 0
     attack: 5
     criticalRate: 1
-    cost: 0
+    cost: 1
   - level: 1
     attack: 8
     criticalRate: 2
