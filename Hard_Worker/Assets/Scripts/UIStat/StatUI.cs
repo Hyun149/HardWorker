@@ -66,7 +66,7 @@ public class StatUI : MonoBehaviour
             case StatType.CritChance:
             case StatType.CritBonus:
                 valueText.text = $"{value}%";              // 퍼센트 형식
-                break;
+                break;  
 
             case StatType.AssistSpeed:
                 valueText.text = $"{value:0.0}s";          // 시간(초) 형식
@@ -78,7 +78,8 @@ public class StatUI : MonoBehaviour
         }
 
         // 비용 및 레벨 텍스트 갱신
-        costText.text = cost > 0 ? cost.ToString() : "-";  // 비용이 없으면 "-"
-        levelText.text = level.ToString();                 // 숫자만 출력
+        bool isMaxLevel = level >= playerStat.GetMaxLevel(statType);
+        costText.text = (cost > 0 && !isMaxLevel) ? cost.ToString() : "-";
+        levelText.text = level.ToString();
     }
 }
