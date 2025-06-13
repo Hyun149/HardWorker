@@ -136,6 +136,7 @@ public class WeaponSlot : MonoBehaviour
             SkillPointManager.Instance.SpendSP(cost);
             weapon.Enhance();
             FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+            WeaponStatusUI.Instance.DisplayWeapon(weapon);
         }
         else
         {
