@@ -8,6 +8,18 @@ public class WeaponInventoryUI : MonoBehaviour
     public GameObject slotPrefab;
     
     /// <summary>
+    /// 무기 장착될때 이벤트 구독하여 자동 업뎃 
+    /// </summary>
+    private void OnEnable()
+    {
+        WeaponManager.Instance.OnWeaponEquipped += RenderInventory;
+    }
+
+    private void OnDisable()
+    {
+        WeaponManager.Instance.OnWeaponEquipped -= RenderInventory;
+    }
+    /// <summary>
     /// 인벤에서 장착,업글,구매 등 버튼을 눌렀을때호출, 슬롯들 UI를 업데이트해줌
     /// </summary>
     public void RenderInventory()

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,11 +14,11 @@ public class WeaponSlot : MonoBehaviour
     public TextMeshProUGUI attackValue;
     public TextMeshProUGUI criticalValue;
     public GameObject infoText;
-    [Header("Buttons")]
+    [Header("InteractContainer")]
     public Button buyButton;
     public Button upgradeButton;
     public Button equipButton;
-
+    public TextMeshProUGUI maxUpgradeText;
     private Weapon weapon;
     private WeaponDataSO data;
     
@@ -34,15 +32,16 @@ public class WeaponSlot : MonoBehaviour
         weapon = ownedWeapon;
         
         bool isOwned = weapon != null;
-        bool isEquipped = isOwned && WeaponManager.Instance.GetEquippedWeapon() == weapon;
+        bool isEquipped = isOwned && WeaponManager.Instance.GetEquippedWeapon()?.GetData().id == data.id;
         bool isDefault = data.id == "0";
 
         icon.sprite = data.icon;
         AdjustIconSize(data.icon);
-
+        
+        upgradeButton.gameObject.SetActive(false);
+        equipButton.gameObject.SetActive(false);
         if (isOwned || isDefault)
         {
-            Debug.Log("dd");
             icon.color = Color.white;
             hiddenText.gameObject.SetActive(false);
             
@@ -53,19 +52,27 @@ public class WeaponSlot : MonoBehaviour
             criticalValue.text = weapon.GetCriticalRate().ToString() + "%";
 
             buyButton.gameObject.SetActive(false);
-            upgradeButton.gameObject.SetActive(true);
-            equipButton.gameObject.SetActive(!isEquipped);
+            
+            bool isMaxEnhanced = isOwned && weapon.GetLevel() >= data.enhancementTable.Count - 1;
+    
+            upgradeButton.gameObject.SetActive(!isMaxEnhanced);
+            maxUpgradeText.gameObject.SetActive(isMaxEnhanced);
 
-            upgradeButton.onClick.RemoveAllListeners();
-            upgradeButton.onClick.AddListener(() => TryEnhance());
-
+            if (!isMaxEnhanced)
+            {
+                upgradeButton.onClick.RemoveAllListeners();
+                upgradeButton.onClick.AddListener(() => TryEnhance());
+            }
             equipButton.onClick.RemoveAllListeners();
             if (!isEquipped)
-                equipButton.onClick.AddListener(() => WeaponManager.Instance.EquipWeapon(weapon));
+            {
+                equipButton.gameObject.SetActive(true);
+                equipButton.onClick.RemoveAllListeners();
+                equipButton.onClick.AddListener(() => TryEquip());
+            }
         }
         else
         {
-            Debug.Log("d2");
             icon.color = new Color(0, 0, 0, 0.5f);
             hiddenText.text = "???";
             hiddenText.gameObject.SetActive(true);
@@ -124,8 +131,14 @@ public class WeaponSlot : MonoBehaviour
         //     Debug.Log("Not enough SP");
         // }
         weapon.Enhance();
-        attackValue.text = weapon.GetAttack().ToString();
-        criticalValue.text = weapon.GetCriticalRate().ToString()+"%";
+        FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+    }
+    /// <summary>
+    /// 무기 장착시 
+    /// </summary>
+    void TryEquip()
+    {
+        WeaponManager.Instance.EquipWeapon(weapon);
     }
     
     /// <summary>
