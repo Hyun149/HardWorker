@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Lv2_knife
   m_EditorClassIdentifier: 
   id: 2
-  name: "\uC911\uC2DD\uCE7C"
+  weaponName: "\uC911\uC2DD \uCE7C"
   description: "\uC911\uC2DD\uC694\uB9AC\uC5D0\uC11C \uC4F0\uB294 \uB450\uAEBC\uC6B4
     \uCE7C. \uB450\uAEBC\uC6B4\uB9CC\uD07C \uD30C\uC6CC\uAC00 \uB192\uB2E4"
   icon: {fileID: -858581096, guid: 87618393348bce34db7e1edafd4c1458, type: 3}
+  enhancementTable:
+  - level: 0
+    attack: 0
+    criticalRate: 0
+    cost: 0

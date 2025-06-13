@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Lv3_knife
   m_EditorClassIdentifier: 
   id: 3
-  name: "\uD669\uAE08\uBE5B \uCE7C"
+  weaponName: "\uC804\uC124\uC758 \uCE7C"
   description: "\uC804\uC124\uC758 \uC170\uD504\uAC00 \uC37C\uB2E4\uACE0 \uC54C\uB824\uC9C0\uB294
     \uCE7C.\uBB34\uC5C7\uD558\uB098 \uBE60\uC9C0\uB294\uAC8C \uC5C6\uB2E4."
   icon: {fileID: -200604454, guid: 87618393348bce34db7e1edafd4c1458, type: 3}
+  enhancementTable:
+  - level: 0
+    attack: 0
+    criticalRate: 0
+    cost: 0
