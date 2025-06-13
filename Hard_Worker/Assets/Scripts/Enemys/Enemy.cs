@@ -6,8 +6,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private EnemyManager enemyManager;
+
     public EnemyData enemyData;
     public event Action<float,float> onChangeProgress;
+    public event Action completedCooking; // 요리 완료시
 
     // 적 초기화
     public void Init(EnemyManager enemyManager)
@@ -29,19 +31,25 @@ public class Enemy : MonoBehaviour
         if (progress >= 100) { Ingredient(); }
     }
     // 재료 지급
-    void Ingredient()
+     void Ingredient()
     {
         // 이번 스테이지에서 죽인 적 카운트를 증가
         enemyManager.UpEnemyCount();
 
         // 재료를 지급
 
-        // 다음 적 생성
+        // 잡을 적이 남았을 경우 다음 적 생성
         if (enemyManager.EnemyCount < enemyManager.enemys.Length - 1)
         {
             enemyManager.SpawnEnemy();
         }
+        // 전부 다 잡은 경우
+        else
+        {
+            // 요리 완성 확인
+            completedCooking?.Invoke();
 
+        }
         Destroy(this);
      }
 }

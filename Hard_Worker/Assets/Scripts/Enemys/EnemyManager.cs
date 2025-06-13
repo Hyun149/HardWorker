@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         // 적 생성
-        SpawnEnemy();
+       // SpawnEnemy();
     }
     // 적 생성
     public void SpawnEnemy()

@@ -112,4 +112,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBarPrefab: {fileID: 4818600827207004075, guid: c8cd8a984f14d6143b41d1da34a616d7, type: 3}
-  offset: {x: 0, y: -2.5, z: 0}
+  offset: {x: 0, y: 2.3, z: 0}
