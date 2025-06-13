@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,7 +54,7 @@ public class StatUI : MonoBehaviour
     /// <summary>
     /// 현재 능력치 수치, 레벨, 비용 정보를 가져와 UI에 출력
     /// </summary>
-    private void RefreshUI()
+    public void RefreshUI()
     {
         int level = playerStat.GetStatLevel(statType);     // 현재 강화 레벨
         float value = playerStat.GetStatValue(statType);   // 최종 능력치 값
@@ -63,10 +63,11 @@ public class StatUI : MonoBehaviour
         // 능력치별 표시 형식 지정
         switch (statType)
         {
+            case StatType.Income:
             case StatType.CritChance:
             case StatType.CritBonus:
                 valueText.text = $"{value}%";              // 퍼센트 형식
-                break;
+                break;  
 
             case StatType.AssistSpeed:
                 valueText.text = $"{value:0.0}s";          // 시간(초) 형식
@@ -78,7 +79,11 @@ public class StatUI : MonoBehaviour
         }
 
         // 비용 및 레벨 텍스트 갱신
-        costText.text = cost > 0 ? cost.ToString() : "-";  // 비용이 없으면 "-"
-        levelText.text = level.ToString();                 // 숫자만 출력
+        bool isMaxLevel = level >= playerStat.GetMaxLevel(statType);
+        costText.text = (cost > 0 && !isMaxLevel) ? cost.ToString() : "-";
+        levelText.text = level.ToString();
+
+        // 가능 여부에 따라 비용 색상 변경
+        costText.color = playerStat.CanUpgrade(statType) ? Color.black : Color.red;
     }
 }

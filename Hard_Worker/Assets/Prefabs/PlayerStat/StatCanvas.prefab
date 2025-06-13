@@ -4956,7 +4956,7 @@ GameObject:
   - component: {fileID: 8576483008363408202}
   - component: {fileID: 4802885178789809889}
   m_Layer: 5
-  m_Name: Stat
+  m_Name: StatCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5057,7 +5057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3ce4d474717774693d355930e4da22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStat: {fileID: 0}
+  playerStat: {fileID: 459848691270114663, guid: 02ce68c14c1a38a49991addbdc804290, type: 3}
   statUIs:
   - {fileID: 4660246921267777792}
   - {fileID: 569168411808020103}
