@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// </summary>
 public class TitleSceneUI : MonoBehaviour
 {
-    [SerializeField] private Button startButton;
+    [SerializeField] private Button startButton; // 인스펙터 창에 버튼 드래그
 
     /// <summary>
     /// 컴포넌트가 활성화될 때 버튼 클릭 이벤트를 등록합니다.

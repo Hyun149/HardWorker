@@ -15,7 +15,8 @@ public class SceneLoader : MonoBehaviour
     private static readonly Dictionary<SceneType, string> sceneMap = new Dictionary<SceneType, string>
     {
         { SceneType.TitleScene, "TitleScene"},
-        { SceneType. MenuScene, "MenuScene"}
+        { SceneType. MenuScene, "MenuScene"},
+        { SceneType.GameScene, "GameScene" }
     };
 
     /// <summary>
