@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Weapon_GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static Weapon_GameManager Instance;
 
     [Header("무기")]
     public WeaponDataSO defaultWeaponData;  // 기본무기

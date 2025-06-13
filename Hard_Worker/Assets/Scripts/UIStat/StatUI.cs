@@ -1,11 +1,15 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 /// <summary>
 /// StatUI : 각 능력치 항목의 UI를 관리하는 클래스
 /// - 능력치 수치, 강화 레벨, 업그레이드 비용을 표시하고
 /// - 버튼 클릭 시 PlayerStat을 통해 능력치를 강화하고 UI를 갱신함
+/// - 단발성으로 클릭 시 1회 강화
+/// - 길게 누르면 0.5초 뒤부터 0.2초 간격으로 반복 강화
+/// - 롱클릭은 Unity EventTrigger로 연결됨
 /// </summary>
 public class StatUI : MonoBehaviour
 {
@@ -26,6 +30,12 @@ public class StatUI : MonoBehaviour
     public StatType StatType => statType;                // 외부 접근용 프로퍼티
 
     private PlayerStat playerStat;                       // 능력치 계산 및 저장 시스템 참조
+
+    // ================================
+    // 🔁 롱클릭 강화용 변수
+    // ================================
+    private bool isHolding = false;                      // 현재 누르고 있는지 여부
+    private Coroutine holdCoroutine;                     // 반복 실행 코루틴 참조
 
     // ================================
     // 📌 초기화
@@ -85,5 +95,43 @@ public class StatUI : MonoBehaviour
 
         // 가능 여부에 따라 비용 색상 변경
         costText.color = playerStat.CanUpgrade(statType) ? Color.black : Color.red;
+    }
+
+    // ================================
+    // 롱클릭 시작 (EventTrigger에서 호출됨)
+    // ================================
+    public void OnPointerDown()
+    {
+        isHolding = true;
+        holdCoroutine = StartCoroutine(HoldUpgradeRoutine());
+    }
+
+    // ================================
+    // 롱클릭 종료 (EventTrigger에서 호출됨)
+    // ================================
+    public void OnPointerUp()
+    {
+        isHolding = false;
+
+        if (holdCoroutine != null)
+        {
+            StopCoroutine(holdCoroutine);
+            holdCoroutine = null;
+        }
+    }
+
+    // ================================
+    // 강화 반복 실행 코루틴
+    // ================================
+    private IEnumerator HoldUpgradeRoutine()
+    {
+        yield return new WaitForSeconds(0.3f);        // 롱클릭 시작 지연
+
+        while (isHolding)
+        {
+            playerStat.UpgradeStat(statType);        // 강화 실행
+            RefreshUI();                             // UI 반영
+            yield return new WaitForSeconds(0.1f);   // 반복 간격
+        }
     }
 }

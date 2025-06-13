@@ -19,6 +19,46 @@ MonoBehaviour:
   icon: {fileID: -200604454, guid: 87618393348bce34db7e1edafd4c1458, type: 3}
   enhancementTable:
   - level: 0
-    attack: 0
-    criticalRate: 0
-    cost: 0
+    attack: 15
+    criticalRate: 5
+    cost: 25
+  - level: 1
+    attack: 22
+    criticalRate: 7
+    cost: 40
+  - level: 2
+    attack: 29
+    criticalRate: 9
+    cost: 65
+  - level: 3
+    attack: 36
+    criticalRate: 11
+    cost: 105
+  - level: 4
+    attack: 43
+    criticalRate: 13
+    cost: 170
+  - level: 5
+    attack: 50
+    criticalRate: 15
+    cost: 275
+  - level: 6
+    attack: 60
+    criticalRate: 17
+    cost: 445
+  - level: 7
+    attack: 70
+    criticalRate: 19
+    cost: 720
+  - level: 8
+    attack: 80
+    criticalRate: 21
+    cost: 1165
+  - level: 9
+    attack: 90
+    criticalRate: 23
+    cost: 1885
+  - level: 10
+    attack: 105
+    criticalRate: 25
+    cost: 3050
