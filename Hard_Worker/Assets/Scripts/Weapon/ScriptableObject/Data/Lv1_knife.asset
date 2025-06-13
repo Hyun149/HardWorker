@@ -13,6 +13,51 @@ MonoBehaviour:
   m_Name: Lv1_knife
   m_EditorClassIdentifier: 
   id: 1
-  name: "\uC0AC\uC2DC\uBBF8 \uCE7C"
+  weaponName: "\uC0AC\uC2DC\uBBF8 \uCE7C"
   description: "\uD68C\uB97C \uB730\uB54C \uC4F0\uB294 \uCE7C. \uC544\uC8FC \uC608\uB9AC\uD558\uB2E4"
   icon: {fileID: 1291169626, guid: 87618393348bce34db7e1edafd4c1458, type: 3}
+  enhancementTable:
+  - level: 0
+    attack: 6
+    criticalRate: 2
+    cost: 5
+  - level: 1
+    attack: 10
+    criticalRate: 3
+    cost: 4
+  - level: 2
+    attack: 14
+    criticalRate: 4
+    cost: 6
+  - level: 3
+    attack: 18
+    criticalRate: 5
+    cost: 8
+  - level: 4
+    attack: 22
+    criticalRate: 6
+    cost: 13
+  - level: 5
+    attack: 26
+    criticalRate: 7
+    cost: 21
+  - level: 6
+    attack: 30
+    criticalRate: 8
+    cost: 34
+  - level: 7
+    attack: 34
+    criticalRate: 9
+    cost: 55
+  - level: 8
+    attack: 38
+    criticalRate: 10
+    cost: 89
+  - level: 9
+    attack: 42
+    criticalRate: 11
+    cost: 144
+  - level: 10
+    attack: 46
+    criticalRate: 12
+    cost: 233

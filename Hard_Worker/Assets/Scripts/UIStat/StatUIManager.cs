@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -22,6 +22,25 @@ public class StatUIManager : MonoBehaviour
         foreach (var ui in statUIs)
         {
             ui.Initialize(ui.StatType, playerStat);  // 각 UI에 타입과 시스템 연결
+        }
+    }
+
+    /// <summary>
+    /// 🔄 모든 StatUI를 새로 갱신
+    /// </summary>
+    public void RefreshAllUI()
+    {
+        for (int i = 0; i < statUIs.Count; i++)
+        {
+            statUIs[i].RefreshUI();
+        }
+    }
+
+    public void InitializeAll()
+    {
+        foreach (var ui in statUIs)
+        {
+            ui.Initialize(ui.StatType, playerStat);
         }
     }
 }
