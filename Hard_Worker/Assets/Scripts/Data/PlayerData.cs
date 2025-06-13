@@ -13,7 +13,10 @@ public class PlayerData
 
     public Dictionary<StatType, int> statLevels = new();
 
-    public List<string> equippedItemIDs = new();
+    public string equippedWeaponId;  // 현재 장착 중인 무기 ID
+    
+    public List<WeaponSaveData> ownedWeapons = new();  // 소유 무기 전체
+
 
     public PlayerData()
     {
@@ -21,7 +24,9 @@ public class PlayerData
         {
             statLevels[stat] = 0;
         }
+
         currentGold = 0;
         stageIndex = 1;
+        equippedWeaponId = "0";
     }
 }
