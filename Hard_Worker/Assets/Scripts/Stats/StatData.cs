@@ -28,6 +28,11 @@ public class StatData : ScriptableObject
     [SerializeField] private List<float> upgradeValues = new List<float>();
 
     /// <summary>
+    /// 업그레이드 비용 (레벨별) 저장 리스트
+    /// </summary>
+    [SerializeField] private List<int> upgradeCosts = new List<int>();
+
+    /// <summary>
     /// 외부에서 스탯 타입을 읽을 수 있도록 하는 프로퍼티
     /// </summary>
     public StatType StatType => statType;
@@ -41,4 +46,9 @@ public class StatData : ScriptableObject
     /// 외부에서 업그레이드 수치를 읽을 수 있도록 하는 프로퍼티
     /// </summary>
     public List<float> UpgradeValues => upgradeValues;
+
+    /// <summary>
+    /// 외부에서 업그레이드 가격을 읽을 수 있도록 하는 프로퍼티
+    /// </summary>
+    public List<int> UpgradeCosts => upgradeCosts;
 }
