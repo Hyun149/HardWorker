@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -80,7 +80,11 @@ public class PlayerStat : MonoBehaviour
     /// </summary>
     public void UpgradeStat(StatType type)
     {
-        if (!CanUpgrade(type)) return;
+        StatData data = statDataList.Find(d => d.StatType == type);
+        if (data == null) return;
+
+        int level = GetStatLevel(type);
+        if (level >= data.MaxLevel) return;
 
         int cost = GetUpgradeCost(type);
         if (!GoldManager.Instance.SpendGold(cost)) return;
