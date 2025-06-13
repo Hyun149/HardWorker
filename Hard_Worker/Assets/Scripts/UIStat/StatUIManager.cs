@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -33,6 +33,14 @@ public class StatUIManager : MonoBehaviour
         for (int i = 0; i < statUIs.Count; i++)
         {
             statUIs[i].RefreshUI();
+        }
+    }
+
+    public void InitializeAll()
+    {
+        foreach (var ui in statUIs)
+        {
+            ui.Initialize(ui.StatType, playerStat);
         }
     }
 }
