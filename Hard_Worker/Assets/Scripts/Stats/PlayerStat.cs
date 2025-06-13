@@ -77,16 +77,13 @@ public class PlayerStat : MonoBehaviour
     /// <summary>
     /// UpgradeStat : 능력치 1단계 업그레이드 처리
     /// - 유효성 검사 후 레벨 증가
-    /// - 추후 골드 시스템 추가 시 비용 비교 및 차감 위치 있음
     /// </summary>
     public void UpgradeStat(StatType type)
     {
         if (!CanUpgrade(type)) return;
 
-        // TODO: 골드 시스템 연동 예시
-        // int cost = GetUpgradeCost(type);
-        // if (!playerInventory.HasEnoughGold(cost)) return;
-        // playerInventory.UseGold(cost);
+        int cost = GetUpgradeCost(type);
+        if (!GoldManager.Instance.SpendGold(cost)) return;
 
         if (!statLevels.ContainsKey(type))
             statLevels[type] = 0;
@@ -102,13 +99,13 @@ public class PlayerStat : MonoBehaviour
     public bool CanUpgrade(StatType type)
     {
         StatData data = statDataList.Find(d => d.StatType == type);
+        if (data == null) return false;
+
         int level = GetStatLevel(type);
+        if (level >= data.MaxLevel) return false;
 
-        // TODO: 골드 조건을 추가하려면 여기서 비교
-        // int cost = GetUpgradeCost(type);
-        // return data != null && level < data.MaxLevel && playerInventory.HasEnoughGold(cost);
-
-        return data != null && level < data.MaxLevel;
+        int cost = GetUpgradeCost(type);
+        return GoldManager.Instance.CurrentGold >= cost;
     }
 
     /// <summary>

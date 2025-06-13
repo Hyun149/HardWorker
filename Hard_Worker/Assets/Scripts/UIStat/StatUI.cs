@@ -82,5 +82,8 @@ public class StatUI : MonoBehaviour
         bool isMaxLevel = level >= playerStat.GetMaxLevel(statType);
         costText.text = (cost > 0 && !isMaxLevel) ? cost.ToString() : "-";
         levelText.text = level.ToString();
+
+        // 가능 여부에 따라 비용 색상 변경
+        costText.color = playerStat.CanUpgrade(statType) ? Color.black : Color.red;
     }
 }
