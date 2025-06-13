@@ -9,6 +9,7 @@ public class OptionPanelUI : MonoBehaviour
     [SerializeField] private GameObject optionPanel;
     [SerializeField] private Button openButton;
     [SerializeField] private Button closeButton;
+    [SerializeField] private UIAnimator optionPanelAnimator;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class OptionPanelUI : MonoBehaviour
     /// </summary>
     private void OpenOptionPanel()
     {
-        optionPanel.SetActive(true);
+        optionPanelAnimator.Show();
     }
 
     /// <summary>
@@ -29,6 +30,6 @@ public class OptionPanelUI : MonoBehaviour
     /// </summary>
     private void CloseOptionPanel()
     {
-        optionPanel.SetActive(false);
+        optionPanelAnimator.Hide();
     }
 }

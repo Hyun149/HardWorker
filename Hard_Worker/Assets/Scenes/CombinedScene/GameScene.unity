@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionButton_GameScene
       objectReference: {fileID: 0}
+    - target: {fileID: 1310433429926820097, guid: 844c0b4dcdf1c38429a99da36f0ad234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8425567515511675452, guid: 844c0b4dcdf1c38429a99da36f0ad234, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -761,7 +765,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2723366110104909581, guid: 996505ae160bbe546a0c758226f7fbee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 802037702}
+    - targetCorrespondingSourceObject: {fileID: 2723366110104909581, guid: 996505ae160bbe546a0c758226f7fbee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 802037701}
   m_SourcePrefab: {fileID: 100100000, guid: 996505ae160bbe546a0c758226f7fbee, type: 3}
 --- !u!224 &802037698 stripped
 RectTransform:
@@ -784,6 +794,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &802037701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802037699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25387b9ecee1324aadcc1d255e49ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.4
+  startScale: 0.5
+  punchScale: 1.1
+--- !u!225 &802037702
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802037699}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &910715961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1187,7 @@ MonoBehaviour:
   optionPanel: {fileID: 802037699}
   openButton: {fileID: 360417601}
   closeButton: {fileID: 802037700}
+  optionPanelAnimator: {fileID: 802037701}
 --- !u!224 &8608095253831705187
 RectTransform:
   m_ObjectHideFlags: 0

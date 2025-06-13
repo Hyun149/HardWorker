@@ -274,6 +274,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 865582854953483239, guid: 4995fde0a471a234abad14660725dc57, type: 3}
       insertIndex: -1
       addedObject: {fileID: 277367481}
+    - targetCorrespondingSourceObject: {fileID: 8969437327915403093, guid: 4995fde0a471a234abad14660725dc57, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 277367483}
+    - targetCorrespondingSourceObject: {fileID: 8969437327915403093, guid: 4995fde0a471a234abad14660725dc57, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 277367484}
   m_SourcePrefab: {fileID: 100100000, guid: 4995fde0a471a234abad14660725dc57, type: 3}
 --- !u!1 &277367478 stripped
 GameObject:
@@ -311,6 +317,7 @@ MonoBehaviour:
   optionPanel: {fileID: 277367480}
   openButton: {fileID: 277367479}
   closeButton: {fileID: 277367482}
+  optionPanelAnimator: {fileID: 277367484}
 --- !u!114 &277367482 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2558373906689467872, guid: 4995fde0a471a234abad14660725dc57, type: 3}
@@ -322,6 +329,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &277367483
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277367480}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &277367484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277367480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25387b9ecee1324aadcc1d255e49ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.4
+  startScale: 0.5
+  punchScale: 1.1
 --- !u!1 &832232519
 GameObject:
   m_ObjectHideFlags: 0
