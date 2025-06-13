@@ -10,7 +10,6 @@ public class WeaponStatusUI : MonoBehaviour
     
     [Header("장착 무기 정보")]
     public TextMeshProUGUI nameText;
-    public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI attackText;
     public TextMeshProUGUI criticalText;
     public Image icon;
@@ -20,7 +19,7 @@ public class WeaponStatusUI : MonoBehaviour
     private Image buttonimage;
     public List<Sprite> buttonImages;
     private TextMeshProUGUI buttonText;
-    public GameObject inventoryUI;
+    public WeaponInventoryUI inventoryUI;
     private void Awake()
     {
         Instance = this;
@@ -41,7 +40,6 @@ public class WeaponStatusUI : MonoBehaviour
     {
         var data = weapon.GetData();
         nameText.text = data.weaponName;
-        descriptionText.text = data.description;
         attackText.text = $"{weapon.GetAttack()}";
         criticalText.text = $"{weapon.GetCriticalRate()}%";
         icon.sprite = data.icon;
@@ -81,6 +79,7 @@ public class WeaponStatusUI : MonoBehaviour
         {
             bool isActive = !panel.gameObject.activeSelf;
             panel.gameObject.SetActive(isActive);
+            inventoryUI.RenderInventory();
             
             buttonimage.sprite = isActive ? buttonImages[1] : buttonImages[0];
             buttonText.text = isActive ? "도구 가방 접기" : "도구 가방 열기";

@@ -15,7 +15,7 @@ public class WeaponSlot : MonoBehaviour
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI attackValue;
     public TextMeshProUGUI criticalValue;
-
+    public GameObject infoText;
     [Header("Buttons")]
     public Button buyButton;
     public Button upgradeButton;
@@ -25,10 +25,11 @@ public class WeaponSlot : MonoBehaviour
     private WeaponDataSO data;
     
     /// <summary>
-    /// Slot 세팅
+    /// Slot 세팅: 가진거 or 기본무기일때 , 구매하지 않은 무기일때 나눠서 조건문탐
     /// </summary>
     public void SetupSlot(WeaponDataSO dataSO, Weapon ownedWeapon)
     {
+        //Debug.Log($"Setting up slot for {dataSO.weaponName}, owned: {ownedWeapon != null}");
         data = dataSO;
         weapon = ownedWeapon;
         
@@ -37,15 +38,19 @@ public class WeaponSlot : MonoBehaviour
         bool isDefault = data.id == "0";
 
         icon.sprite = data.icon;
+        AdjustIconSize(data.icon);
 
         if (isOwned || isDefault)
         {
+            Debug.Log("dd");
             icon.color = Color.white;
             hiddenText.gameObject.SetActive(false);
+            
+            infoText.SetActive(true);
             nameText.text = data.weaponName;
             descriptionText.text = data.description;
             attackValue.text = weapon.GetAttack().ToString();
-            criticalValue.text = weapon.GetCriticalRate().ToString("P1");
+            criticalValue.text = weapon.GetCriticalRate().ToString() + "%";
 
             buyButton.gameObject.SetActive(false);
             upgradeButton.gameObject.SetActive(true);
@@ -60,13 +65,16 @@ public class WeaponSlot : MonoBehaviour
         }
         else
         {
+            Debug.Log("d2");
             icon.color = new Color(0, 0, 0, 0.5f);
             hiddenText.text = "???";
             hiddenText.gameObject.SetActive(true);
-            nameText.text = "";
+            
+            infoText.SetActive(false);
+            nameText.text = "???";
             descriptionText.text = "";
-            attackValue.text = "-";
-            criticalValue.text = "-";
+            attackValue.text = "";
+            criticalValue.text = "";
 
             buyButton.gameObject.SetActive(true);
             upgradeButton.gameObject.SetActive(false);
@@ -79,21 +87,22 @@ public class WeaponSlot : MonoBehaviour
     
     
     /// <summary>
-    /// 처음 구입시 해당 무기의 강화테이블 레벨0의 비용을 내고 구입가능
+    /// 처음 구입시 해당 무기의 강화테이블 레벨0일때의 cost을 내고 구입가능
     /// </summary>
     void TryPurchase()
     {
-        if (SkillPointManager.Instance.HasEnough(data.enhancementTable[0].cost))
-        {
-            //SkillPointManager.Instance.SpendSP(data.enhancementTable[0].cost);
-            WeaponInventory.Instance.AddWeapon(data);
-            FindObjectOfType<WeaponInventoryUI>().RenderInventory();
-        }
-        else
-        {
-            Debug.Log("Not enough SP");
-            //SoundManager.Instance.Play("NotEnoughSP");
-        }
+        // if (SkillPointManager.Instance.HasEnough(data.enhancementTable[0].cost))
+        // {
+        //     //SkillPointManager.Instance.SpendSP(data.enhancementTable[0].cost);
+        //     WeaponInventory.Instance.AddWeapon(data);
+        //     FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+        // }
+        // else
+        // {
+        //     Debug.Log("Not enough SP");
+        // }
+        WeaponInventory.Instance.AddWeapon(data);
+        FindObjectOfType<WeaponInventoryUI>().RenderInventory();
     }
     
     
@@ -102,18 +111,40 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryEnhance()
     {
-        int cost = weapon.GetEnhanceCost();
-        if (SkillPointManager.Instance.HasEnough(cost))
-        {
-            SkillPointManager.Instance.SpendSP(cost);
-            weapon.Enhance();
-            attackValue.text = weapon.GetAttack().ToString();
-            criticalValue.text = weapon.GetCriticalRate().ToString("P1");
-        }
-        else
-        {
-            Debug.Log("Not enough SP");
-            //SoundManager.Instance.Play("NotEnoughSP");
-        }
+        // int cost = weapon.GetEnhanceCost();
+        // if (SkillPointManager.Instance.HasEnough(cost))
+        // {
+        //     SkillPointManager.Instance.SpendSP(cost);
+        //     weapon.Enhance();
+        //     attackValue.text = weapon.GetAttack().ToString();
+        //     criticalValue.text = weapon.GetCriticalRate().ToString()+"%";
+        // }
+        // else
+        // {
+        //     Debug.Log("Not enough SP");
+        // }
+        weapon.Enhance();
+        attackValue.text = weapon.GetAttack().ToString();
+        criticalValue.text = weapon.GetCriticalRate().ToString()+"%";
+    }
+    
+    /// <summary>
+    /// Icon 크기 조절
+    /// </summary>
+    /// <param name="sprite">무기 데이터의 아이콘데이터</param>
+    private void AdjustIconSize(Sprite sprite)
+    {
+        if (sprite == null) return;
+
+        RectTransform rt = icon.GetComponent<RectTransform>();
+
+        // 원하는 최대 크기
+        float maxSize = 120f;
+
+        float w = sprite.rect.width;
+        float h = sprite.rect.height;
+
+        float scale = Mathf.Min(maxSize / w, maxSize / h);
+        rt.sizeDelta = new Vector2(w * scale, h * scale);
     }
 }
