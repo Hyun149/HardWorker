@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: Cut
   m_EditorClassIdentifier: 
   statType: 0
-  baseValue: 10
-  upgradeValues: []
+  baseValue: 100
+  upgradeValues:
+  - 50
+  - 100
+  - 150
+  upgradeCosts: 320000006400000096000000
+  maxLevel: 100
