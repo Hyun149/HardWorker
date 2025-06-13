@@ -29,6 +29,9 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     public void SetupSlot(WeaponDataSO dataSO, Weapon ownedWeapon)
     {
+        data = dataSO;
+        weapon = ownedWeapon;
+        
         bool isOwned = weapon != null;
         bool isEquipped = isOwned && WeaponManager.Instance.GetEquippedWeapon() == weapon;
         bool isDefault = data.id == "0";

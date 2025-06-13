@@ -14,6 +14,7 @@ public class WeaponInventoryUI : MonoBehaviour
 
         foreach (var data in WeaponInventory.Instance.GetAllWeaponData())
         {
+            Debug.Log(data.name);
             var owned = WeaponInventory.Instance.GetWeapons().Find(w => w.GetData().id == data.id);
             GameObject slotObj = Instantiate(slotPrefab, slotContainer);
             WeaponSlot slot = slotObj.GetComponent<WeaponSlot>();
