@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class MenuSceneUI : MonoBehaviour
 {
-    [SerializeField] private Button startButton;
+    [SerializeField] private Button startButton; 
 
     private void Awake()
     {
@@ -19,6 +19,6 @@ public class MenuSceneUI : MonoBehaviour
     private void OnClickStart()
     {
         Debug.Log("[MenuSceneUI] 게임 시작 버튼 클릭됨");
-        SceneLoader.Load(SceneType.GameScene);
+        SceneLoader.LoadWithFade(SceneType.GameScene);
     }
 }

@@ -22,6 +22,6 @@ public class TitleSceneUI : MonoBehaviour
     /// </summary>
     private void OnClickStart()
     {
-        SceneLoader.Load(SceneType.MenuScene);
+        SceneLoader.LoadWithFade(SceneType.MenuScene);
     }
 }
