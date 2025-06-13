@@ -7,10 +7,17 @@ using TMPro;
 /// </summary>
 public class WarningUI : MonoSingleton<WarningUI>
 {
+    [SerializeField] private GameObject warningPanel;
     [SerializeField] private TMP_Text warningText;
     [SerializeField] private float showDuration = 1.5f;
 
     private Coroutine currentRoutine;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        warningPanel.gameObject.SetActive(false);
+    }
 
     public void Show(string message)
     {
@@ -24,8 +31,8 @@ public class WarningUI : MonoSingleton<WarningUI>
     private IEnumerator ShowMessage(string message)
     {
         warningText.text = message;
-        warningText.gameObject.SetActive(true);
+        warningPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(showDuration);
-        warningText.gameObject.SetActive(false);
+        warningPanel.gameObject.SetActive(false);
     }
 }
