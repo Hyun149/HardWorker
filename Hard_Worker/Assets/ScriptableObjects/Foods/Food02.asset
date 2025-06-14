@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c48c8e5a903a940bbb18a5028461a4, type: 3}
+  m_Name: Food02
+  m_EditorClassIdentifier: 
+  foodName: "\uD1A0\uB9C8\uD1A0 \uC218\uD504"
+  foodImage: {fileID: -1026319525, guid: 17ae33432a673054f937bfe700ab3226, type: 3}
+  enemys:
+  - {fileID: 1166934866354872200, guid: 19941d49cabe4da48953a8fb28aaa4d3, type: 3}
