@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c48c8e5a903a940bbb18a5028461a4, type: 3}
   m_Name: Food02
   m_EditorClassIdentifier: 
-  foodName: Food02
-  foodImage: {fileID: 21300000, guid: 60a5f1103ab07b24182aa8cd6ef0d02f, type: 3}
+  foodName: "\uD1A0\uB9C8\uD1A0 \uC218\uD504"
+  foodImage: {fileID: -1026319525, guid: 17ae33432a673054f937bfe700ab3226, type: 3}
+  enemys:
+  - {fileID: 1166934866354872200, guid: 19941d49cabe4da48953a8fb28aaa4d3, type: 3}

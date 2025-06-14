@@ -1,31 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 적 생성을 관리하는 스크립트입니다.
+/// </summary>
 public class EnemyManager : MonoBehaviour
 {
-    private int enemyCount = 0; // 스테이지 당 죽인 적의 개
-    public GameObject[] enemys = new GameObject[3];
-    public Vector3 pos = new Vector3 (0, 1f, 0);
-    
+    EnemyManager enemyManager;
+
+    public Enemy enemy; // 현재 잡고있는 적
+    private int enemyCount = 0; // 스테이지 당 죽인 적의 개수
+  
+    public Vector3 pos = new Vector3 (0.3f, -3f, 0); // 적이 생성될 위치
+
+    private DamageTextPool damageTextPool;
+
     public int EnemyCount => enemyCount;
+    CustomerManager customerManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        // 적 생성
-       // SpawnEnemy();
+        enemyManager = GetComponent<EnemyManager>();
+        damageTextPool = GetComponent<DamageTextPool>();
+        customerManager = FindObjectOfType<CustomerManager>();  
     }
-    // 적 생성
+    /// <summary>
+    /// 적을 생성합니다.
+    /// </summary>
     public void SpawnEnemy()
     {
         // 적 생성
-        Enemy enemy = Instantiate(enemys[enemyCount], pos, Quaternion.identity).GetComponent<Enemy>();
-        enemy.Init(this.gameObject.GetComponent<EnemyManager>());
+        enemy = Instantiate(customerManager.food.Enemys[enemyCount], pos, Quaternion.identity).GetComponent<Enemy>();
+    
+        UpEnemyCount(1);
+
+        // 적 초기화
+        enemy.Init();
+
     }
-    // 현재 스테이지에서 죽인 적 개수 증가
-    public void UpEnemyCount()
+    /// <summary>
+    /// 죽인 적 개수를 증가시킵니다.
+    /// </summary>
+    /// <param name="_enemyCount"></param>
+    public void UpEnemyCount(int _enemyCount)
     {
-        enemyCount++;
+        enemyCount += _enemyCount;
+    }
+    /// <summary>
+    /// 적 공격시 공격 데미지 텍스트를 활성화합니다.
+    /// </summary>
+    /// <param name="value"></param>
+    public void DamageText(int value)
+    {
+        if (enemyManager.enemy.gameObject.activeSelf == false) { return; }
+
+        DamageText dt = damageTextPool.Get();
+        dt.gameObject.SetActive(true);
+        damageTextPool.damageTexts.transform.SetAsLastSibling();
+        dt.FadeOutAndMove(value, () =>
+        {
+            damageTextPool.Return(dt);
+        });
     }
 }
