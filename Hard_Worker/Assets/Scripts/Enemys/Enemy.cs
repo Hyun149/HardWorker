@@ -107,8 +107,14 @@ public class Enemy : MonoBehaviour
     /// 적을 던지는 효과를 재생합니다.
     /// </summary>
     void Throw()
-    {
-        Vector3 targetPos = transform.position + throwDirection.normalized * throwDistance;
+    {  
+        // 카메라 기준으로 방향 변환
+        Vector3 camRelativeDir = Camera.main.transform.TransformDirection(throwDirection.normalized);
+
+        // 평면화 (원하지 않는 Z 이동 제거 - 2D라면 특히 중요)
+        camRelativeDir.z = 0;
+
+        Vector3 targetPos = transform.position + camRelativeDir.normalized * throwDistance;
         transform.DOMove(targetPos, duration).SetEase(easing);
     }
     /// <summary>

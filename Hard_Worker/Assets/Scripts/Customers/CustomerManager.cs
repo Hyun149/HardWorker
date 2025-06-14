@@ -4,7 +4,6 @@ using UnityEngine;
 /// <summary>
 /// 손님 관리하는 스크립트입니다.
 /// </summary>
-// 손님 생성, 음식 선택, 스테이지 전환
 public class CustomerManager : MonoBehaviour
 {
     CustomerUI customerUI;
