@@ -1,34 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Weapon : MonoBehaviour
+
+public class Weapon
 {
-    public WeaponData data;
-
+    public WeaponDataSO data;
     private int enhanceLevel;
-
-    void Start()
-    {
-        
-    }
-    public Weapon(WeaponData data)
+    
+    public Weapon(WeaponDataSO data)
     {
         this.data = data;
+        enhanceLevel = 0;
     }
     
-    public int GetAttack()
-    {
-        return 0;
-    }
-
-    public void TryEnhance()
-    {
-        
-    }
-
-    public float GetCriticalRate()
-    {
-        return 0;
-    }
+    public int GetAttack() => data.enhancementTable[enhanceLevel].attack;
+    public float GetCriticalRate() => data.enhancementTable[enhanceLevel].criticalRate;
+    public int GetEnhanceCost() => data.enhancementTable[enhanceLevel].cost;
+    public void Enhance() { if (enhanceLevel < data.enhancementTable.Count - 1) enhanceLevel++; }
+    public int GetLevel() => enhanceLevel;
+    public WeaponDataSO GetData() => data;
 }

@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15e9d2317fa4ec4da6fac839b3353f1, type: 3}
+  m_Name: Lv3_knife
+  m_EditorClassIdentifier: 
+  id: 3
+  weaponName: "\uC804\uC124\uC758 \uCE7C"
+  description: "\uC804\uC124\uC758 \uC170\uD504\uAC00 \uC37C\uB2E4\uACE0 \uC54C\uB824\uC9C0\uB294
+    \uCE7C.\uBB34\uC5C7\uD558\uB098 \uBE60\uC9C0\uB294\uAC8C \uC5C6\uB2E4."
+  icon: {fileID: -200604454, guid: 87618393348bce34db7e1edafd4c1458, type: 3}
+  enhancementTable:
+  - level: 0
+    attack: 15
+    criticalRate: 5
+    cost: 25
+  - level: 1
+    attack: 22
+    criticalRate: 7
+    cost: 40
+  - level: 2
+    attack: 29
+    criticalRate: 9
+    cost: 65
+  - level: 3
+    attack: 36
+    criticalRate: 11
+    cost: 105
+  - level: 4
+    attack: 43
+    criticalRate: 13
+    cost: 170
+  - level: 5
+    attack: 50
+    criticalRate: 15
+    cost: 275
+  - level: 6
+    attack: 60
+    criticalRate: 17
+    cost: 445
+  - level: 7
+    attack: 70
+    criticalRate: 19
+    cost: 720
+  - level: 8
+    attack: 80
+    criticalRate: 21
+    cost: 1165
+  - level: 9
+    attack: 90
+    criticalRate: 23
+    cost: 1885
+  - level: 10
+    attack: 105
+    criticalRate: 25
+    cost: 3050

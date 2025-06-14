@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e873b5ff631cfa245bdc55b8a5e7b1ed, type: 3}
   m_Name: AssistSpeed
   m_EditorClassIdentifier: 
-  statType: 0
-  baseValue: 0
-  upgradeValues: []
+  statType: 4
+  baseValue: 10.1
+  upgradeValues:
+  - -0.1
+  upgradeCosts: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  maxLevel: 100
