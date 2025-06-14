@@ -11,7 +11,6 @@ public class PlayerStat : MonoBehaviour
     [Header("스탯 데이터 연결")]
     [SerializeField] private List<StatData> statDataList; // 능력치 종류별 ScriptableObject 리스트
 
-    private Dictionary<StatType, int> statLevels = new(); // 각 능력치별 현재 레벨 저장
 
     /// <summary>
     /// GetStatValue : 최종 능력치 값 계산
@@ -71,7 +70,7 @@ public class PlayerStat : MonoBehaviour
     /// </summary>
     public int GetStatLevel(StatType type)
     {
-        return statLevels.ContainsKey(type) ? statLevels[type] : 0;
+        return GameManager.Instance.playerData.GetStatLevel(type);
     }
 
     /// <summary>
@@ -80,7 +79,7 @@ public class PlayerStat : MonoBehaviour
     /// </summary>
     public void UpgradeStat(StatType type)
     {
-        StatData data = statDataList.Find(d => d.StatType == type);
+        var data = statDataList.Find(d => d.StatType == type);
         if (data == null) return;
 
         int level = GetStatLevel(type);
@@ -89,10 +88,8 @@ public class PlayerStat : MonoBehaviour
         int cost = GetUpgradeCost(type);
         if (!GoldManager.Instance.SpendGold(cost)) return;
 
-        if (!statLevels.ContainsKey(type))
-            statLevels[type] = 0;
-
-        statLevels[type]++;
+        GameManager.Instance.playerData.SetStatLevel(type, level + 1);
+        GameManager.Instance.SaveGame(); // 능력치 강화 후 저장
     }
 
     /// <summary>

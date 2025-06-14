@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// 플레이어의 전체 데이터를 관리하는 클래스입니다.
@@ -11,7 +10,7 @@ public class PlayerData
     public int stageIndex;
     public int currentGold;
 
-    public Dictionary<StatType, int> statLevels = new();
+    public List<SerializableStat> statLevels = new();
 
     public string equippedWeaponId;  // 현재 장착 중인 무기 ID
     
@@ -22,11 +21,30 @@ public class PlayerData
     {
         foreach (StatType stat in System.Enum.GetValues(typeof(StatType)))
         {
-            statLevels[stat] = 0;
+            statLevels.Add(new SerializableStat { StatType = stat, level = 0 });
         }
 
         currentGold = 0;
         stageIndex = 1;
         equippedWeaponId = "0";
     }
+
+    public int GetStatLevel(StatType type)
+    {
+        var stat = statLevels.Find(s => s.StatType == type);
+        return stat != null ? stat.level : 0;
+    }
+
+    public void SetStatLevel(StatType type, int value)
+    {
+        var stat = statLevels.Find(s => s.StatType == type);
+        if (stat != null) stat.level = value;
+    }
+}
+
+[System.Serializable]
+public class SerializableStat
+{
+    public StatType StatType;
+    public int level;
 }

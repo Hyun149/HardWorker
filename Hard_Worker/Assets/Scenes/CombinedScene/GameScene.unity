@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 281084450}
-  - component: {fileID: 281084449}
+  - component: {fileID: 281084451}
   m_Layer: 0
   m_Name: GoldManager
   m_TagString: Untagged
@@ -145,18 +145,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &281084449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281084448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4204e919231544e4ca3002f646221a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &281084450
 Transform:
   m_ObjectHideFlags: 0
@@ -172,6 +160,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &281084451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281084448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72601b4c203f183429f744713de09a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onGoldChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &360417599
 PrefabInstance:
   m_ObjectHideFlags: 0
