@@ -7,13 +7,19 @@ using UnityEngine.UI;
 /// </summary>
 public class CustomerUI : MonoBehaviour
 {
+    CustomerManager manager;
     public TMP_Text stageText; // 현재 스테이지 텍스트
 
     public Image foodImage; // 주문한 음식 이미지
     public TMP_Text foodText; // 주문한 음식 텍스트
 
-    private void Start()
+    public Image[] enemyInfos = new Image[4];
+    public Image[] enemyInfoImages = new Image[4];
+
+    private void Awake()
     {
+        manager = GetComponent<CustomerManager>();
+
         if (StageManager.Instance != null)
         {
             StageManager.Instance.onStageChanged -= ShowStageText;
@@ -38,5 +44,12 @@ public class CustomerUI : MonoBehaviour
         foodImage.gameObject.SetActive(true);
         foodImage.sprite = Instantiate(food.FoodImage, GameObject.Find("Canvas").transform);
         foodText.text = food.FoodName;
+
+        for (int i = 0; i < manager.food.Enemys.Count; i++)
+        {
+            // 재료 개수만큼 UI 표시
+            enemyInfos[i].gameObject.SetActive(true);
+            enemyInfoImages[i].sprite = manager.food.Enemys[i].GetComponent<Enemy>().enemyData.EnemyImage;
+        }
     }
 }
