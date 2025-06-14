@@ -120,4 +120,26 @@ public class PlayerStat : MonoBehaviour
         StatData data = statDataList.Find(d => d.StatType == type);
         return data != null ? data.MaxLevel : 0;
     }
+
+    public float GetFinalStatValue(StatType type)
+    {
+        float baseStat = GetStatValue(type);
+        if (type == StatType.Cut || type == StatType.CritChance && WeaponManager.Instance != null)
+        {
+            Weapon equipped = WeaponManager.Instance.GetEquippedWeapon();
+            if (equipped != null)
+            {
+                if (type == StatType.Cut)
+                {
+                    baseStat += equipped.GetAttack();
+                }
+                else if (type == StatType.CritChance)
+                {
+                    baseStat += equipped.GetCriticalRate();
+                }
+            }
+        }
+
+        return baseStat;
+    }
 }
