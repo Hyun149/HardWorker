@@ -79,6 +79,8 @@ public class PlayerStat : MonoBehaviour
     /// </summary>
     public void UpgradeStat(StatType type)
     {
+        SFXManager.Instance.Play(SFXType.StatEnhance);
+
         var data = statDataList.Find(d => d.StatType == type);
         if (data == null) return;
 
