@@ -26,6 +26,8 @@ public class StatButtonUI : MonoBehaviour
     /// </summary>
     private void ShowStatCanvas()
     {
+        SFXManager.Instance.Play(SFXType.UIShow);
+
         uiManager.InitializeAll();
         uiManager.RefreshAllUI();
 
@@ -35,6 +37,8 @@ public class StatButtonUI : MonoBehaviour
 
     private void HideStatCanvas()
     {
+        SFXManager.Instance.Play(SFXType.UIShow);
+
         gameCanvas.SetActive(true);
         statCanvas.SetActive(false);
     }

@@ -22,6 +22,7 @@ public class TitleSceneUI : MonoBehaviour
     /// </summary>
     private void OnClickStart()
     {
+        SFXManager.Instance.Play(SFXType.ButtonClick);
         SceneLoader.LoadWithFade(SceneType.MenuScene);
     }
 }
