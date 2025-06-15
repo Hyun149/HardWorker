@@ -12,16 +12,17 @@ public class FinalStatUIController : MonoBehaviour
     {
         finalStatButton.onClick.AddListener(OpenFinalStatPanel);
         backButton.onClick.AddListener(CloseFinalStatPanel);
-        finalStatPanel.SetActive(false);
     }
 
     private void OpenFinalStatPanel()
     {
+        SFXManager.Instance.Play(SFXType.UIShow);
         finalStatPanelAnimator.Show();
     }
 
     private void CloseFinalStatPanel()
     {
+        SFXManager.Instance.Play(SFXType.UIShow);
         finalStatPanelAnimator.Hide();
     }
 }

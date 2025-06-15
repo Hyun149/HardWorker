@@ -22,6 +22,7 @@ public class OptionPanelUI : MonoBehaviour
     /// </summary>
     private void OpenOptionPanel()
     {
+        SFXManager.Instance.Play(SFXType.UIShow);
         optionPanelAnimator.Show();
     }
 
@@ -30,6 +31,7 @@ public class OptionPanelUI : MonoBehaviour
     /// </summary>
     private void CloseOptionPanel()
     {
+        SFXManager.Instance.Play(SFXType.UIShow);
         optionPanelAnimator.Hide();
     }
 }

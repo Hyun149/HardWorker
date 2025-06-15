@@ -9,7 +9,8 @@ public class AudioMixerController : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
 
-    public Slider sliderBGM;
+    [SerializeField] private Slider sliderBGM;
+    [SerializeField] private Slider sliderSFX;
 
     /// <summary>
     /// BGM 볼륨을 설정합니다.
@@ -34,6 +35,7 @@ public class AudioMixerController : MonoBehaviour
     /// <param name="value">슬라이더의 현재 값 (0.0 ~ 1.0)</param>
     public void SetSFXVolume(float value)
     {
+        float dB = VolumeToDecibel(value);
         audioMixer.SetFloat("SFX", VolumeToDecibel(value));
     }
 
