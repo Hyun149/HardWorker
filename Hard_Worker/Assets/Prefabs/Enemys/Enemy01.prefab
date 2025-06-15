@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: db1f5b1cc2f05d64089dd3c75ccb65ce, type: 2}
-  throwDirection: {x: -7, y: -1.3, z: 0}
-  throwDistance: 6
+  throwDirection: {x: -5.81, y: -0.3, z: 0}
+  throwDistance: 15
   duration: 0.5
   easing: 6
 --- !u!114 &6378880152024601806

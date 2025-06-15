@@ -7,7 +7,7 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
-
+    LineController lineController;
     int stage = 0; // 현재 스테이지 정보
     [SerializeField] private int reward; // 보상
 
@@ -30,11 +30,14 @@ public class StageManager : MonoBehaviour
         }
 
         Instance = this;
+       
+      
     }
     // Start is called before the first frame update
     void Start()
     {
         enemyManager = FindObjectOfType<EnemyManager>();
+        lineController = GetComponent<LineController>();
         StartStage();
     }
 
@@ -42,10 +45,12 @@ public class StageManager : MonoBehaviour
     /// 스테이지를 시작합니다.
     /// </summary>
     void StartStage()
-    {
-        customerManager.SpawnCustomer();
-        customerManager.RamdomOrder();
-        customerManager.customer.Init();
+    {    
+        customerManager.SpawnCustomer(); // 손님 소환
+      
+        lineController.CreateLine(); // 줄세우기
+        lineController.StartCoroutine(lineController.HandleOrder()); // 주문하기
+
     }
     /// <summary>
     /// 스테이지 계수 (1 + 0.2 * stage) 반환
@@ -93,17 +98,13 @@ public class StageManager : MonoBehaviour
         stage++;
         onStageChanged?.Invoke(stage + 1);
 
-        // Destroy(customer.gameObject);
-        customerManager.customer.gameObject.SetActive(false);
+        // 손님 퇴장
+        customerManager.curCustomer.CompleteOrder(true);
 
         // EnemyCount 초기화합니다.
         enemyManager.UpEnemyCount(-enemyManager.EnemyCount);
 
-        // 스테이지를 시작합니다.
-        StartStage();
-
         // 보상을 증가시킵니다.
         UpdateReward();
-
     }
 }
