@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Enemy08
   m_EditorClassIdentifier: 
   enemyName: "\uBE75"
-  enemyImage: {fileID: -1717970716, guid: 17ae33432a673054f937bfe700ab3226, type: 3}
+  enemyImage: {fileID: 21300000, guid: 18e93befccef2ff40b06a77523544d37, type: 3}
   isBoss: 0
   effectPrefab: {fileID: 0}

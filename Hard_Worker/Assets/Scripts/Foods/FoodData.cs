@@ -14,4 +14,5 @@ public class FoodData : ScriptableObject
     public string FoodName => foodName;
     public Sprite FoodImage => foodImage;
     public List<GameObject> Enemys=> enemys;
+    public int Difficulty => enemys.Count;
 }
