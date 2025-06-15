@@ -8,7 +8,7 @@ public class CustomerAni : MonoBehaviour
     Animator animator;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         animator = GetComponent<Animator>();
     }

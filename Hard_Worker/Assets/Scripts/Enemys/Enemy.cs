@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         // 진행도 UI 설정
         enemyProgress.progressBar.gameObject.SetActive(true);
         enemyProgress.SetMaxProgress(StageManager.Instance.UpdateMaxProgress());
-        enemyProgress.SetProgress(0); // 진행도 0으로 변경
+        enemyProgress.Init(); // 진행도 0으로 변경
 
         onChangeProgress += enemyProgress.UpdateProgressBar;
         enemyProgress.SetTarget(this.transform);
@@ -111,7 +111,6 @@ public class Enemy : MonoBehaviour
         // 카메라 기준으로 방향 변환
         Vector3 camRelativeDir = Camera.main.transform.TransformDirection(throwDirection.normalized);
 
-        // 평면화 (원하지 않는 Z 이동 제거 - 2D라면 특히 중요)
         camRelativeDir.z = 0;
 
         Vector3 targetPos = transform.position + camRelativeDir.normalized * throwDistance;
@@ -138,9 +137,8 @@ public class Enemy : MonoBehaviour
             // 요리 완성 확인
             completedCooking?.Invoke();
         }
-
         enemyProgress.SetProgress(0);
-        this.gameObject.SetActive(false);
-      //  Destroy(this.gameObject);
+
+       Destroy(this.gameObject);
      }
 }
