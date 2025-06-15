@@ -35,6 +35,7 @@ public class AudioMixerController : MonoBehaviour
     /// <param name="value">슬라이더의 현재 값 (0.0 ~ 1.0)</param>
     public void SetSFXVolume(float value)
     {
+        float dB = VolumeToDecibel(value);
         audioMixer.SetFloat("SFX", VolumeToDecibel(value));
     }
 
