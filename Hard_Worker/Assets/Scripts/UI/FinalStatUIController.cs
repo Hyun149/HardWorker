@@ -12,7 +12,6 @@ public class FinalStatUIController : MonoBehaviour
     {
         finalStatButton.onClick.AddListener(OpenFinalStatPanel);
         backButton.onClick.AddListener(CloseFinalStatPanel);
-        finalStatPanel.SetActive(false);
     }
 
     private void OpenFinalStatPanel()

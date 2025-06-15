@@ -351,9 +351,25 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetSFXVolume
       objectReference: {fileID: 0}
+    - target: {fileID: 8702762869506077383, guid: 4995fde0a471a234abad14660725dc57, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2914ffb5a68bae54495623beeaf5dfef, type: 3}
+    - target: {fileID: 8702762869506077383, guid: 4995fde0a471a234abad14660725dc57, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702762869506077383, guid: 4995fde0a471a234abad14660725dc57, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702762869506077383, guid: 4995fde0a471a234abad14660725dc57, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8969437327915403093, guid: 4995fde0a471a234abad14660725dc57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -429,7 +445,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277367480}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -617,8 +633,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1024168156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -47.37503, y: 0}
   m_SizeDelta: {x: 94.75, y: -223.68}
   m_Pivot: {x: 0.49999967, y: 0.5}

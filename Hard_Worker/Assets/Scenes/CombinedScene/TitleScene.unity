@@ -625,9 +625,9 @@ MonoBehaviour:
   bgmSource: {fileID: 1496982182}
   sceneBGMs:
   - sceneType: 0
-    bgmClip: {fileID: 8300000, guid: baf888cfe708a4896b23490d70c389f6, type: 3}
+    bgmClip: {fileID: 8300000, guid: 8fab401eac256497392573ff7015c6ce, type: 3}
   - sceneType: 1
-    bgmClip: {fileID: 8300000, guid: f1966f59841fe47e1a508b33216f72bd, type: 3}
+    bgmClip: {fileID: 8300000, guid: 98e96b2d764a24b2291026ed45e4bcee, type: 3}
   - sceneType: 2
     bgmClip: {fileID: 8300000, guid: 10f3c56b01c0840eca2dcdecbce64151, type: 3}
 --- !u!1 &2020936171
@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -759,8 +759,9 @@ GameObject:
   - component: {fileID: 8534499833013762353}
   - component: {fileID: 2074318477311796581}
   - component: {fileID: 2111544762977313601}
+  - component: {fileID: 8534499833013762354}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TitleText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,7 +825,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC170\uD504, \uC190\uB2D8\uC774 \uAE30\uB2E4\uB824\uC694!"
+  m_text: "\uC170\uD504, \uC190\uB2D8\uB4E4\uC774 \uAE30\uB2E4\uB824\uC694!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13df3e05488554943b729a7099f8a687, type: 2}
   m_sharedMaterial: {fileID: -5686179609767503971, guid: 13df3e05488554943b729a7099f8a687, type: 2}
@@ -833,8 +834,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1023,14 +1024,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9960785, g: 0.909804, b: 0.77647066, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 086e7c92a90cbfd43aade79d146a9f4e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1277,6 +1278,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -332}
   m_SizeDelta: {x: -619.79, y: -902.94}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8534499833013762354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375444719079813569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a718bcd3d3836f64db8343fcfb96c2a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 2111544762977313601}
+  duration: 1
 --- !u!114 &9022789958601109131
 MonoBehaviour:
   m_ObjectHideFlags: 0

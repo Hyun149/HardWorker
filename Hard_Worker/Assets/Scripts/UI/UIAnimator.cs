@@ -22,7 +22,10 @@ public class UIAnimator : MonoBehaviour
     {
         canvasGroup = GetComponent<CanvasGroup>();
         originalScale = transform.localScale;
-        gameObject.SetActive(false);
+
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     /// <summary>
@@ -30,16 +33,22 @@ public class UIAnimator : MonoBehaviour
     /// </summary>
     public void Show()
     {
-        gameObject.SetActive(true);
         currentTween?.Kill();
 
         transform.localScale = originalScale * startScale;
         canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
 
         Sequence seq = DOTween.Sequence();
         seq.Append(canvasGroup.DOFade(1f, duration * 0.5f));
         seq.Join(transform.DOScale(originalScale * punchScale, duration * 0.6f).SetEase(Ease.OutBack));
         seq.Append(transform.DOScale(originalScale, duration * 0.2f).SetEase(Ease.InOutSine));
+        seq.OnComplete(() =>
+        {
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+        });
 
         currentTween = seq;
     }
@@ -51,10 +60,12 @@ public class UIAnimator : MonoBehaviour
     {
         currentTween?.Kill();
 
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+
         Sequence seq = DOTween.Sequence();
         seq.Append(canvasGroup.DOFade(0f, duration * 0.3f));
         seq.Join(transform.DOScale(originalScale * startScale, duration * 0.3f).SetEase(Ease.InBack));
-        seq.OnComplete(() => gameObject.SetActive(false));
 
         currentTween = seq;
     }
