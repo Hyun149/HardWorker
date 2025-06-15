@@ -42,7 +42,7 @@ public class CustomerUI : MonoBehaviour
     public void ShowOrderImage(FoodData food)
     {
         foodImage.gameObject.SetActive(true);
-        foodImage.sprite = Instantiate(food.FoodImage, GameObject.Find("Canvas").transform);
+        foodImage.sprite = Instantiate(food.FoodImage, GameObject.Find("GameCanvas").transform);
         foodText.text = food.FoodName;
 
         for (int i = 0; i < manager.food.Enemys.Count; i++)
