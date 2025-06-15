@@ -16,6 +16,7 @@ public class GoldManager : MonoSingleton<GoldManager>
     /// </summary>
     public void AddGold(int amount)
     {
+        SFXManager.Instance.Play(SFXType.AddGold);
         CurrentGold += amount;
         onGoldChanged.Invoke(CurrentGold);
     }

@@ -17,11 +17,13 @@ public class FinalStatUIController : MonoBehaviour
 
     private void OpenFinalStatPanel()
     {
+        SFXManager.Instance.Play(SFXType.UIShow);
         finalStatPanelAnimator.Show();
     }
 
     private void CloseFinalStatPanel()
     {
+        SFXManager.Instance.Play(SFXType.UIShow);
         finalStatPanelAnimator.Hide();
     }
 }

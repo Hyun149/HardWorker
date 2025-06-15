@@ -8,5 +8,6 @@ public enum SFXType
     UIHide,
     StatEnhance,
     WeaponEnhance,
-    Error
+    Error,
+    AddGold
 }
