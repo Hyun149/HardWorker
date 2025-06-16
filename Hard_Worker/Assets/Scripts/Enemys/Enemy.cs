@@ -138,6 +138,9 @@ public class Enemy : MonoBehaviour
         {
             // 요리 완성 확인
             completedCooking?.Invoke();
+
+            int reward = customerManager.food.Difficulty * 100;
+            GoldManager.Instance.AddGold(reward);
         }
         enemyProgress.SetProgress(0);
 
