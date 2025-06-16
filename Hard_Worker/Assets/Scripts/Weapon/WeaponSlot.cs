@@ -75,8 +75,17 @@ public class WeaponSlot : MonoBehaviour
             infoText.SetActive(true);
             nameText.text = data.weaponName;
             descriptionText.text = data.description;
-            attackValue.text = weapon.GetAttack().ToString();
-            criticalValue.text = weapon.GetCriticalRate().ToString() + "%";
+            //weapon매니저보다 인벤토리 슬롯이 먼저 실행함 따라서 아래서 분기설정
+            if (weapon != null) //기본무기가 할당이 안되면
+            {
+                attackValue.text = weapon.GetAttack().ToString();
+                criticalValue.text = weapon.GetCriticalRate().ToString() + "%";
+            }
+            else //기본무기가 할당되면
+            {
+                attackValue.text = "5";
+                criticalValue.text = "1";
+            }
 
             buyButton.gameObject.SetActive(false);
             
