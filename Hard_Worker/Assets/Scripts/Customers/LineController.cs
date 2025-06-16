@@ -26,7 +26,9 @@ public class LineController : MonoBehaviour
         int i = 0;
         foreach (var customer in customers) 
         {
+            Debug.Log($"목표 위치:{customer}");
             Vector3 targetPos = lineStartPos.position + new Vector3(spacing * i, 0, 0);
+            Debug.Log($"{targetPos}");
             StartCoroutine(customer.MoveCoroutine(targetPos));
             i++;
         }    
