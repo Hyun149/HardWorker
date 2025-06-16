@@ -22,7 +22,6 @@ public class WeaponManager : MonoBehaviour
         if (equipped != null)
         {
             EquipWeapon(equipped); // 저장된 장착 무기 복원
-            Debug.Log($"[무기 복원] {equippedId} 장착됨");
         }
         else
         {
@@ -30,7 +29,6 @@ public class WeaponManager : MonoBehaviour
             Weapon defaultWeapon = new Weapon(defaultWeaponData);
             weaponInventory.AddWeapon(defaultWeaponData);
             EquipWeapon(defaultWeapon);
-            Debug.Log($"[기본 무기 장착]");
         }
     }
     /// <summary>

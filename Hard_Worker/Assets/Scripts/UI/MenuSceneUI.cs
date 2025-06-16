@@ -18,7 +18,6 @@ public class MenuSceneUI : MonoBehaviour
     /// </summary>
     private void OnClickStart()
     {
-        Debug.Log("[MenuSceneUI] 게임 시작 버튼 클릭됨");
         SFXManager.Instance.Play(SFXType.ButtonClick);
         SceneLoader.LoadWithFade(SceneType.GameScene);
     }

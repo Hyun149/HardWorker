@@ -26,11 +26,6 @@ public class WeaponInventory : MonoBehaviour
                 GameManager.Instance.playerData.ownedWeapons.Add(new WeaponSaveData(data.id, 0, 0));
             }
         }
-        else
-        {
-            Debug.Log("Weapon already exists, not added.");
-        }
-
     }
 
     /// <summary>

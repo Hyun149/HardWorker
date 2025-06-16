@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
 public class AutoAttackTester : MonoBehaviour
 {
@@ -42,7 +42,6 @@ public class AutoAttackTester : MonoBehaviour
     {
         testPlayerLevel++;
         clickEventHandler.SetPlayerLevel(testPlayerLevel);
-        Debug.Log($"플레이어 레벨 {testPlayerLevel}로 상승!");
         UpdateUI();
     }
     // 자동 공격 업그레이드 테스트
@@ -50,7 +49,6 @@ public class AutoAttackTester : MonoBehaviour
     {
         currentAutoAttackLevel++;
         clickEventHandler.SetAutoAttackLevel(currentAutoAttackLevel);
-        Debug.Log($"자동 공격 레벨 {currentAutoAttackLevel}로 업그레이드!");
         UpdateUI();
     }
     // 일시정지 토글
@@ -58,7 +56,6 @@ public class AutoAttackTester : MonoBehaviour
     {
         currentPauseState = !currentPauseState;
         clickEventHandler.SetPause(currentPauseState);
-        Debug.Log($"일시정지: {currentPauseState}");
         UpdateUI();
     }
     // UI 업데이트

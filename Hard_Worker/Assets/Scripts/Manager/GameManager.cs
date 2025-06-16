@@ -27,9 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         string json = JsonUtility.ToJson(playerData, true);
         string path = Application.persistentDataPath + "/" + SaveFileName;
-        Debug.Log($"[저장 경로] {path}");
         System.IO.File.WriteAllText(path,json);
-        Debug.Log($"[저장 완료] {path}");
     }
 
     /// <summary>
@@ -38,18 +36,15 @@ public class GameManager : MonoSingleton<GameManager>
     public void LoadGame()
     {
         string path = Application.persistentDataPath + "/" + SaveFileName;
-        Debug.Log($"[불러오기 경로] {path}");
 
         if (System.IO.File.Exists(path))
         {
             string json = System.IO.File.ReadAllText(path);
             playerData = JsonUtility.FromJson<PlayerData>(json);
-            Debug.Log("[로드 완료] 저장 데이터를 불러옵니다.");
         }
         else
         {
             playerData = new PlayerData();
-            Debug.Log("[초기화] 저장 데이터가 없어 새로 생성합니다.");
         }
 
         StartCoroutine(WaitAndLoadWeaponInventory());
@@ -65,7 +60,6 @@ public class GameManager : MonoSingleton<GameManager>
         if (inventory != null)
         {
             inventory.LoadFromPlayerData(playerData);
-            Debug.Log("[무기 인벤토리 복원 완료]");
         }
         else
         {
