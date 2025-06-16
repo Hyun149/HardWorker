@@ -130,6 +130,8 @@ public class WeaponSlot : MonoBehaviour
             skillPointManager.SpendSP(data.enhancementTable[0].cost);
             weaponInventory.AddWeapon(data);
             FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+
+            SFXManager.Instance.Play(SFXType.Buy);
         }
         else
         {
@@ -154,6 +156,8 @@ public class WeaponSlot : MonoBehaviour
             {
                 weaponStatusUI.DisplayWeapon(weapon);
             }
+
+            SFXManager.Instance.Play(SFXType.WeaponEnhance);
         }
         else
         {
@@ -165,6 +169,7 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryEquip()
     {
+        SFXManager.Instance.Play(SFXType.EquipWeapon); // 장착 사운드
         weaponManager.EquipWeapon(weapon);
     }
     
