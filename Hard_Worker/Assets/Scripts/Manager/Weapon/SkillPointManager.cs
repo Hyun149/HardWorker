@@ -3,17 +3,16 @@ using UnityEngine.Events;
 
 public class SkillPointManager : MonoBehaviour
 {
-    public int currentSP = 1000;
+    [SerializeField] int currentSP;
 
     public UnityEvent OnSPChanged;
-    
-    public bool HasEnough(int amount) => currentSP >= amount;
-
     private void Start()
     {
         SetSP(GameManager.Instance.playerData.currentSkillPoint);
+        currentSP =  GameManager.Instance.playerData.currentSkillPoint;
     }
-
+    public bool HasEnough(int amount) => currentSP >= amount;
+    
     public bool SpendSP(int amount)
     {
         if (!HasEnough(amount)) return false;
