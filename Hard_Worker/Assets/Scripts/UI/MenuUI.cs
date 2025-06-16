@@ -23,7 +23,7 @@ public class MenuUI : MonoBehaviour
     /// </summary>
     private void OnClickStart()
     {
-        cursorManager.OnOtherUIClose();
+        cursorManager.OnOtherUIOpen();
         SFXManager.Instance.Play(SFXType.ButtonClick);
         SceneLoader.LoadWithFade(SceneType.MenuScene);
     }
