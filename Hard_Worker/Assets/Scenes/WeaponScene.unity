@@ -260,6 +260,28 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &830321884 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1315399134578198503, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
+  m_PrefabInstance: {fileID: 676187011748238822}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd72f3de2e69104f840cad8b6250cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1981602586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2029643206596474723, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+  m_PrefabInstance: {fileID: 579632327121424743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1a5cd589c68d3438af783a7d202992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2055776192
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,15 +398,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2029643206596474723, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+      propertyPath: weaponStatusUI
+      value: 
+      objectReference: {fileID: 830321884}
     - target: {fileID: 4658345330965394334, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
       propertyPath: m_Name
       value: Weapon_Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 6868009238445680529, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+      propertyPath: weaponInventory
+      value: 
+      objectReference: {fileID: 676187011748238823}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+--- !u!114 &579632327121424744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8945108131785193839, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+  m_PrefabInstance: {fileID: 579632327121424743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e9682c2686f794196dbd32190999ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &676187011748238822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,6 +474,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7310746871145124752, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
+      propertyPath: weaponManager
+      value: 
+      objectReference: {fileID: 1981602586}
+    - target: {fileID: 7310746871145124752, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
+      propertyPath: skillPointManager
+      value: 
+      objectReference: {fileID: 579632327121424744}
     - target: {fileID: 8103744563544614640, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
       propertyPath: m_Name
       value: WeaponUI
@@ -442,6 +491,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
+--- !u!114 &676187011748238823 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6785983022340191520, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
+  m_PrefabInstance: {fileID: 676187011748238822}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eff97fce6b5137b40af0aaceee8243fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

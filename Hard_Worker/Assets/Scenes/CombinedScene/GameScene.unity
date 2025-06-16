@@ -1183,6 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1a5cd589c68d3438af783a7d202992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStatusUI: {fileID: 0}
 --- !u!1001 &782911397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2057,6 +2058,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 459848691270114663, guid: 02ce68c14c1a38a49991addbdc804290, type: 3}
+      propertyPath: weaponManager
+      value: 
+      objectReference: {fileID: 733511853}
     - target: {fileID: 770122282320754003, guid: 02ce68c14c1a38a49991addbdc804290, type: 3}
       propertyPath: m_LocalPosition.x
       value: 474.85922
