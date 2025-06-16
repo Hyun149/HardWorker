@@ -13,7 +13,7 @@ public class CustomerManager : MonoBehaviour
     CustomerUI customerUI;
     LineController lineController;
 
-    public List<GameObject> customerPrefabs = new List<GameObject>(); // 손님 프리팹
+    //public List<GameObject> customerPrefabs = new List<GameObject>(); // 손님 프리팹
    [HideInInspector] public GameObject customer; // 지금 주문 중인 손님
     public Customer curCustomer;
     public List<FoodData> foods = new List<FoodData>();
@@ -31,7 +31,7 @@ public class CustomerManager : MonoBehaviour
     public void SpawnCustomer()
     { 
         // 네명의 랜덤한 손님 프리팹 선택
-        for (int i = 0; i < customerPrefabs.Count; i++)
+        for (int i = 0; i < poolManager.prefabs.Length; i++)
         {
             GetPoolCustomer();// Pool에서 손님 한명을 꺼내옴        
             lineController.AddCustomer(customer.GetComponent<Customer>());
@@ -43,7 +43,6 @@ public class CustomerManager : MonoBehaviour
     /// <param name="index"></param>
     public void AddNewCustomer(int index)
     {
-        int rand = Random.Range(0, customerPrefabs.Count);
         Vector2 spawnPos = lineController.lineStartPos.position + new Vector3(lineController.spacing * index, 0, 0);
 
         GetPoolCustomer(); // Pool에서 손님 한명을 꺼내옴

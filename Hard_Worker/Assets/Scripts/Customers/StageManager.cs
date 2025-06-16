@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
     LineController lineController;
-    int stage = 0; // 현재 스테이지 정보
+    [SerializeField] int stage = 0; // 현재 스테이지 정보
     [SerializeField] private int reward; // 보상
 
     public CustomerManager customerManager;

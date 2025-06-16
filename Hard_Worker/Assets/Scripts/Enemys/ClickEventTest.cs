@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class ClickEventTest : MonoBehaviour
@@ -11,7 +10,6 @@ public class ClickEventTest : MonoBehaviour
     {
         enemyManager = GetComponent<EnemyManager>();
         damageTextPool = GetComponent<DamageTextPool>();
-       // enemyManager.enemy.enemyData.SetProgress(0);
     }
 
     void Update()

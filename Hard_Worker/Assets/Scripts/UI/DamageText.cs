@@ -28,6 +28,7 @@ public class DamageText : MonoBehaviour, IPoolable
     {
         damageTexts = GameObject.Find("DamageTexts");
         transform.SetParent(damageTexts.transform);
+        transform.localScale = Vector3.one;
 
         // 위치 초기화
         rect.anchoredPosition = startPos;
@@ -59,9 +60,8 @@ public class DamageText : MonoBehaviour, IPoolable
     /// 위로 올라가는 애니메이션을 한 뒤 비활성화됩니다.
     /// </summary>
     public void FadeOutAndMove(float value, Action onComplete)
-    {    
-        damageText.DOKill();
-        rect.DOKill();
+    {
+        if (!gameObject.activeInHierarchy) { return; }
 
         damageText.text = value.ToString();
 
@@ -73,14 +73,15 @@ public class DamageText : MonoBehaviour, IPoolable
         Vector2 randomPos = new Vector2(startPos.x + randomX, startPos.y);
         rect.anchoredPosition = randomPos;
 
-        if (transform == null) { return; }
-           
+        damageText.DOKill();
+        rect.DOKill();
+
         // 위로 올라가기
         Vector2 target = randomPos + Vector2.up * distance;
-        rect.DOAnchorPos(target, duration);
+        rect.DOAnchorPos(target, duration).SetLink(gameObject, LinkBehaviour.KillOnDestroy);
 
         // 텍스트 비활성화
-        damageText.DOFade(0f, duration)
+        Tween tween= damageText.DOFade(0f, duration).SetLink(gameObject, LinkBehaviour.KillOnDestroy)
         .OnComplete(() =>
         {
             // 애니메이션 끝난 뒤에 원래 위치로 되돌림
@@ -89,6 +90,7 @@ public class DamageText : MonoBehaviour, IPoolable
             // Pool에 return
             onComplete?.Invoke();
         });
+       
     }
     public void ShowText()
     {
