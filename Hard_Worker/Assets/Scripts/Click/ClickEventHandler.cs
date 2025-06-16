@@ -23,6 +23,9 @@ public class ClickEventHandler : MonoBehaviour
     [SerializeField] private ParticleSystem normalAttackParticle;
     [SerializeField] private ParticleSystem criticalAttackParticle;
 
+    [Header("파티클 설정")] // 추가된 부분
+    [SerializeField] private AttackParticleSettings particleSettings = new AttackParticleSettings();
+
     [Header("오디오")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip normalAttackSound;
@@ -36,6 +39,16 @@ public class ClickEventHandler : MonoBehaviour
     {
         mainCamera = Camera.main;
         autoAttackManager = FindObjectOfType<AutoAttackManager>(); // 추가
+
+        // 파티클 설정 적용 (추가된 부분)
+        if (normalAttackParticle != null)
+        {
+            AttackParticleSettings.SetupNormalAttackParticle(normalAttackParticle, particleSettings);
+        }
+        if (criticalAttackParticle != null)
+        {
+            AttackParticleSettings.SetupCriticalAttackParticle(criticalAttackParticle, particleSettings);
+        }
 
         // 플레이어 레벨 체크하여 자동 공격 해금
         CheckAutoAttackUnlock();
