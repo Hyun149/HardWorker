@@ -10,7 +10,7 @@ public class PlayerStat : MonoBehaviour
 {
     [Header("스탯 데이터 연결")]
     [SerializeField] private List<StatData> statDataList; // 능력치 종류별 ScriptableObject 리스트
-
+    [SerializeField] private WeaponManager weaponManager;
 
     /// <summary>
     /// GetStatValue : 최종 능력치 값 계산
@@ -126,9 +126,9 @@ public class PlayerStat : MonoBehaviour
     public float GetFinalStatValue(StatType type)
     {
         float baseStat = GetStatValue(type);
-        if (type == StatType.Cut || type == StatType.CritChance && WeaponManager.Instance != null)
+        if (type == StatType.Cut || type == StatType.CritChance && weaponManager != null)
         {
-            Weapon equipped = WeaponManager.Instance.GetEquippedWeapon();
+            Weapon equipped = weaponManager.GetEquippedWeapon();
             if (equipped != null)
             {
                 if (type == StatType.Cut)

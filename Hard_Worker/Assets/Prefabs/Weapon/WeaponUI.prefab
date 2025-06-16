@@ -2094,6 +2094,10 @@ MonoBehaviour:
   slotContainer: {fileID: 1879083425081228726}
   slotPrefab: {fileID: 4221194838715383510, guid: fc649c94f792ff045ac5960c06469e28, type: 3}
   spAmountText: {fileID: 7731748234653193578}
+  weaponManager: {fileID: 0}
+  weaponInventory: {fileID: 6785983022340191520}
+  skillPointManager: {fileID: 0}
+  weaponStatusUI: {fileID: 1315399134578198503}
 --- !u!114 &6785983022340191520
 MonoBehaviour:
   m_ObjectHideFlags: 0
