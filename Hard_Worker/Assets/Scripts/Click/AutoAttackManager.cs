@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// 자동 공격 업그레이드 단계를 정의하는 데이터 클래스입니다.
+/// </summary>
 [System.Serializable]
 public class AutoAttackUpgrade
 {
@@ -11,6 +14,9 @@ public class AutoAttackUpgrade
     public string description;
 }
 
+/// <summary>
+/// 자동 공격 시스템의 레벨 업그레이드 및 UI를 관리하는 클래스입니다.
+/// </summary>
 public class AutoAttackManager : MonoBehaviour
 {
     [Header("자동 공격 업그레이드 설정")]
@@ -36,8 +42,10 @@ public class AutoAttackManager : MonoBehaviour
     [SerializeField] private GameObject upgradeButton;
 
     private int currentAutoAttackLevel = 0;
-    private int playerGold = 0; // GameManager에서 관리
 
+    /// <summary>
+    /// 시작 시 참조 설정 및 UI 초기화
+    /// </summary>
     void Start()
     {
         if (clickEventHandler == null)
@@ -48,7 +56,10 @@ public class AutoAttackManager : MonoBehaviour
         UpdateUI();
     }
 
-    // 자동 공격 업그레이드
+    /// <summary>
+    /// 자동 공격을 업그레이드합니다.
+    /// - 조건: 최대 레벨이 아님, (주석 처리됨: 플레이어 레벨 및 골드 조건)
+    /// </summary>
     public void UpgradeAutoAttack()
     {
         if (currentAutoAttackLevel >= autoAttackUpgrades.Length - 1)
@@ -84,7 +95,9 @@ public class AutoAttackManager : MonoBehaviour
         UpdateUI();
     }
 
-    // UI 업데이트
+    /// <summary>
+    /// 자동 공격 UI를 최신 정보로 갱신합니다.
+    /// </summary>
     void UpdateUI()
     {
         if (autoAttackUI == null) return;
@@ -138,20 +151,29 @@ public class AutoAttackManager : MonoBehaviour
         }
     }
 
-    // 자동 공격 해금 시 호출
+    /// <summary>
+    /// 자동 공격이 해금되었을 때 호출됩니다.
+    /// 초기 레벨을 1로 설정하고 UI를 갱신합니다.
+    /// </summary>
     public void OnAutoAttackUnlocked()
     {
         currentAutoAttackLevel = 1;
         UpdateUI();
     }
 
-    // 현재 자동 공격 레벨 가져오기
+    /// <summary>
+    /// 현재 자동 공격 레벨을 반환합니다.
+    /// </summary>
     public int GetCurrentAutoAttackLevel()
     {
         return currentAutoAttackLevel;
     }
 
-    // 자동 공격 업그레이드 정보 가져오기
+    /// <summary>
+    /// 특정 레벨의 자동 공격 업그레이드 정보를 반환합니다.
+    /// </summary>
+    /// <param name="level">요청할 업그레이드 레벨</param>
+    /// <returns>해당 레벨의 업그레이드 정보 또는 null</returns>
     public AutoAttackUpgrade GetUpgradeInfo(int level)
     {
         if (level < 0 || level >= autoAttackUpgrades.Length)
