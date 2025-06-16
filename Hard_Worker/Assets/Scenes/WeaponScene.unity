@@ -6932,37 +6932,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1009539766}
     m_Modifications:
-    - target: {fileID: 2737581607741696995, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2737581607741696995, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -319
-      objectReference: {fileID: 0}
     - target: {fileID: 3847568699938483923, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
       propertyPath: m_Name
       value: WeaponInventory
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430188382747887035, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430188382747887035, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1166772182, guid: 215f4f8475163fa4da411a7abf249fab, type: 3}
-    - target: {fileID: 4430188382747887035, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5373510122597586220, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5701602206478339732, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6101803661378427683, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
       propertyPath: m_Pivot.x
@@ -7044,10 +7016,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6323251572542187547, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_Padding.m_Right
-      value: -78
-      objectReference: {fileID: 0}
     - target: {fileID: 8260470609678890737, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
       propertyPath: cursorManager
       value: 
@@ -7064,14 +7032,6 @@ PrefabInstance:
       propertyPath: skillPointManager
       value: 
       objectReference: {fileID: 1066505235}
-    - target: {fileID: 8473135680331840515, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -799.5259
-      objectReference: {fileID: 0}
-    - target: {fileID: 8473135680331840515, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.69999695
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
