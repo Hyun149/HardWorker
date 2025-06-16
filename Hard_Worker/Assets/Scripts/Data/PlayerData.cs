@@ -9,7 +9,7 @@ public class PlayerData
 {
     public int stageIndex;
     public int currentGold;
-
+    
     public List<SerializableStat> statLevels = new();
 
     public string equippedWeaponId;  // 현재 장착 중인 무기 ID
