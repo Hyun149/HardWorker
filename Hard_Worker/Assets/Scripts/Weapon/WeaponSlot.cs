@@ -165,6 +165,7 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryEquip()
     {
+        SFXManager.Instance.Play(SFXType.EquipWeapon);
         weaponManager.EquipWeapon(weapon);
     }
     
