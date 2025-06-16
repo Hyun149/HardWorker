@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class WeaponInventory : MonoBehaviour
 {
-    public static WeaponInventory Instance;
-    
     public List<WeaponDataSO> allWeaponData;
     private List<Weapon> ownedWeapons = new();
-
-    private void Awake() => Instance = this;
     
     public List<Weapon> GetWeapons() => ownedWeapons;
     public List<WeaponDataSO> GetAllWeaponData() => allWeaponData;

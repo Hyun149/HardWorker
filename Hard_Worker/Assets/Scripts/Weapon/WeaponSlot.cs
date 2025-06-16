@@ -20,11 +20,20 @@ public class WeaponSlot : MonoBehaviour
     public Button equipButton;
     public TextMeshProUGUI maxUpgradeText;
     public TextMeshProUGUI[] requireSPTexts;
-    
-    
+
+    [SerializeField] private WeaponInventory weaponInventory;
+    [SerializeField] private SkillPointManager skillPointManager;
     
     private Weapon weapon;
     private WeaponDataSO data;
+    /// <summary>
+    /// 슬롯 렌더링할때 슬롯스크립트에 inventory,skillpointmanager 주입
+    /// </summary>
+    public void SetDependencies(WeaponInventory inventory, SkillPointManager skillManager)
+    {
+        this.weaponInventory = inventory;
+        this.skillPointManager = skillManager;
+    }
     
     /// <summary>
     /// Slot 세팅: 가진거 or 기본무기일때 , 구매하지 않은 무기일때 나눠서 조건문탐
@@ -112,10 +121,10 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryPurchase()
     {
-        if (SkillPointManager.Instance.HasEnough(data.enhancementTable[0].cost))
+        if (skillPointManager.HasEnough(data.enhancementTable[0].cost))
         {
-            SkillPointManager.Instance.SpendSP(data.enhancementTable[0].cost);
-            WeaponInventory.Instance.AddWeapon(data);
+            skillPointManager.SpendSP(data.enhancementTable[0].cost);
+            weaponInventory.AddWeapon(data);
             FindObjectOfType<WeaponInventoryUI>().RenderInventory();
         }
         else
@@ -131,11 +140,12 @@ public class WeaponSlot : MonoBehaviour
     void TryEnhance()
     {
         int cost = weapon.GetEnhanceCost();
-        if (SkillPointManager.Instance.HasEnough(cost))
+        if (skillPointManager.HasEnough(cost))
         {
-            SkillPointManager.Instance.SpendSP(cost);
+            skillPointManager.SpendSP(cost);
             weapon.Enhance();
             FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+            
             WeaponStatusUI.Instance.DisplayWeapon(weapon);
         }
         else

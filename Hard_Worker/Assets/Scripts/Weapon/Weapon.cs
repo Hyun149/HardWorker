@@ -1,5 +1,4 @@
 
-
 public class Weapon
 {
     public WeaponDataSO data;
