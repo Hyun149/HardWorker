@@ -52,11 +52,11 @@
 
 | 시스템 | 설명 | 예시 이미지 |
 |--------|------|-------------|
-| 무기 강화 시스템 | 재화를 소비해 무기 성능 업그레이드 | ![WeaponUpgrade](https://github.com/user-attachments/assets/ad1a1abe-bac9-4f54-9569-7320cb098f1b.png) |
-| 스탯 강화 UI | 플레이어 능력치를 골드로 강화 | ![StatUpgrade](https://github.com/user-attachments/assets/1d3946a5-ebaf-4039-8431-23e9f73c039e) |
-| 옵션 및 사운드 조절 | BGM/SFX 볼륨 조절 슬라이더 제공 | ![OptionUI](https://github.com/user-attachments/assets/d08715f5-cc4c-40e6-8e5f-8a1866158069.png) |
-| 커서 커스터마이징 | 무기 장착 시 커서가 식칼로 변경됨 | ![Cursor](https://github.com/user-attachments/assets/83a977fe-5c06-48e0-94fb-3812806bcefd.png) |
-| 인벤토리 시스템 | 구매한 무기를 장착/관리 가능 | ![Inventory](https://github.com/user-attachments/assets/7ce1366c-79ec-4198-b6a3-0ee4c48abb31.png) |
+| 무기 강화 시스템 | 재화를 소비해 무기 성능 업그레이드 | <img src="https://github.com/user-attachments/assets/ad1a1abe-bac9-4f54-9569-7320cb098f1b.png" width="160"/> |
+| 스탯 강화 UI | 플레이어 능력치를 골드로 강화 | <img src="https://github.com/user-attachments/assets/1d3946a5-ebaf-4039-8431-23e9f73c039e.png" width="160"/> |
+| 옵션 및 사운드 조절 | BGM/SFX 볼륨 조절 슬라이더 제공 | <img src="https://github.com/user-attachments/assets/d08715f5-cc4c-40e6-8e5f-8a1866158069.png" width="160"/> |
+| 커서 커스터마이징 | 무기 장착 시 커서가 식칼로 변경됨 | <img src="https://github.com/user-attachments/assets/83a977fe-5c06-48e0-94fb-3812806bcefd.png" width="160"/> |
+| 인벤토리 시스템 | 구매한 무기를 장착/관리 가능 | <img src="https://github.com/user-attachments/assets/7ce1366c-79ec-4198-b6a3-0ee4c48abb31.png" width="160"/> |
 
 ---
 
