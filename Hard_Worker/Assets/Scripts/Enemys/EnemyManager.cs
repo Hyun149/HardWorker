@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
     {
         // 적 생성
         enemy = Instantiate(customerManager.food.Enemys[enemyCount], pos, Quaternion.identity).GetComponent<Enemy>();
-    
+        Debug.Log($"{pos}");
         UpEnemyCount(1);
 
         // 적 초기화

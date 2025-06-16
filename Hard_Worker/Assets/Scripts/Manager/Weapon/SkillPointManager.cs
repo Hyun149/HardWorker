@@ -3,13 +3,10 @@ using UnityEngine.Events;
 
 public class SkillPointManager : MonoBehaviour
 {
-    public static SkillPointManager Instance;
-
     public int currentSP = 1000;
 
     public UnityEvent OnSPChanged;
-
-    private void Awake()=> Instance = this;
+    
     public bool HasEnough(int amount) => currentSP >= amount;
 
     public bool SpendSP(int amount)

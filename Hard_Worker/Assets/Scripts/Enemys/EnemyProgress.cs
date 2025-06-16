@@ -33,7 +33,7 @@ public class EnemyProgress : MonoBehaviour
         cam = Camera.main;
         enemyManager = GetComponent<EnemyManager>();
         // 진행도 UI 생성
-        progressBar = Instantiate(progressBarPrefab,GameObject.Find("Canvas").transform);
+        progressBar = Instantiate(progressBarPrefab,GameObject.Find("BackGroundCanvas").transform);
         rt = progressBar.GetComponent<RectTransform>();
     }
     public void Init()
@@ -71,8 +71,13 @@ public class EnemyProgress : MonoBehaviour
             // 위치 변환
             Vector3 screenPos = cam.WorldToScreenPoint(target.position + offset);
 
-        // 위치 갱신
-        rt.position = screenPos;
+        Vector2 localPoint;
+        RectTransform canvasRect = progressBar.transform.parent as RectTransform;
+
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, cam, out localPoint))
+        {
+            rt.localPosition = localPoint;
+        }
     }
     /// <summary>
     /// 진행도 Bar 값을 갱신 코루틴을 실행합니다.

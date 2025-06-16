@@ -41,7 +41,7 @@ public class CustomerUI : MonoBehaviour
     public void ShowOrderImage(FoodData food)
     {
         foodImage.gameObject.SetActive(true);
-        foodImage.sprite = Instantiate(food.FoodImage, GameObject.Find("Canvas").transform);
+        foodImage.sprite = Instantiate(food.FoodImage, GameObject.Find("BackGroundCanvas").transform);
         foodText.text = food.FoodName;
 
         TurnOffEnemyInfo();

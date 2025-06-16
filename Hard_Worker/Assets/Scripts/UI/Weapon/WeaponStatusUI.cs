@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,11 +20,8 @@ public class WeaponStatusUI : MonoBehaviour
     public List<Sprite> buttonImages;
     private TextMeshProUGUI buttonText;
     public WeaponInventoryUI inventoryUI;
-    private void Awake()
-    {
-        Instance = this;
-    }
-
+    
+    [SerializeField]private CursorManager cursorManager;
     void Start()
     {
         inventoryButton.onClick.AddListener(OnClickInventoryButton);
@@ -82,7 +80,11 @@ public class WeaponStatusUI : MonoBehaviour
             
             buttonimage.sprite = isActive ? buttonImages[1] : buttonImages[0];
             buttonText.text = isActive ? "도구 가방 접기" : "도구 가방 열기";
-            
+
+            if (isActive)
+                cursorManager.OnOtherUIOpen(); // 인벤토리 열림 → 기본 커서
+            else
+                cursorManager.OnOtherUIClose();
             //가방 열고 접기 효과음 나중에 추가
         }
     }
