@@ -19,10 +19,6 @@ public class WeaponStatusUI : MonoBehaviour
     public List<Sprite> buttonImages;
     private TextMeshProUGUI buttonText;
     public WeaponInventoryUI inventoryUI;
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     void Start()
     {

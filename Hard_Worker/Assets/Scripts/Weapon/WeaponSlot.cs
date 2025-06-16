@@ -21,18 +21,22 @@ public class WeaponSlot : MonoBehaviour
     public TextMeshProUGUI maxUpgradeText;
     public TextMeshProUGUI[] requireSPTexts;
 
-    [SerializeField] private WeaponInventory weaponInventory;
-    [SerializeField] private SkillPointManager skillPointManager;
+    private WeaponInventory weaponInventory;
+    private SkillPointManager skillPointManager;
+    private WeaponManager weaponManager;
+    private WeaponStatusUI weaponStatusUI;
     
     private Weapon weapon;
     private WeaponDataSO data;
     /// <summary>
     /// 슬롯 렌더링할때 슬롯스크립트에 inventory,skillpointmanager 주입
     /// </summary>
-    public void SetDependencies(WeaponInventory inventory, SkillPointManager skillManager)
+    public void SetDependencies(WeaponInventory inventory, SkillPointManager skillManager,WeaponManager manager,WeaponStatusUI weaponStatus)
     {
         this.weaponInventory = inventory;
         this.skillPointManager = skillManager;
+        this.weaponManager = manager;
+        this.weaponStatusUI = weaponStatus;
     }
     
     /// <summary>
@@ -45,7 +49,7 @@ public class WeaponSlot : MonoBehaviour
         weapon = ownedWeapon;
         
         bool isOwned = weapon != null;
-        bool isEquipped = isOwned && WeaponManager.Instance.GetEquippedWeapon()?.GetData().id == data.id;
+        bool isEquipped = isOwned && weaponManager.GetEquippedWeapon()?.GetData().id == data.id;
         bool isDefault = data.id == "0";
 
         icon.sprite = data.icon;
@@ -145,8 +149,11 @@ public class WeaponSlot : MonoBehaviour
             skillPointManager.SpendSP(cost);
             weapon.Enhance();
             FindObjectOfType<WeaponInventoryUI>().RenderInventory();
-            
-            WeaponStatusUI.Instance.DisplayWeapon(weapon);
+            Weapon equippedWeapon = weaponManager.GetEquippedWeapon();
+            if (equippedWeapon != null && equippedWeapon == weapon)
+            {
+                weaponStatusUI.DisplayWeapon(weapon);
+            }
         }
         else
         {
@@ -158,7 +165,7 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryEquip()
     {
-        WeaponManager.Instance.EquipWeapon(weapon);
+        weaponManager.EquipWeapon(weapon);
     }
     
     /// <summary>

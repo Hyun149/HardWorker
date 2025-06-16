@@ -260,6 +260,17 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &830321884 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1315399134578198503, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
+  m_PrefabInstance: {fileID: 676187011748238822}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd72f3de2e69104f840cad8b6250cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1981602586 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2029643206596474723, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
@@ -387,10 +398,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2029643206596474723, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+      propertyPath: weaponStatusUI
+      value: 
+      objectReference: {fileID: 830321884}
     - target: {fileID: 4658345330965394334, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
       propertyPath: m_Name
       value: Weapon_Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 6868009238445680529, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+      propertyPath: weaponManager
+      value: 
+      objectReference: {fileID: 1981602586}
     - target: {fileID: 6868009238445680529, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
       propertyPath: weaponInventory
       value: 
@@ -463,6 +482,10 @@ PrefabInstance:
       propertyPath: weaponManager
       value: 
       objectReference: {fileID: 1981602586}
+    - target: {fileID: 7310746871145124752, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
+      propertyPath: weaponStatusUI
+      value: 
+      objectReference: {fileID: 830321884}
     - target: {fileID: 7310746871145124752, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
       propertyPath: weaponInventory
       value: 

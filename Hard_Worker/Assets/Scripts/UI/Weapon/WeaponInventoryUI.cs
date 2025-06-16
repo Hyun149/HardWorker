@@ -9,6 +9,7 @@ public class WeaponInventoryUI : MonoBehaviour
     [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private WeaponInventory weaponInventory;
     [SerializeField] private SkillPointManager skillPointManager;
+    [SerializeField] private WeaponStatusUI weaponStatusUI;
     /// <summary>
     /// 무기 장착될때 이벤트 구독하여 자동 업뎃 
     /// </summary>
@@ -35,7 +36,7 @@ public class WeaponInventoryUI : MonoBehaviour
             GameObject slotObj = Instantiate(slotPrefab, slotContainer);
             WeaponSlot slot = slotObj.GetComponent<WeaponSlot>();
             
-            slot.SetDependencies(weaponInventory, skillPointManager);
+            slot.SetDependencies(weaponInventory, skillPointManager,weaponManager,weaponStatusUI);
             
             slot.SetupSlot(data, owned);
         }
