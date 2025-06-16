@@ -10,17 +10,23 @@ public class WeaponInventoryUI : MonoBehaviour
     [SerializeField] private WeaponInventory weaponInventory;
     [SerializeField] private SkillPointManager skillPointManager;
     [SerializeField] private WeaponStatusUI weaponStatusUI;
+    [SerializeField] private CursorManager cursorManager;
+    
+    
+    
     /// <summary>
     /// 무기 장착될때 이벤트 구독하여 자동 업뎃 
     /// </summary>
     private void OnEnable()
     {
         weaponManager.OnWeaponEquipped += RenderInventory;
+        //cursorManager.OnInventoryOpen();
     }
 
     private void OnDisable()
     {
         weaponManager.OnWeaponEquipped -= RenderInventory;
+        //cursorManager.OnInventoryClose();
     }
     /// <summary>
     /// 인벤에서 장착,업글,구매 등 버튼을 눌렀을때호출, 슬롯들 UI를 업데이트해줌
