@@ -8,7 +8,10 @@ public class CursorManager : MonoBehaviour
 
     [Header("무기 매니저")]
     public WeaponManager weaponManager;
-
+    
+    [Header("애니메이션")]
+    [SerializeField] private Animator cursorAnimator;
+    
     private bool isOtherUIOpen = false;
 
     void Start()
@@ -76,7 +79,9 @@ public class CursorManager : MonoBehaviour
         return tex;
     }
 
-    // ▶ 인벤토리 열릴 때 호출
+    /// <summary>
+    /// 다른 UI 열릴때 호출
+    /// </summary>
     public void OnOtherUIOpen()
     {
         isOtherUIOpen = true;
@@ -85,7 +90,9 @@ public class CursorManager : MonoBehaviour
         if (cursorImage != null) cursorImage.enabled = false;
     }
 
-    // ▶ 인벤토리 닫을 때 호출
+    /// <summary>
+    /// 다른 UI 닫힐때 호출
+    /// </summary>
     public void OnOtherUIClose()
     {
         isOtherUIOpen = false;
@@ -96,6 +103,16 @@ public class CursorManager : MonoBehaviour
         {
             cursorImage.enabled = true;
             UpdateCursorSprite();
+        }
+    }
+    /// <summary>
+    /// 클릭 애니메이션 플레이
+    /// </summary>
+    public void PlayClickAnimation()
+    {
+        if (cursorAnimator != null)
+        {
+            cursorAnimator.SetTrigger("Click");
         }
     }
 }

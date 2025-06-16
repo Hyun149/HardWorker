@@ -36,7 +36,10 @@ public class ClickEventHandler : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip normalAttackSound;
     [SerializeField] private AudioClip criticalAttackSound;
-
+    
+    [Header("클릭 애니메이션 관련")]
+    [SerializeField] private CursorManager cursorManager;
+    
     private Camera mainCamera;
     private Coroutine autoAttackCoroutine;
     private AutoAttackManager autoAttackManager; // 추가
@@ -97,7 +100,8 @@ public class ClickEventHandler : MonoBehaviour
     void PerformClick()
     {
         Vector3 clickPosition = GetClickWorldPosition();
-
+        Debug.Log("클릭됨");
+        cursorManager?.PlayClickAnimation();
         // 치명타 판정
         bool isCritical = Random.Range(0f, 1f) < criticalChance;
 
