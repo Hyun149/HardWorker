@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbbc9dd58afd5e54b95a81f2af61dd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorManager: {fileID: 0}
   optionPanel: {fileID: 277367480}
   openButton: {fileID: 277367479}
   closeButton: {fileID: 277367482}

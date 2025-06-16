@@ -29,6 +29,8 @@ public class CursorManager : MonoBehaviour
 
     void Update()
     {
+        if (isOtherUIOpen || cursorImage == null || !cursorImage.enabled || cursorImage.canvas == null)
+            return;
         UpdateCursorPosition();
     }
 
