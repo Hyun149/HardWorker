@@ -4969,8 +4969,8 @@ GameObject:
   - component: {fileID: 7299489111199913965}
   - component: {fileID: 8183835334412595468}
   - component: {fileID: 1588440414692234373}
-  - component: {fileID: 8183835334412595469}
   - component: {fileID: 8183835334412595470}
+  - component: {fileID: 8183835334412595471}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: Untagged
@@ -7181,19 +7181,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &8183835334412595469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865582854437349739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626a50cf9de27b64f9e501205915a68f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startButton: {fileID: 782911399}
 --- !u!114 &8183835334412595470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7211,6 +7198,20 @@ MonoBehaviour:
   openButton: {fileID: 360417601}
   closeButton: {fileID: 802037700}
   optionPanelAnimator: {fileID: 802037701}
+--- !u!114 &8183835334412595471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865582854437349739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d3d35dc3583494b90e26f7c618e916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorManager: {fileID: 1577997026}
+  startButton: {fileID: 782911399}
 --- !u!114 &8278525189931518151
 MonoBehaviour:
   m_ObjectHideFlags: 0
