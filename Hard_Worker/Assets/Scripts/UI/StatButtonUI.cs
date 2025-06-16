@@ -6,6 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class StatButtonUI : MonoBehaviour
 {
+    [SerializeField] private CursorManager cursorManager;
     [SerializeField] private GameObject gameCanvas;
     [SerializeField] private GameObject statCanvas;
     [SerializeField] private Button backButton;
@@ -26,6 +27,7 @@ public class StatButtonUI : MonoBehaviour
     /// </summary>
     private void ShowStatCanvas()
     {
+        cursorManager.OnOtherUIOpen();
         SFXManager.Instance.Play(SFXType.UIShow);
 
         uiManager.InitializeAll();
@@ -37,6 +39,7 @@ public class StatButtonUI : MonoBehaviour
 
     private void HideStatCanvas()
     {
+        cursorManager.OnOtherUIClose();
         SFXManager.Instance.Play(SFXType.UIShow);
 
         gameCanvas.SetActive(true);
