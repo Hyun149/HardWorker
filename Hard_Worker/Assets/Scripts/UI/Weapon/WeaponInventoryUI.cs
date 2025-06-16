@@ -25,13 +25,11 @@ public class WeaponInventoryUI : MonoBehaviour
     private void OnEnable()
     {
         weaponManager.OnWeaponEquipped += RenderInventory;
-        //cursorManager.OnInventoryOpen();
     }
 
     private void OnDisable()
     {
         weaponManager.OnWeaponEquipped -= RenderInventory;
-        //cursorManager.OnInventoryClose();
     }
     /// <summary>
     /// 인벤에서 장착,업글,구매 등 버튼을 눌렀을때호출, 슬롯들 UI를 업데이트해줌
@@ -52,6 +50,6 @@ public class WeaponInventoryUI : MonoBehaviour
             slot.SetupSlot(data, owned);
         }
 
-        spAmountText.text = skillPointManager.currentSP.ToString();
+        spAmountText.text = GameManager.Instance.playerData.currentSkillPoint.ToString();
     }
 }

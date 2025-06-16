@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = System.Random;
 
 /// <summary>
 /// 적(음식 재료)을 관리하는 스크립트입니다.
@@ -87,6 +88,7 @@ public class Enemy : MonoBehaviour
    /// <param name="progress"></param>
     void EnemyAni(float progress)
     {
+        if(isAttackEnd) return;
         float ratio = progress / enemyProgress.MaxProgress;
 
         if (ratio >= 0.9f) enemyAni.Cut(3);
@@ -95,6 +97,7 @@ public class Enemy : MonoBehaviour
         if (progress >= enemyProgress.MaxProgress) // 진행도가 최고치일 경우
         {
             // 보상 지급
+            isAttackEnd = true; // 진행도가 최고가 되면 공격못하도록 설정 
             StartCoroutine(Ingredient());
         }
     }
@@ -120,11 +123,12 @@ public class Enemy : MonoBehaviour
         isAttackEnd = true;
         Throw();
         enemyProgress.SetProgress(enemyProgress.MaxProgress);
-
-         yield return new WaitForSeconds(0.15F);
+        
+        yield return new WaitForSeconds(0.15F);
         if (enemyProgress.progressBar.value >= 1f)
         {
             enemyProgress.progressBar.gameObject.SetActive(false);
+            DropSkillPoints();
         }
         yield return new WaitForSeconds(1F);
 
@@ -145,5 +149,19 @@ public class Enemy : MonoBehaviour
         enemyProgress.SetProgress(0);
 
        Destroy(this.gameObject);
-     }
+    }
+    /// <summary>
+    /// 재료 손질완료시 호출되는 Sp드랍 메소드, 드랍확률 50%
+    /// </summary>
+    public void DropSkillPoints()
+    {
+        Random random = new Random();
+        int chance = random.Next(0, 2);
+        if (chance == 1)
+        {
+            Debug.Log("숙련도 포인트 획득");
+            //숙련도 포인트 획득 효과음
+            GameManager.Instance.playerData.currentSkillPoint++;
+        }
+    }
 }
