@@ -100,7 +100,7 @@ public class ClickEventHandler : MonoBehaviour
     void PerformClick()
     {
         Vector3 clickPosition = GetClickWorldPosition();
-        Debug.Log("클릭됨");
+        
         cursorManager?.PlayClickAnimation();
         // 치명타 판정
         bool isCritical = Random.Range(0f, 1f) < criticalChance;
