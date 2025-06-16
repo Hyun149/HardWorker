@@ -179,7 +179,6 @@ public class ClickEventHandler : MonoBehaviour
         if (playerLevel >= autoAttackUnlockLevel && !isAutoAttackUnlocked)
         {
             isAutoAttackUnlocked = true;
-            Debug.Log($"레벨 {autoAttackUnlockLevel} 달성! 자동 공격이 해금되었습니다!");
 
             // 자동 공격 레벨 1로 설정하여 시작
             SetAutoAttackLevel(1);
@@ -257,7 +256,6 @@ public class ClickEventHandler : MonoBehaviour
     {
         if (!isAutoAttackUnlocked && level > 0)
         {
-            Debug.Log($"자동 공격은 레벨 {autoAttackUnlockLevel}에 해금됩니다!");
             return;
         }
 

@@ -11,9 +11,14 @@ public class WeaponInventoryUI : MonoBehaviour
     [SerializeField] private SkillPointManager skillPointManager;
     [SerializeField] private WeaponStatusUI weaponStatusUI;
     [SerializeField] private CursorManager cursorManager;
-    
-    
-    
+
+    private void Start()
+    {
+        weaponInventory.LoadFromPlayerData(GameManager.Instance.playerData);
+
+        RenderInventory();
+    }
+
     /// <summary>
     /// 무기 장착될때 이벤트 구독하여 자동 업뎃 
     /// </summary>

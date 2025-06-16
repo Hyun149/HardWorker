@@ -28,7 +28,6 @@ public class GoldManager : MonoSingleton<GoldManager>
     {
         if (CurrentGold < amount)
         {
-            Debug.LogWarning($"[GoldManager] 골드 부족: {CurrentGold} / 필요: {amount}");
             WarningUI.Instance.Show("골드가 부족합니다!");
             return false;
         }
