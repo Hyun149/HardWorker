@@ -33,7 +33,7 @@ public class EnemyProgress : MonoBehaviour
         cam = Camera.main;
         enemyManager = GetComponent<EnemyManager>();
         // 진행도 UI 생성
-        progressBar = Instantiate(progressBarPrefab,GameObject.Find("GameCanvas").transform);
+        progressBar = Instantiate(progressBarPrefab,GameObject.Find("BackGroundCanvas").transform);
         rt = progressBar.GetComponent<RectTransform>();
     }
     public void Init()
