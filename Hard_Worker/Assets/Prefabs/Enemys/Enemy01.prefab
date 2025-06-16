@@ -125,6 +125,8 @@ MonoBehaviour:
   throwDistance: 15
   duration: 0.5
   easing: 6
+  isAttackEnd: 0
+  skillPointIconPrefab: {fileID: 1337404047429044062, guid: 5c552bdabe4b88748ad96afea19219d0, type: 3}
 --- !u!114 &6378880152024601806
 MonoBehaviour:
   m_ObjectHideFlags: 0
