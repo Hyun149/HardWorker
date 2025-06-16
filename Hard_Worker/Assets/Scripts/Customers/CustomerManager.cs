@@ -1,26 +1,27 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.EditorTools;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 
 /// <summary>
 /// 손님 관리하는 스크립트입니다.
 /// </summary>
 public class CustomerManager : MonoBehaviour
 {
+    CustomerPoolManager poolManager;
     CustomerUI customerUI;
     LineController lineController;
 
-    public List<GameObject> customerPrefabs = new List<GameObject>(); // 손님 프리팹
-   [HideInInspector] public Customer customer; // 지금 주문 중인 손님
+    //public List<GameObject> customerPrefabs = new List<GameObject>(); // 손님 프리팹
+   [HideInInspector] public GameObject customer; // 지금 주문 중인 손님
     public Customer curCustomer;
     public List<FoodData> foods = new List<FoodData>();
     public FoodData food;
 
-    public Vector3 pos = new Vector3(15, -0.81f, 0); // 손님 생성 위치
-
     void Awake()
     {
-        //  lineController = FindObjectOfType<LineController>();
+        poolManager = GetComponent<CustomerPoolManager>();
         lineController = GetComponentInParent<LineController>();
         customerUI = GetComponent<CustomerUI>();    
     }
@@ -30,13 +31,11 @@ public class CustomerManager : MonoBehaviour
     public void SpawnCustomer()
     { 
         // 네명의 랜덤한 손님 프리팹 선택
-        for (int i = 0; i < customerPrefabs.Count; i++)
-        {     
-            int index = Random.Range(0, customerPrefabs.Count);
-            customer = Instantiate(customerPrefabs[i], pos, Quaternion.identity).GetComponent<Customer>();
-            lineController.AddCustomer(customer);
+        for (int i = 0; i < poolManager.prefabs.Length; i++)
+        {
+            GetPoolCustomer();// Pool에서 손님 한명을 꺼내옴        
+            lineController.AddCustomer(customer.GetComponent<Customer>());
         }
-     
     }
     /// <summary>
     /// 새로운 손님을 줄에 추가합니다.
@@ -44,14 +43,23 @@ public class CustomerManager : MonoBehaviour
     /// <param name="index"></param>
     public void AddNewCustomer(int index)
     {
-        int rand = Random.Range(0, customerPrefabs.Count);
         Vector2 spawnPos = lineController.lineStartPos.position + new Vector3(lineController.spacing * index, 0, 0);
-       
-        GameObject customer = Instantiate(customerPrefabs[rand], pos, Quaternion.identity);
-        Customer _customer = customer.GetComponent<Customer>();
 
+        GetPoolCustomer(); // Pool에서 손님 한명을 꺼내옴
+        
+        Customer _customer = customer.GetComponent<Customer>();
         _customer.targetPos = spawnPos; // 위치 지정
-        lineController.customers.Enqueue(customer.GetComponent<Customer>());
+
+        lineController.AddCustomer(_customer);
+    }
+    /// <summary>
+    /// Pool에서 손님 한명을 꺼내옵니다.
+    /// </summary>
+    void GetPoolCustomer()
+    {
+        customer = poolManager.GetObject(0); // Pool에서 까내온 뒤
+        CustomerPool customerPool = customer.GetComponent<CustomerPool>();
+        customerPool.Init(customer => poolManager.ReturnObject(0, customer)); // 초기화 합니다.
     }
     /// <summary>
     /// 랜덤하게 요리를 주문합니다.

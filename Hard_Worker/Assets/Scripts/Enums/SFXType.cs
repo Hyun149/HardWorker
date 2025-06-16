@@ -9,5 +9,7 @@ public enum SFXType
     StatEnhance,
     WeaponEnhance,
     Error,
-    AddGold
+    AddGold,
+    Buy,
+    EquipWeapon,
 }

@@ -20,11 +20,24 @@ public class WeaponSlot : MonoBehaviour
     public Button equipButton;
     public TextMeshProUGUI maxUpgradeText;
     public TextMeshProUGUI[] requireSPTexts;
-    
-    
+
+    private WeaponInventory weaponInventory;
+    private SkillPointManager skillPointManager;
+    private WeaponManager weaponManager;
+    private WeaponStatusUI weaponStatusUI;
     
     private Weapon weapon;
     private WeaponDataSO data;
+    /// <summary>
+    /// 슬롯 렌더링할때 슬롯스크립트에 inventory,skillpointmanager 주입
+    /// </summary>
+    public void SetDependencies(WeaponInventory inventory, SkillPointManager skillManager,WeaponManager manager,WeaponStatusUI weaponStatus)
+    {
+        this.weaponInventory = inventory;
+        this.skillPointManager = skillManager;
+        this.weaponManager = manager;
+        this.weaponStatusUI = weaponStatus;
+    }
     
     /// <summary>
     /// Slot 세팅: 가진거 or 기본무기일때 , 구매하지 않은 무기일때 나눠서 조건문탐
@@ -36,7 +49,7 @@ public class WeaponSlot : MonoBehaviour
         weapon = ownedWeapon;
         
         bool isOwned = weapon != null;
-        bool isEquipped = isOwned && WeaponManager.Instance.GetEquippedWeapon()?.GetData().id == data.id;
+        bool isEquipped = isOwned && weaponManager.GetEquippedWeapon()?.GetData().id == data.id;
         bool isDefault = data.id == "0";
 
         icon.sprite = data.icon;
@@ -112,11 +125,21 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryPurchase()
     {
-        if (SkillPointManager.Instance.HasEnough(data.enhancementTable[0].cost))
+        if (skillPointManager.HasEnough(data.enhancementTable[0].cost))
         {
-            SkillPointManager.Instance.SpendSP(data.enhancementTable[0].cost);
-            WeaponInventory.Instance.AddWeapon(data);
+            skillPointManager.SpendSP(data.enhancementTable[0].cost);
+            weaponInventory.AddWeapon(data);
+
+            var saveList = GameManager.Instance.playerData.ownedWeapons;
+            if (!saveList.Exists(w => w.weaponId == data.id))
+            {
+                saveList.Add(new WeaponSaveData(data.id, 0, 0));
+            }
+
             FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+
+            SFXManager.Instance.Play(SFXType.Buy);
+            GameManager.Instance.SaveGame();
         }
         else
         {
@@ -131,12 +154,26 @@ public class WeaponSlot : MonoBehaviour
     void TryEnhance()
     {
         int cost = weapon.GetEnhanceCost();
-        if (SkillPointManager.Instance.HasEnough(cost))
+        if (skillPointManager.HasEnough(cost))
         {
-            SkillPointManager.Instance.SpendSP(cost);
+            skillPointManager.SpendSP(cost);
             weapon.Enhance();
             FindObjectOfType<WeaponInventoryUI>().RenderInventory();
-            WeaponStatusUI.Instance.DisplayWeapon(weapon);
+            Weapon equippedWeapon = weaponManager.GetEquippedWeapon();
+            if (equippedWeapon != null && equippedWeapon == weapon)
+            {
+                weaponStatusUI.DisplayWeapon(weapon);
+            }
+
+            SFXManager.Instance.Play(SFXType.WeaponEnhance);
+
+            WeaponSaveData saveData = GameManager.Instance.playerData.ownedWeapons.Find(w => w.weaponId == weapon.GetData().id);
+
+            if (saveData != null)
+            {
+                saveData.enhanceLevel = weapon.GetLevel();
+                GameManager.Instance.SaveGame();
+            }
         }
         else
         {
@@ -148,7 +185,11 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryEquip()
     {
-        WeaponManager.Instance.EquipWeapon(weapon);
+        SFXManager.Instance.Play(SFXType.EquipWeapon); // 장착 사운드
+        weaponManager.EquipWeapon(weapon);
+
+        GameManager.Instance.playerData.equippedWeaponId = weapon.GetData().id;
+        GameManager.Instance.SaveGame();
     }
     
     /// <summary>

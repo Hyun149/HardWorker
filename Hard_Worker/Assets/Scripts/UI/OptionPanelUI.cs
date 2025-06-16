@@ -6,6 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class OptionPanelUI : MonoBehaviour
 {
+    [SerializeField] private CursorManager cursorManager;
     [SerializeField] private GameObject optionPanel;
     [SerializeField] private Button openButton;
     [SerializeField] private Button closeButton;
@@ -22,6 +23,7 @@ public class OptionPanelUI : MonoBehaviour
     /// </summary>
     private void OpenOptionPanel()
     {
+        cursorManager?.OnOtherUIOpen();
         SFXManager.Instance.Play(SFXType.UIShow);
         optionPanelAnimator.Show();
     }
@@ -31,6 +33,7 @@ public class OptionPanelUI : MonoBehaviour
     /// </summary>
     private void CloseOptionPanel()
     {
+        cursorManager?.OnOtherUIClose();
         SFXManager.Instance.Play(SFXType.UIShow);
         optionPanelAnimator.Hide();
     }

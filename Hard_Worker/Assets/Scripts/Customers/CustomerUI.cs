@@ -16,7 +16,7 @@ public class CustomerUI : MonoBehaviour
     public Image[] enemyInfos = new Image[4];
     public Image[] enemyInfoImages = new Image[4];
 
-    private void Awake()
+    private void Start()
     {
         manager = GetComponent<CustomerManager>();
 
@@ -41,7 +41,7 @@ public class CustomerUI : MonoBehaviour
     public void ShowOrderImage(FoodData food)
     {
         foodImage.gameObject.SetActive(true);
-        foodImage.sprite = Instantiate(food.FoodImage, GameObject.Find("GameCanvas").transform);
+        foodImage.sprite = Instantiate(food.FoodImage, GameObject.Find("BackGroundCanvas").transform);
         foodText.text = food.FoodName;
 
         TurnOffEnemyInfo();
