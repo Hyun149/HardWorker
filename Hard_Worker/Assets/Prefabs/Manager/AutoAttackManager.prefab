@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1595458661583205627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3543309011707939115}
+  - component: {fileID: 7777982896380795093}
+  m_Layer: 0
+  m_Name: AutoAttackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3543309011707939115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595458661583205627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0059167147, y: 0, z: 0.00047898293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7777982896380795093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595458661583205627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f89df9fe56b7cb4399a207e1968ffec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoAttackUpgrades:
+  - level: 1
+    requiredPlayerLevel: 5
+    attackSpeedBonus: 0
+    upgradeCost: 0
+    description: "\uC790\uB3D9 \uACF5\uACA9 \uD574\uAE08"
+  - level: 2
+    requiredPlayerLevel: 10
+    attackSpeedBonus: 10
+    upgradeCost: 100
+    description: "\uACF5\uACA9 \uC18D\uB3C4 10% \uC99D\uAC00"
+  - level: 3
+    requiredPlayerLevel: 15
+    attackSpeedBonus: 20
+    upgradeCost: 500
+    description: "\uACF5\uACA9 \uC18D\uB3C4 20% \uC99D\uAC00"
+  - level: 4
+    requiredPlayerLevel: 20
+    attackSpeedBonus: 35
+    upgradeCost: 1000
+    description: "\uACF5\uACA9 \uC18D\uB3C4 35% \uC99D\uAC00"
+  - level: 5
+    requiredPlayerLevel: 25
+    attackSpeedBonus: 50
+    upgradeCost: 2500
+    description: "\uACF5\uACA9 \uC18D\uB3C4 50% \uC99D\uAC00"
+  clickEventHandler: {fileID: 0}
+  autoAttackUI: {fileID: 0}
+  autoAttackLevelText: {fileID: 0}
+  autoAttackSpeedText: {fileID: 0}
+  nextUpgradeText: {fileID: 0}
+  upgradeCostText: {fileID: 0}
+  upgradeButton: {fileID: 0}
