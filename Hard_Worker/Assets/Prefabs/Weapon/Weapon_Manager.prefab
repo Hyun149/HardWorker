@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1a5cd589c68d3438af783a7d202992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultWeaponData: {fileID: 11400000, guid: 3db303d6f0f6e44478d6c20fe95a31d2, type: 2}
+  weaponInventory: {fileID: 0}
   weaponStatusUI: {fileID: 0}
 --- !u!1 &4658345330965394334
 GameObject:
@@ -76,56 +78,8 @@ Transform:
   m_Children:
   - {fileID: 3556972108744681609}
   - {fileID: 3216032189686563428}
-  - {fileID: 8078885182526480616}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4693420446901237029
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8078885182526480616}
-  - component: {fileID: 6868009238445680529}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8078885182526480616
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4693420446901237029}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1709108142554218420}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6868009238445680529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4693420446901237029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bbd4dcbc7199ee4285fb8c14c76223b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultWeaponData: {fileID: 11400000, guid: 3db303d6f0f6e44478d6c20fe95a31d2, type: 2}
-  weaponInventory: {fileID: 0}
-  weaponManager: {fileID: 2029643206596474723}
 --- !u!1 &8883204287198343802
 GameObject:
   m_ObjectHideFlags: 0

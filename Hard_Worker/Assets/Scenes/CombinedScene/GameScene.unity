@@ -1067,6 +1067,10 @@ PrefabInstance:
       propertyPath: weaponStatusUI
       value: 
       objectReference: {fileID: 1224428570}
+    - target: {fileID: 2029643206596474723, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+      propertyPath: weaponInventory
+      value: 
+      objectReference: {fileID: 1224428571}
     - target: {fileID: 4658345330965394334, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
       propertyPath: m_Name
       value: Weapon_Manager
