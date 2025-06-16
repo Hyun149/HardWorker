@@ -149,5 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageText: {fileID: 6806279552517822230}
   rect: {fileID: 8030345158302621697}
+  startPos: {x: 0, y: -10}
   distance: 300
   duration: 100
+  attackDamage: 0
