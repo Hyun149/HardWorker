@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1a5cd589c68d3438af783a7d202992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStatusUI: {fileID: 0}
 --- !u!1 &4658345330965394334
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultWeaponData: {fileID: 11400000, guid: 3db303d6f0f6e44478d6c20fe95a31d2, type: 2}
+  weaponInventory: {fileID: 0}
+  weaponManager: {fileID: 2029643206596474723}
 --- !u!1 &8883204287198343802
 GameObject:
   m_ObjectHideFlags: 0

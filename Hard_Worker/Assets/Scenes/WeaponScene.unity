@@ -407,10 +407,6 @@ PrefabInstance:
       value: Weapon_Manager
       objectReference: {fileID: 0}
     - target: {fileID: 6868009238445680529, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
-      propertyPath: weaponManager
-      value: 
-      objectReference: {fileID: 1981602586}
-    - target: {fileID: 6868009238445680529, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
       propertyPath: weaponInventory
       value: 
       objectReference: {fileID: 676187011748238823}
@@ -482,14 +478,6 @@ PrefabInstance:
       propertyPath: weaponManager
       value: 
       objectReference: {fileID: 1981602586}
-    - target: {fileID: 7310746871145124752, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
-      propertyPath: weaponStatusUI
-      value: 
-      objectReference: {fileID: 830321884}
-    - target: {fileID: 7310746871145124752, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
-      propertyPath: weaponInventory
-      value: 
-      objectReference: {fileID: 676187011748238823}
     - target: {fileID: 7310746871145124752, guid: 6ac8b77ec9c78c9448487bb1ac58c3db, type: 3}
       propertyPath: skillPointManager
       value: 
