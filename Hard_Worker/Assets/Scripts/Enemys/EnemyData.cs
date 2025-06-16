@@ -11,8 +11,6 @@ public class EnemyData : ScriptableObject
 
    [SerializeField] private bool isBoss;
 
-    public GameObject effectPrefab;
-
     public string EnemyName => enemyName;
     public Sprite EnemyImage => enemyImage;
     public bool IsBoss => isBoss;

@@ -129,7 +129,17 @@ public class WeaponSlot : MonoBehaviour
         {
             skillPointManager.SpendSP(data.enhancementTable[0].cost);
             weaponInventory.AddWeapon(data);
+
+            var saveList = GameManager.Instance.playerData.ownedWeapons;
+            if (!saveList.Exists(w => w.weaponId == data.id))
+            {
+                saveList.Add(new WeaponSaveData(data.id, 0, 0));
+            }
+
             FindObjectOfType<WeaponInventoryUI>().RenderInventory();
+
+            SFXManager.Instance.Play(SFXType.Buy);
+            GameManager.Instance.SaveGame();
         }
         else
         {
@@ -154,6 +164,16 @@ public class WeaponSlot : MonoBehaviour
             {
                 weaponStatusUI.DisplayWeapon(weapon);
             }
+
+            SFXManager.Instance.Play(SFXType.WeaponEnhance);
+
+            WeaponSaveData saveData = GameManager.Instance.playerData.ownedWeapons.Find(w => w.weaponId == weapon.GetData().id);
+
+            if (saveData != null)
+            {
+                saveData.enhanceLevel = weapon.GetLevel();
+                GameManager.Instance.SaveGame();
+            }
         }
         else
         {
@@ -165,7 +185,11 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     void TryEquip()
     {
+        SFXManager.Instance.Play(SFXType.EquipWeapon); // 장착 사운드
         weaponManager.EquipWeapon(weapon);
+
+        GameManager.Instance.playerData.equippedWeaponId = weapon.GetData().id;
+        GameManager.Instance.SaveGame();
     }
     
     /// <summary>

@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
     LineController lineController;
-    int stage = 0; // 현재 스테이지 정보
+    [SerializeField] int stage = 0; // 현재 스테이지 정보
     [SerializeField] private int reward; // 보상
 
     public CustomerManager customerManager;
@@ -28,10 +28,7 @@ public class StageManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-       
-      
     }
     // Start is called before the first frame update
     void Start()
@@ -50,7 +47,6 @@ public class StageManager : MonoBehaviour
       
         lineController.CreateLine(); // 줄세우기
         lineController.StartCoroutine(lineController.HandleOrder()); // 주문하기
-
     }
     /// <summary>
     /// 스테이지 계수 (1 + 0.2 * stage) 반환

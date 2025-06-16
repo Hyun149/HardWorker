@@ -61,7 +61,6 @@ public class BGMManager : MonoSingleton<BGMManager>
         var sceneType = SceneLoader.GetSceneType(scene.name);
         if (sceneType.HasValue)
         {
-            Debug.Log($" OnSceneLoded 호출, 씬: {scene.name}, 타입: {sceneType.Value}");
             PlayBGM(sceneType.Value);
         }
     }

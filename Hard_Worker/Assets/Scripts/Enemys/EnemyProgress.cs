@@ -97,18 +97,19 @@ public class EnemyProgress : MonoBehaviour
     {
         float duration = 0.1f; // 부드럽게 이동할 시간
         float timer = 0f;
+        float start = curProgress / maxProgress;
+        float end = targetProgress / maxProgress;
 
         while (timer < duration)
         {
             timer += Time.deltaTime;
             float t = timer / duration;
-            progressBar.value = Mathf.Lerp(curProgress, targetProgress, t)/maxProgress;
+            progressBar.value = Mathf.Lerp(start, end, t);
             yield return null;
         }
 
         curProgress = targetProgress;
-        progressBar.value = targetProgress/maxProgress;
-
+        progressBar.value = end;
     }
     /// <summary>
     /// 현재 진행도를 변경합니다.
@@ -128,7 +129,7 @@ public class EnemyProgress : MonoBehaviour
 
         if (enemyManager.enemy.enemyData.IsBoss == true)
         {
-            maxProgress = maxProgress * 10;
+            maxProgress = maxProgress * 5;
         }
         UpdateProgressBar(curProgress, maxProgress);
     }

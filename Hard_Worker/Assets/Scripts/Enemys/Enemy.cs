@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     public float duration = 0.5f; // 던지는데 걸리는 시간
     public Ease easing = Ease.OutQuad; // 움직임 곡선
 
+    public bool isAttackEnd = false; // 플레이어의 공격이 끝났음을 나타냄
+
     /// <summary>
     /// 적을 초기화합니다.
     /// </summary>
@@ -37,6 +39,8 @@ public class Enemy : MonoBehaviour
         StageManager.Instance.RegisterCookingCompleteEvent();
 
         SetProgress(); // 진행도 UI 설정
+
+        isAttackEnd = false;
     }
     /// <summary>
     /// 적 이미지를 변경합니다.
@@ -85,18 +89,9 @@ public class Enemy : MonoBehaviour
     {
         float ratio = progress / enemyProgress.MaxProgress;
 
-        if (ratio >= 0.9f)
-        {
-            enemyAni.Cut(3);
-        }
-        else if (ratio >= 0.6f)
-        {
-            enemyAni.Cut(2);
-        }
-        else if (ratio >= 0.3f)
-        {
-            enemyAni.Cut(1);
-        }
+        if (ratio >= 0.9f) enemyAni.Cut(3);
+        else if (ratio >= 0.6f) enemyAni.Cut(2);
+        else if (ratio >= 0.3f) enemyAni.Cut(1);
         if (progress >= enemyProgress.MaxProgress) // 진행도가 최고치일 경우
         {
             // 보상 지급
@@ -122,8 +117,15 @@ public class Enemy : MonoBehaviour
     /// <returns></returns>
     IEnumerator Ingredient()
     {
+        isAttackEnd = true;
         Throw();
-        enemyProgress.progressBar.gameObject.SetActive(false);
+        enemyProgress.SetProgress(enemyProgress.MaxProgress);
+
+         yield return new WaitForSeconds(0.15F);
+        if (enemyProgress.progressBar.value >= 1f)
+        {
+            enemyProgress.progressBar.gameObject.SetActive(false);
+        }
         yield return new WaitForSeconds(1F);
 
         // 잡을 적이 남았을 경우 다음 적 생성

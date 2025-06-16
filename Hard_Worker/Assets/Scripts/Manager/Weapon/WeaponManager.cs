@@ -16,10 +16,20 @@ public class WeaponManager : MonoBehaviour
     private Image icon;
     private void Start()
     {
-        // 기본 무기 생성 및 등록
-        Weapon defaultWeapon = new Weapon(defaultWeaponData);
-        weaponInventory.AddWeapon(defaultWeaponData);
-        EquipWeapon(defaultWeapon);
+        string equippedId = GameManager.Instance.playerData.equippedWeaponId;
+        Weapon equipped = weaponInventory.GetWeapons().Find(w => w.GetData().id == equippedId);
+
+        if (equipped != null)
+        {
+            EquipWeapon(equipped); // 저장된 장착 무기 복원
+        }
+        else
+        {
+            // 장착 정보 없거나 무기 목록에 없으면 기본 무기 생성
+            Weapon defaultWeapon = new Weapon(defaultWeaponData);
+            weaponInventory.AddWeapon(defaultWeaponData);
+            EquipWeapon(defaultWeapon);
+        }
     }
     /// <summary>
     /// 장비장착시

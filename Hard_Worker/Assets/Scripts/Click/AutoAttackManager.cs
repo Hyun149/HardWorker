@@ -64,7 +64,6 @@ public class AutoAttackManager : MonoBehaviour
     {
         if (currentAutoAttackLevel >= autoAttackUpgrades.Length - 1)
         {
-            Debug.Log("자동 공격이 최대 레벨입니다!");
             return;
         }
 
@@ -91,7 +90,6 @@ public class AutoAttackManager : MonoBehaviour
         // 골드 차감 (GameManager에서 처리)
         // GameManager.Instance.SpendGold(nextUpgrade.upgradeCost);
 
-        Debug.Log($"자동 공격 레벨 {currentAutoAttackLevel}로 업그레이드!");
         UpdateUI();
     }
 

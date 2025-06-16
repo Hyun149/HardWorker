@@ -11,6 +11,7 @@ public class Customer : MonoBehaviour
     LineController lineController;
     EnemyManager enemyManager;
     SpriteRenderer spriteRenderer;
+    CustomerPool pool;
 
     public Vector2 targetPos; // 목표 위치
     public Vector2 exitPos; // 퇴장 위치
@@ -18,7 +19,6 @@ public class Customer : MonoBehaviour
     public float walkingTime; // 주문대까지 걸어가는 시간
     public float moveSpeed = 10f;
     public bool isOrderComplete = false; // 주문 완료 여부
-    //public bool hasArrived = false;
 
     private Coroutine moveCoroutine;
 
@@ -29,14 +29,37 @@ public class Customer : MonoBehaviour
         enemyManager = FindObjectOfType<EnemyManager>();
         customerAni = GetComponent<CustomerAni>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        pool = GetComponent<CustomerPool>();
     }
-
+    /// <summary>
+    /// 주문 상태를 변경합니다.
+    /// </summary>
+    /// <param name="value"></param>
     public void CompleteOrder(bool value)
     {
         isOrderComplete = value;
     }
-  
-    // 목표 위치까지 걷기
+    /// <summary>
+    ///  재사용시 코루틴의 중복 사용을 막기 위한 부분입니다.
+    /// </summary>
+    /// <param name="targetPos"></param>
+    /// <returns></returns>
+    public IEnumerator MoveCoroutine(Vector2 targetPos)
+    {
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+            moveCoroutine = null;
+        }
+
+        moveCoroutine = StartCoroutine(MoveRoutine(targetPos));
+        yield return moveCoroutine;
+        moveCoroutine = null;
+    }
+    /// <summary>
+    ///  손님을 목표 위치까지 걷게끔 하는 부분입니다.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator MoveRoutine(Vector2 targetPos)
     {
         customerAni.Walk();
@@ -53,18 +76,7 @@ public class Customer : MonoBehaviour
         transform.position = targetPos;
 
     }
-    public IEnumerator MoveCoroutine(Vector2 targetPos)
-    {
-        if (moveCoroutine != null)
-        {
-            StopCoroutine(moveCoroutine);
-            moveCoroutine = null;
-        }
-
-        moveCoroutine = StartCoroutine(MoveRoutine(targetPos));
-        yield return moveCoroutine;
-        moveCoroutine = null;
-    }
+ 
     /// <summary>
     /// 주문시 적(음식 재료)을 생성하고 주문합니다.
     /// </summary>
@@ -99,8 +111,7 @@ public class Customer : MonoBehaviour
 
         yield return new WaitForSeconds(walkingTime);
 
-        Destroy(gameObject);
-
+        pool.OnDespawn();
+       // Destroy(gameObject);
     }
-
 }

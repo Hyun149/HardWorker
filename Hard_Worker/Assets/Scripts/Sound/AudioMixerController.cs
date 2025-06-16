@@ -19,12 +19,7 @@ public class AudioMixerController : MonoBehaviour
     /// <param name="value">슬라이더의 현재 값 (0.0 ~ 1.0)</param>
     public void SetBGMVolume(float value)
     {
-        Debug.Log($"[AudioMixer] BGM 볼륨 설정 (이벤트 파라미터): {value}");
-        Debug.Log($"[AudioMixer] Slider.value 현재값: {sliderBGM.value}");
-
         float dB = VolumeToDecibel(value);
-        Debug.Log($"[AudioMixer] 계산된 데시벨 값: {dB}");
-
         audioMixer.SetFloat("BGM", VolumeToDecibel(value));
     }
 

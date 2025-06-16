@@ -16,7 +16,7 @@ public class CustomerUI : MonoBehaviour
     public Image[] enemyInfos = new Image[4];
     public Image[] enemyInfoImages = new Image[4];
 
-    private void Awake()
+    private void Start()
     {
         manager = GetComponent<CustomerManager>();
 
