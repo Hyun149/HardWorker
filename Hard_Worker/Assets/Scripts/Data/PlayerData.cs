@@ -9,6 +9,7 @@ public class PlayerData
 {
     public int stageIndex;
     public int currentGold;
+    public int currentSkillPoint = 1000;
 
     public List<SerializableStat> statLevels = new();
 
