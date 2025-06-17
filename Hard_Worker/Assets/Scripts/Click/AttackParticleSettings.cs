@@ -1,5 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 
+/// <summary>
+/// 칼질 공격과 관련된 파티클 설정을 정의하는 클래스입니다.
+/// - 일반 공격과 크리티컬 공격에 대한 색상, 크기, 수량 등을 설정할 수 있습니다.
+/// - 해당 설정을 기반으로 ParticleSystem에 세부 속성을 적용하는 정적 메서드를 제공합니다.
+/// </summary>
 [System.Serializable]
 public class AttackParticleSettings
 {
@@ -13,7 +18,11 @@ public class AttackParticleSettings
     public float criticalParticleSize = 0.5f;
     public int criticalParticleCount = 30;
 
-    // 일반 칼질 파티클 시스템 설정
+    /// <summary>
+    /// 일반 공격 시 파티클 시스템의 설정을 적용합니다.
+    /// </summary>
+    /// <param name="particleSystem">설정을 적용할 파티클 시스템</param>
+    /// <param name="settings">사용할 파티클 설정 데이터</param>
     public static void SetupNormalAttackParticle(ParticleSystem particleSystem, AttackParticleSettings settings)
     {
         var main = particleSystem.main;
@@ -66,7 +75,11 @@ public class AttackParticleSettings
         colorOverLifetime.color = gradient;
     }
 
-    // 완벽한 손질 파티클 시스템 설정
+    /// <summary>
+    /// 완벽한 손질 시 파티클 시스템의 설정을 적용합니다.
+    /// </summary>
+    /// <param name="particleSystem">설정을 적용할 파티클 시스템</param>
+    /// <param name="settings">사용할 파티클 설정 데이터</param>
     public static void SetupCriticalAttackParticle(ParticleSystem particleSystem, AttackParticleSettings settings)
     {
         var main = particleSystem.main;
