@@ -124,7 +124,7 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0}
   exitPos: {x: 15, y: -0.81}
   walkingTime: 10
-  moveSpeed: 3
+  moveSpeed: 20
   isOrderComplete: 0
 --- !u!114 &1495154108759448182
 MonoBehaviour:

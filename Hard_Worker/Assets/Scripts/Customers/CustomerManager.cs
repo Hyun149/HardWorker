@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.UI.CanvasScaler;
 using DG.Tweening;
@@ -95,6 +93,10 @@ public class CustomerManager : MonoBehaviour
         curCustomer.foodData = food;
         // 음식 이미지 표시
         customerUI.ShowOrderImage(food);
+
+        // 기본 골드 보상 설정
+        StageManager.Instance.SetBaseReward(food.Difficulty * 100);
+
     } 
     /// <summary>
     /// 요리 완료시 호출되는 애니메이션 : 손님만족 이모션포함 

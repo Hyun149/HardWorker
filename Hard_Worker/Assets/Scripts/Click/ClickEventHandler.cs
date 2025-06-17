@@ -12,6 +12,7 @@ using UnityEngine.EventSystems;
 public class ClickEventHandler : MonoBehaviour
 {
     [SerializeField] private PlayerStat playerstat;
+    [SerializeField] private CookingAttackHandler cookingAttackHandler;
 
     [Header("클릭 설정")]
     [SerializeField] private bool isPaused = false;
@@ -102,7 +103,9 @@ public class ClickEventHandler : MonoBehaviour
         Vector3 clickPosition = GetClickWorldPosition();
         cursorManager?.PlayClickAnimation();
 
-        float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance), 0f, 0.9f);
+        cookingAttackHandler.TryPlayerAttack();
+
+        float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance) * 0.01f, 0f, 0.95f);
         bool isCritical = Random.Range(0f, 1f) < critChance;
 
         float baseDamage = playerstat.GetStatValue(StatType.Cut);
@@ -230,12 +233,14 @@ public class ClickEventHandler : MonoBehaviour
             {
                 Vector3 targetPosition = GetAutoAttackTargetPosition();
 
-                float critChance = playerstat.GetStatValue(StatType.CritChance);
+                float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance) * 0.01f, 0f, 0.95f);
                 bool isCritical = Random.Range(0f, 1f) < critChance;
 
                 float assistPower = playerstat.GetStatValue(StatType.AssistSkill);
                 float critBonus = playerstat.GetStatValue(StatType.CritBonus);
                 float finalDamage = isCritical ? assistPower * (1f + critBonus) : assistPower;
+
+                cookingAttackHandler.TryAutoAttack();
 
                 if (isCritical)
                 {

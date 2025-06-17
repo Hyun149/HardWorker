@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 /// <summary>
@@ -52,6 +52,15 @@ public class StageManager : MonoBehaviour
     /// 스테이지 계수 (1 + 0.2 * stage) 반환
     /// </summary>
     private float StageMultiplier => 1f + 0.2f * stage;
+
+    /// <summary>
+    /// 보상의 기본 값을 설정합니다.
+    /// </summary>
+    /// <returns></returns>
+    public void SetBaseReward(int value)
+    {
+        reward = value;
+    }
 
     /// <summary>
     /// 스테이지마다 보상을 증가시킵니다.

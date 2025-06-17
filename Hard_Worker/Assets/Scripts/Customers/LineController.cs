@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 /// <summary>
@@ -63,7 +62,5 @@ public class LineController : MonoBehaviour
                 i++;
             }
         }
-       
     }
-  
 }
