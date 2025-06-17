@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
 using UnityEngine;
-using static UnityEngine.UI.CanvasScaler;
 
 /// <summary>
 /// 손님 관리하는 스크립트입니다.
