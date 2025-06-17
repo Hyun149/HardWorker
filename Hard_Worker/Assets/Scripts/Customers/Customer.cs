@@ -23,16 +23,27 @@ public class Customer : MonoBehaviour
 
     private Coroutine moveCoroutine;
     public FoodData foodData;
+
     private void OnEnable()
     {
-        customerManager = FindObjectOfType<CustomerManager>();
-        foodSelector = FindObjectOfType<FoodSelector>();
-        lineController = FindObjectOfType<LineController>();
-        enemyManager = FindObjectOfType<EnemyManager>();
-
         customerAni = GetComponent<CustomerAni>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         pool = GetComponent<CustomerPool>();
+    }
+    /// <summary>
+    ///  초기화 합니다.
+    /// </summary>
+    /// <param name="customerManager"></param>
+    /// <param name="foodSelector"></param>
+    /// <param name="lineController"></param>
+    /// <param name="enemyManager"></param>
+    public void Init( CustomerManager customerManager,FoodSelector foodSelector,
+                      LineController lineController,EnemyManager enemyManager)
+    {
+        this.customerManager = customerManager;
+        this.foodSelector = foodSelector;
+        this.lineController = lineController;
+        this.enemyManager = enemyManager;
     }
     /// <summary>
     /// 주문 상태를 변경합니다.

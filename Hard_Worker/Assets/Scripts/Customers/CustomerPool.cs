@@ -20,6 +20,7 @@ public class CustomerPool : MonoBehaviour, IPoolable
         returnToPool = returnAction;
         spriteRenderer.flipX = true;
         customer.isOrderComplete = false;
+
     }
 
     public void OnSpawn()
