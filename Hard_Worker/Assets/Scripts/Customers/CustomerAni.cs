@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class CustomerAni : MonoBehaviour
 {
-    Animator animator;
+    private Animator animator;
 
     /// <summary>
     /// 오브젝트가 활성화될 때 Animator 컴포넌트를 캐싱합니다.

@@ -8,15 +8,15 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
-    LineController lineController;
-    [SerializeField] int stage = 0; // 현재 스테이지 정보
-    [SerializeField] private int reward; // 보상
-
-    public CustomerManager customerManager;
     public event Action<int> onStageChanged; // 스테이지 변경시 event
 
-    EnemyManager enemyManager;
-    Enemy enemy;
+    [SerializeField] int stage = 0; // 현재 스테이지 정보
+    [SerializeField] private int reward; // 보상
+    [SerializeField] private CustomerManager customerManager;
+
+    private LineController lineController;
+    private EnemyManager enemyManager;
+    private Enemy enemy;
 
     public int Stage => stage;
     public int Reward => reward;

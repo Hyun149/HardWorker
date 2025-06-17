@@ -8,8 +8,8 @@ using UnityEngine;
 public class CustomerPool : MonoBehaviour, IPoolable
 {
     private Action<GameObject> returnToPool;
-    Customer customer;
-    SpriteRenderer spriteRenderer;
+    private Customer customer;
+    private SpriteRenderer spriteRenderer;
 
     /// <summary>
     /// 오브젝트가 활성화될 때 필요한 컴포넌트를 캐싱합니다.

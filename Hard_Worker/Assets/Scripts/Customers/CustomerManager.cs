@@ -8,16 +8,15 @@ using DG.Tweening;
 /// </summary>
 public class CustomerManager : MonoBehaviour
 {
-    CustomerPoolManager poolManager;
-    public CustomerUI customerUI;
-    LineController lineController;
-
-    public Customer curCustomer; // 지금 주문 중인 손님
-
     public List<FoodData> foods = new List<FoodData>(); // 요리 데이터들
     public FoodData food;
     public GameObject foodIconPrefab;
+    public Customer curCustomer; // 지금 주문 중인 손님
+    public CustomerUI customerUI;
     
+    private CustomerPoolManager poolManager;
+    private LineController lineController;
+
     void Awake()
     {
         poolManager = GetComponent<CustomerPoolManager>();

@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public class FoodSelector : MonoBehaviour
 {
-    CustomerManager manager;
-    CustomerUI customerUI;
+    private CustomerManager manager;
+    private CustomerUI customerUI;
 
     private void Start()
     {

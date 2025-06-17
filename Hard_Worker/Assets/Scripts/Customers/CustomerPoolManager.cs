@@ -8,10 +8,10 @@ using UnityEngine;
 /// </summary>
 public class CustomerPoolManager : ObjectPoolManager
 {
-    CustomerManager customerManager;
-    FoodSelector foodSelector;
-    LineController lineController;
-    EnemyManager enemyManager;
+    private CustomerManager customerManager;
+    private FoodSelector foodSelector;
+    private LineController lineController;
+    private EnemyManager enemyManager;
 
     public Vector3 pos = new Vector3(15, -0.81f, 0); // 손님 생성 위치
 

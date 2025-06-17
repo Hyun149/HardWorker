@@ -9,17 +9,18 @@ using UnityEngine.UI;
 /// </summary>
 public class CustomerUI : MonoBehaviour
 {
-    CustomerManager manager;
-    public TMP_Text stageText; // 현재 스테이지 텍스트
+    [SerializeField] private TMP_Text stageText; // 현재 스테이지 텍스트
 
-    public Image foodImage; // 주문한 음식 이미지
-    public TMP_Text foodText; // 주문한 음식 텍스트
+    [SerializeField] private Image foodImage; // 주문한 음식 이미지
+    [SerializeField] private TMP_Text foodText; // 주문한 음식 텍스트
 
-    public Image[] enemyInfos = new Image[4];
-    public Image[] enemyInfoImages = new Image[4];
+    [SerializeField] private Image[] enemyInfos = new Image[4];
+    [SerializeField] private Image[] enemyInfoImages = new Image[4];
 
-    public GameObject heartEffectPrefab;
-    public GameObject rewardPopupPrefab;
+    [SerializeField] private GameObject heartEffectPrefab;
+    [SerializeField] private GameObject rewardPopupPrefab;
+    
+    private CustomerManager manager;
 
     /// <summary>
     /// 시작 시 StageManager 이벤트를 구독하고 현재 스테이지를 표시합니다.

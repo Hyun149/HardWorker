@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public class CustomerController : MonoBehaviour
 {
-    public float walkingTime; // 주문대까지 걸어가는 시간
-    public bool isArrived = false; // 계산대에 도착했는지 여부
+    [SerializeField] private float walkingTime; // 주문대까지 걸어가는 시간
+    [SerializeField] private bool isArrived = false; // 계산대에 도착했는지 여부
     
     private Customer customer;
     private CustomerManager customerManager;

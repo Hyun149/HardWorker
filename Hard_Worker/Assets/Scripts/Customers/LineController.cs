@@ -8,11 +8,11 @@ using UnityEngine;
 /// </summary>
 public class LineController : MonoBehaviour
 {
-    private CustomerManager customerManager;
-
     public Transform lineStartPos; // 줄의 시작 위치
     public float spacing = 3f; // 손님 간 간격
     public Queue<Customer> customers = new Queue<Customer>(); // 줄을 선 손님들 담을 Queue
+    
+    private CustomerManager customerManager;
 
     /// <summary>
     /// 초기화 시 CustomerManager를 찾아 저장합니다.

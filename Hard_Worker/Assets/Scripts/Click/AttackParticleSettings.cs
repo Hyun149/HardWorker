@@ -9,14 +9,14 @@ using UnityEngine;
 public class AttackParticleSettings
 {
     [Header("일반 칼질 파티클 설정")]
-    public Color normalAttackColor = new Color(0.9f, 0.9f, 0.9f, 1f); // 은빛 칼날
-    public float normalParticleSize = 0.3f;
-    public int normalParticleCount = 15;
+    [SerializeField] private Color normalAttackColor = new Color(0.9f, 0.9f, 0.9f, 1f); // 은빛 칼날
+    [SerializeField] private float normalParticleSize = 0.3f;
+    [SerializeField] private int normalParticleCount = 15;
 
     [Header("완벽한 손질 파티클 설정")]
-    public Color criticalAttackColor = new Color(1f, 0.9f, 0.4f, 1f); // 황금빛 반짝임
-    public float criticalParticleSize = 0.5f;
-    public int criticalParticleCount = 30;
+    [SerializeField] private Color criticalAttackColor = new Color(1f, 0.9f, 0.4f, 1f); // 황금빛 반짝임
+    [SerializeField] private float criticalParticleSize = 0.5f;
+    [SerializeField] private int criticalParticleCount = 30;
 
     /// <summary>
     /// 일반 공격 시 파티클 시스템의 설정을 적용합니다.
