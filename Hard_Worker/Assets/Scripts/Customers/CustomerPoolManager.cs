@@ -1,10 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
 /// <summary>
-/// 손님의 Pool을 관리하는 스크립트 입니다.
+/// 손님 전용 오브젝트 풀을 관리하는 클래스입니다.
+/// - 손님 오브젝트를 효율적으로 재사용하기 위해 ObjectPoolManager를 상속받아 확장합니다.
+/// - 손님 생성 시 필요한 의존성(Manager들)도 함께 주입합니다.
 /// </summary>
 public class CustomerPoolManager : ObjectPoolManager
 {
@@ -15,6 +15,9 @@ public class CustomerPoolManager : ObjectPoolManager
 
     public Vector3 pos = new Vector3(15, -0.81f, 0); // 손님 생성 위치
 
+    /// <summary>
+    /// 초기화 시 필요한 매니저 컴포넌트를 캐싱합니다.
+    /// </summary>
     protected override void Awake()
     {
         base.Awake(); // 부모의 Awake 실행되도록
@@ -24,10 +27,14 @@ public class CustomerPoolManager : ObjectPoolManager
         lineController = GetComponentInParent<LineController>();
         enemyManager = transform.parent?.GetComponentsInChildren<EnemyManager>(true).FirstOrDefault(m => m.gameObject != gameObject);
     }
+
     /// <summary>
-    /// Pool에서 가져오는 기능입니다.
+    /// 오브젝트 풀에서 손님 오브젝트를 가져옵니다.
+    /// - 풀에 남은 객체가 있으면 재사용하고, 없으면 새로 생성합니다.
+    /// - 새로 생성될 경우 각종 매니저 의존성을 주입하고 초기화도 수행합니다.
     /// </summary>
-    /// <returns></returns>
+    /// <param name="prefabIndex">사용할 프리팹 인덱스</param>
+    /// <returns>활성화된 손님 GameObject</returns>
     public override GameObject GetObject(int prefabIndex)
     {
         if (!pools.ContainsKey(prefabIndex))
@@ -53,10 +60,12 @@ public class CustomerPoolManager : ObjectPoolManager
         obj.GetComponent<IPoolable>()?.OnSpawn();
         return obj;
     }
+
     /// <summary>
-    ///  Pool에서 반납하는 기능입니다.
+    /// 오브젝트를 풀에 반환합니다.
     /// </summary>
-    /// <returns></returns>
+    /// <param name="prefabIndex">반환 대상의 프리팹 인덱스</param>
+    /// <param name="obj">반환할 GameObject</param>
     public override void ReturnObject(int prefabIndex, GameObject obj)
     {
         base.ReturnObject(prefabIndex, obj);

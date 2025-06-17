@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 랜덤하게 요리를 주문합니다.
+/// 현재 스테이지에 따라 난이도 기반으로 음식 주문을 랜덤하게 선택하는 클래스입니다.
+/// - 손님에게 랜덤한 요리를 부여하고, 관련 UI와 보상 설정을 수행합니다.
 /// </summary>
 public class FoodSelector : MonoBehaviour
 {
@@ -14,8 +15,11 @@ public class FoodSelector : MonoBehaviour
         manager = GetComponent<CustomerManager>();
         customerUI = GetComponent<CustomerUI>();
     }
+
     /// <summary>
-    /// 랜덤하게 요리를 주문합니다.
+    /// 스테이지 난이도에 따라 랜덤한 음식 주문을 생성합니다.
+    /// - 난이도 낮은 음식은 자주, 높은 음식은 드물게 등장합니다.
+    /// - 선택된 음식은 손님과 UI에 반영되며, 기본 보상도 설정됩니다.
     /// </summary>
     public void RamdomOrder()
     {
@@ -52,6 +56,5 @@ public class FoodSelector : MonoBehaviour
 
         // 기본 골드 보상 설정
         StageManager.Instance.SetBaseReward(_food.Difficulty * 100);
-
     }
 }

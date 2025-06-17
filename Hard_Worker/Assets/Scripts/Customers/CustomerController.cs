@@ -1,25 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 손님 이동 컨트롤 스크립트 입니다.
+/// 손님의 이동 및 주문 과정을 제어하는 클래스입니다.
+/// - 이동, 애니메이션, 주문 처리, 퇴장까지 전반적인 흐름을 관리합니다.
 /// </summary>
 public class CustomerController : MonoBehaviour
 {
-    Customer customer;
-    CustomerManager customerManager;
-    FoodSelector foodSelector;
-    CustomerAni customerAni;
-    LineController lineController;
-    EnemyManager enemyManager;
-    SpriteRenderer spriteRenderer;
-    CustomerPool pool;
-
     public float walkingTime; // 주문대까지 걸어가는 시간
     public bool isArrived = false; // 계산대에 도착했는지 여부
+    
+    private Customer customer;
+    private CustomerManager customerManager;
+    private FoodSelector foodSelector;
+    private CustomerAni customerAni;
+    private LineController lineController;
+    private EnemyManager enemyManager;
+    private SpriteRenderer spriteRenderer;
+    private CustomerPool pool;
     private Coroutine moveCoroutine;
 
+    /// <summary>
+    /// 활성화될 때 필요한 컴포넌트를 캐싱합니다.
+    /// </summary>
     private void OnEnable()
     {
         customer = GetComponent<Customer>();
@@ -27,6 +30,7 @@ public class CustomerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         pool = GetComponent<CustomerPool>();
     }
+
     /// <summary>
     ///  초기화 합니다.
     /// </summary>
@@ -42,6 +46,7 @@ public class CustomerController : MonoBehaviour
         this.lineController = lineController;
         this.enemyManager = enemyManager;
     }
+
     /// <summary>
     /// 주문 상태를 변경합니다.
     /// </summary>

@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// 스테이지를 관리하는 스크립트입니다.
+/// 게임 내 스테이지를 관리하는 클래스입니다.
+/// - 스테이지 진행, 보상 설정 및 계산, 손님 생성 및 주문 관리 기능을 포함합니다.
 /// </summary>
 public class StageManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class StageManager : MonoBehaviour
     public int Stage => stage;
     public int Reward => reward;
 
+    /// <summary>
+    /// 싱글톤 설정 및 중복 방지 처리합니다.
+    /// </summary>
     private void Awake()
     {
         // 인스턴스가 이미 존재하면 파괴
@@ -30,7 +34,10 @@ public class StageManager : MonoBehaviour
         }
         Instance = this;
     }
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// 스테이지 시작 시 필요한 매니저 및 라인 초기화를 수행합니다.
+    /// </summary>
     void Start()
     {
         enemyManager = FindObjectOfType<EnemyManager>();
@@ -53,6 +60,7 @@ public class StageManager : MonoBehaviour
         lineController.CreateLine(); // 줄세우기
         lineController.StartCoroutine(lineController.HandleOrder()); // 주문하기
     }
+
     /// <summary>
     /// 스테이지 계수 (1 + 0.2 * stage) 반환
     /// </summary>
@@ -75,6 +83,7 @@ public class StageManager : MonoBehaviour
     {
         reward = (int)(reward * StageMultiplier);
     }
+
     /// <summary>
     /// 보상을 반환합니다.
     /// </summary>
@@ -83,6 +92,7 @@ public class StageManager : MonoBehaviour
     {
         return reward;
     }
+
     /// <summary>
     /// 스테이지마다 최대 진행도를 증가시킵니다.
     /// </summary>
@@ -91,6 +101,7 @@ public class StageManager : MonoBehaviour
     {
         return (int)(100f * StageMultiplier);
     }
+
     /// <summary>
     /// 요리 완성시 발생하는 event에 구독합니다.
     /// </summary>
@@ -100,8 +111,10 @@ public class StageManager : MonoBehaviour
         enemy.completedCooking -= NextStage;
         enemy.completedCooking += NextStage;
     }
+
     /// <summary>
-    /// 다음 스테이지로 이동합니다.
+    /// 다음 스테이지로 진입합니다.
+    /// - 스테이지 증가 및 보상 갱신, 저장 처리 포함
     /// </summary>
     public void NextStage()
     {
@@ -118,6 +131,10 @@ public class StageManager : MonoBehaviour
         GameManager.Instance.SaveGame();
     }
 
+    /// <summary>
+    /// 능력치(수익 증가율)를 반영한 최종 보상을 계산하고 골드를 지급합니다.
+    /// </summary>
+    /// <returns>최종 지급된 보상 금액</returns>
     public int GiveReward()
     {
         float incomeBonus = FindAnyObjectByType<PlayerStat>().GetFinalStatValue(StatType.Income);

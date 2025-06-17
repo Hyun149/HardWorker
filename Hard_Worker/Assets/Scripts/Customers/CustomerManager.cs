@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
 /// <summary>
-/// 손님 관리하는 스크립트입니다.
+/// 손님을 생성하고, 주문 및 반응 애니메이션을 관리하는 클래스입니다.
+/// - 손님 생성/추가, 음식 서빙 반응, 오브젝트 풀 관리 기능을 포함합니다.
 /// </summary>
 public class CustomerManager : MonoBehaviour
 {
