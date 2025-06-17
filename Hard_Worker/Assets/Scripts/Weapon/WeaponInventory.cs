@@ -49,10 +49,6 @@ public class WeaponInventory : MonoBehaviour
 
                 ownedWeapons.Add(weapon);
             }
-            else
-            {
-                Debug.LogWarning($"WeaponDataSO not found for id: {save.weaponId}");
-            }
         }
     }
 }

@@ -72,7 +72,7 @@ public class AutoAttackTester : MonoBehaviour
             {
                 status += $"자동 공격: 해금됨\n";
                 status += $"자동 공격 레벨: {currentAutoAttackLevel}\n";
-                status += $"공격 간격: {clickEventHandler.GetCurrentAutoAttackInterval():F2}초\n";
+                status += $"공격 간격: {clickEventHandler.GetAutoAttackInterval():F2}초\n";
                 status += $"일시정지: {(currentPauseState ? "활성" : "비활성")}";
             }
             else

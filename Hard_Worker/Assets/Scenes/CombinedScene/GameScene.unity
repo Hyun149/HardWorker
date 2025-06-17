@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: clickEventHandler
       value: 
       objectReference: {fileID: 697337926}
+    - target: {fileID: 7777982896380795093, guid: 95010f7495ca0c846b6ddf5a8c46057e, type: 3}
+      propertyPath: upgrades.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1769,9 +1773,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 551525453013262285, guid: 433b41657f59c1247ab3d8560da73203, type: 3}
+      propertyPath: playerstat
+      value: 
+      objectReference: {fileID: 922048516}
+    - target: {fileID: 551525453013262285, guid: 433b41657f59c1247ab3d8560da73203, type: 3}
+      propertyPath: playerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 551525453013262285, guid: 433b41657f59c1247ab3d8560da73203, type: 3}
       propertyPath: cursorManager
       value: 
       objectReference: {fileID: 1577997026}
+    - target: {fileID: 551525453013262285, guid: 433b41657f59c1247ab3d8560da73203, type: 3}
+      propertyPath: autoAttackUnlockLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5513019519450220755, guid: 433b41657f59c1247ab3d8560da73203, type: 3}
       propertyPath: m_Name
       value: ClickManager
@@ -2726,7 +2742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8578163775575686934, guid: 02ce68c14c1a38a49991addbdc804290, type: 3}
       propertyPath: m_Name
-      value: PlayerStat
+      value: StatManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3868,7 +3884,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682627459}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -4003,7 +4019,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721606121}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

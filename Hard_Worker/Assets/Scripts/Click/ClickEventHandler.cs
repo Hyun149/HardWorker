@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,20 +11,19 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class ClickEventHandler : MonoBehaviour
 {
+    [SerializeField] private PlayerStat playerstat;
+
     [Header("클릭 설정")]
     [SerializeField] private bool isPaused = false;
 
     [Header("플레이어 레벨")]
-    [SerializeField] private int playerLevel = 1;
-    [SerializeField] private int autoAttackUnlockLevel = 5; // 자동 공격 해금 레벨
+    [SerializeField] private int playerLevel = 0;
+    [SerializeField] private int autoAttackUnlockLevel = 1; // 자동 공격 해금 레벨
 
     [Header("자동 공격 설정")]
     [SerializeField] private int autoAttackLevel = 0;
     [SerializeField] private float baseAutoAttackInterval = 1.0f;
     [SerializeField] private bool isAutoAttackUnlocked = false;
-
-    [Header("치명타 설정")]
-    [SerializeField] private float criticalChance = 0.1f; // 10% 기본 치명타 확률
 
     [Header("파티클 시스템")]
     [SerializeField] private ParticleSystem normalAttackParticle;
@@ -100,20 +100,22 @@ public class ClickEventHandler : MonoBehaviour
     void PerformClick()
     {
         Vector3 clickPosition = GetClickWorldPosition();
-        
         cursorManager?.PlayClickAnimation();
-        // 치명타 판정
-        bool isCritical = Random.Range(0f, 1f) < criticalChance;
+
+        float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance), 0f, 0.9f);
+        bool isCritical = Random.Range(0f, 1f) < critChance;
+
+        float baseDamage = playerstat.GetStatValue(StatType.Cut);
 
         if (isCritical)
         {
-            // 치명타 공격
-            OnCriticalAttack(clickPosition);
+            float critBonus = playerstat.GetStatValue(StatType.CritBonus);   
+            float critDamage = baseDamage * (1f + critBonus);
+            OnCriticalAttack(clickPosition, critDamage);
         }
         else
         {
-            // 일반 공격
-            OnNormalAttack(clickPosition);
+            OnNormalAttack(clickPosition, baseDamage);
         }
     }
 
@@ -130,7 +132,7 @@ public class ClickEventHandler : MonoBehaviour
     /// <summary>
     /// 일반 공격 처리: 이펙트, 사운드 실행
     /// </summary>
-    void OnNormalAttack(Vector3 position)
+    void OnNormalAttack(Vector3 position, float damage)
     {
         // 일반 공격 이펙트
         if (normalAttackParticle != null)
@@ -144,15 +146,12 @@ public class ClickEventHandler : MonoBehaviour
         {
             audioSource.PlayOneShot(normalAttackSound);
         }
-
-        // GameManager에 공격 이벤트 전달 (다른 팀원이 구현)
-        // GameManager.Instance.OnPlayerAttack(damage);
     }
 
     /// <summary>
     /// 치명타 공격 처리: 이펙트, 사운드 실행
     /// </summary>
-    void OnCriticalAttack(Vector3 position)
+    void OnCriticalAttack(Vector3 position, float damage)
     {
         // 치명타 이펙트
         if (criticalAttackParticle != null)
@@ -166,24 +165,22 @@ public class ClickEventHandler : MonoBehaviour
         {
             audioSource.PlayOneShot(criticalAttackSound);
         }
-
-        // GameManager에 치명타 이벤트 전달 (다른 팀원이 구현)
-        // GameManager.Instance.OnPlayerCriticalAttack(criticalDamage);
     }
 
     /// <summary>
     /// 자동 공격 해금 조건 확인 및 처리
     /// </summary>
-    void CheckAutoAttackUnlock()
+    public void CheckAutoAttackUnlock()
     {
-        if (playerLevel >= autoAttackUnlockLevel && !isAutoAttackUnlocked)
+        int currentAssistLevel = playerstat.GetStatLevel(StatType.AssistSkill);
+        Debug.Log($"CheckAutoAttackUnlock 실행됨 (현재 어시스트 레벨: {currentAssistLevel}, 필요레벨: {autoAttackUnlockLevel}, 해금 상태: {isAutoAttackUnlocked})");
+        
+        if (currentAssistLevel >= autoAttackUnlockLevel && !isAutoAttackUnlocked)
         {
+            Debug.Log("자동 공격 해금 조건 달성");
             isAutoAttackUnlocked = true;
-
-            // 자동 공격 레벨 1로 설정하여 시작
             SetAutoAttackLevel(1);
 
-            // AutoAttackManager에게 해금 알림 - 추가
             if (autoAttackManager != null)
             {
                 autoAttackManager.OnAutoAttackUnlocked();
@@ -226,17 +223,28 @@ public class ClickEventHandler : MonoBehaviour
     {
         while (true)
         {
-            // 자동 공격 간격 계산 (레벨이 높을수록 빠르게)
-            float attackInterval = baseAutoAttackInterval / (1 + (autoAttackLevel - 1) * 0.1f);
+            float attackInterval = GetAutoAttackInterval();
             yield return new WaitForSeconds(attackInterval);
 
             if (!isPaused)
             {
-                // 화면 중앙에 자동 공격
-                Vector3 centerPosition = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 10f));
+                Vector3 targetPosition = GetAutoAttackTargetPosition();
 
-                // 자동 공격은 항상 일반 공격으로 처리
-                OnNormalAttack(centerPosition);
+                float critChance = playerstat.GetStatValue(StatType.CritChance);
+                bool isCritical = Random.Range(0f, 1f) < critChance;
+
+                float assistPower = playerstat.GetStatValue(StatType.AssistSkill);
+                float critBonus = playerstat.GetStatValue(StatType.CritBonus);
+                float finalDamage = isCritical ? assistPower * (1f + critBonus) : assistPower;
+
+                if (isCritical)
+                {
+                    OnCriticalAttack(targetPosition, finalDamage);
+                }
+                else
+                {
+                    OnNormalAttack(targetPosition, finalDamage);
+                }
             }
         }
     }
@@ -256,6 +264,7 @@ public class ClickEventHandler : MonoBehaviour
     {
         if (!isAutoAttackUnlocked && level > 0)
         {
+            Debug.Log($"자동 공격 레벨 설정: {level}");
             return;
         }
 
@@ -272,14 +281,6 @@ public class ClickEventHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// 치명타 확률 설정
-    /// </summary>
-    public void SetCriticalChance(float chance)
-    {
-        criticalChance = Mathf.Clamp01(chance);
-    }
-
-    /// <summary>
     /// 플레이어 레벨 설정 및 해금 여부 확인
     /// </summary>
     public void SetPlayerLevel(int level)
@@ -291,10 +292,10 @@ public class ClickEventHandler : MonoBehaviour
     /// <summary>
     /// 현재 자동 공격 간격 반환
     /// </summary>
-    public float GetCurrentAutoAttackInterval()
+    public float GetAutoAttackInterval()
     {
-        if (autoAttackLevel <= 0) return 0f;
-        return baseAutoAttackInterval / (1 + (autoAttackLevel - 1) * 0.1f);
+        float interval = playerstat.GetStatLevel(StatType.AssistSpeed);
+        return Mathf.Clamp(interval, 0.3f, 15f);
     }
 
     /// <summary>
@@ -303,5 +304,17 @@ public class ClickEventHandler : MonoBehaviour
     public bool IsAutoAttackUnlocked()
     {
         return isAutoAttackUnlocked;
+    }
+
+    private Vector3 GetAutoAttackTargetPosition()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        if (enemies.Length == 0)
+        {
+            return GetClickWorldPosition();
+        }
+        
+        Enemy target = enemies.OrderBy(e => e.transform.position.x).FirstOrDefault();
+        return target != null ? target.transform.position : GetClickWorldPosition();
     }
 }
