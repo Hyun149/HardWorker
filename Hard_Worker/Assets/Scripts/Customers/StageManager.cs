@@ -108,8 +108,6 @@ public class StageManager : MonoBehaviour
         stage++;
         onStageChanged?.Invoke(stage);
 
-        GiveReward();
-
         // EnemyCount 초기화합니다.
         enemyManager.UpEnemyCount(-enemyManager.EnemyCount);
 
@@ -120,12 +118,13 @@ public class StageManager : MonoBehaviour
         GameManager.Instance.SaveGame();
     }
 
-    private void GiveReward()
+    public int GiveReward()
     {
         float incomeBonus = FindAnyObjectByType<PlayerStat>().GetFinalStatValue(StatType.Income);
-        int finalReward = Mathf.RoundToInt(reward * (1f + incomeBonus));
+        int finalReward = Mathf.RoundToInt(reward * (1f + (incomeBonus / 100)));
 
-        Debug.Log($"기본 보상(능력치 반영X): {reward}, 능력치로 인한 수익 증가율:{incomeBonus}, 최종보상: {finalReward}");
+        Debug.Log($"기본 보상(능력치 반영X): {reward}, 능력치로 인한 수익 증가율:{incomeBonus}%, 최종보상: {finalReward}");
         GoldManager.Instance.AddGold(finalReward);
+        return finalReward;
     }
 }

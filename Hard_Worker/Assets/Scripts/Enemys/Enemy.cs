@@ -165,10 +165,9 @@ public class Enemy : MonoBehaviour
             customerManager.ServeFoodAnimation(customerManager.curCustomer);
 
             StageManager.Instance.UpdateReward();  // 보상 골드 업데이트
-            int reward = StageManager.Instance.ReturnReward();  // 보상 골드 가져오기
-            GoldManager.Instance.AddGold(reward);  // 업데이트 된 값을 계산하여 골드 지급
-            
-            customerManager.customerUI.ShowRewardReaction(reward); // 보상 연출 UI 호출
+
+            int finalReward = StageManager.Instance.GiveReward();
+            customerManager.customerUI.ShowRewardReaction(finalReward); // 보상 연출 UI 호출
         }
 
         enemyProgress.SetProgress(0);
