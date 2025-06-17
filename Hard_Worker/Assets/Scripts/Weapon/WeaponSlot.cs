@@ -199,6 +199,8 @@ public class WeaponSlot : MonoBehaviour
 
         GameManager.Instance.playerData.equippedWeaponId = weapon.GetData().id;
         GameManager.Instance.SaveGame();
+
+        FindObjectOfType<PlayerStat>()?.NotifyStatChanged();
     }
     
     /// <summary>

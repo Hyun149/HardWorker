@@ -154,4 +154,12 @@ public class PlayerStat : MonoBehaviour
 
         return baseStat;
     }
+
+    /// <summary>
+    /// 외부에서 스탯 변경을 알릴 때 호출 가능한 메서드입니다.
+    /// </summary>
+    public void NotifyStatChanged()
+    {
+        onStatChanged?.Invoke();
+    }
 }
