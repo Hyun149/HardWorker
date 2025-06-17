@@ -934,6 +934,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: StageManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8825768833017610390, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+      propertyPath: playerstat
+      value: 
+      objectReference: {fileID: 922048516}
+    - target: {fileID: 8825768833017610390, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 198144911}
+    - target: {fileID: 8825768833017610390, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+      propertyPath: damageTextPool
+      value: 
+      objectReference: {fileID: 198144912}
     - target: {fileID: 8884439746618279214, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
       propertyPath: target
       value: 
@@ -976,6 +988,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineStartPos: {fileID: 973818514}
   spacing: 3
+--- !u!114 &198144910 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8825768833017610390, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+  m_PrefabInstance: {fileID: 198144907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f103b47c868278e4488feca13c15c5a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &198144911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8013031151505014879, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+  m_PrefabInstance: {fileID: 198144907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce892a9f6b596b4295fecf537ab5b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &198144912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 298335574860656896, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+  m_PrefabInstance: {fileID: 198144907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71732f59e95261d4c9051c1da0f574c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &255794841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,6 +1829,10 @@ PrefabInstance:
       propertyPath: cursorManager
       value: 
       objectReference: {fileID: 1577997026}
+    - target: {fileID: 551525453013262285, guid: 433b41657f59c1247ab3d8560da73203, type: 3}
+      propertyPath: cookingAttackHandler
+      value: 
+      objectReference: {fileID: 198144910}
     - target: {fileID: 551525453013262285, guid: 433b41657f59c1247ab3d8560da73203, type: 3}
       propertyPath: autoAttackUnlockLevel
       value: 1
