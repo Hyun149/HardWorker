@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -164,8 +164,9 @@ public class Enemy : MonoBehaviour
             // 요리 완성 확인
             completedCooking?.Invoke();
 
-            int reward = customerManager.food.Difficulty * 100;
-            GoldManager.Instance.AddGold(reward);
+            StageManager.Instance.UpdateReward();  // 보상 골드 업데이트
+            int reward = StageManager.Instance.ReturnReward();  // 보상 골드 가져오기
+            GoldManager.Instance.AddGold(reward);  // 업데이트 된 값을 계산하여 골드 지급
         }
 
         enemyProgress.SetProgress(0);

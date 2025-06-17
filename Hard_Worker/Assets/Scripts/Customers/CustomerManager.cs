@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
@@ -94,5 +94,9 @@ public class CustomerManager : MonoBehaviour
         food = probabilityFoods[value];
         // 음식 이미지 표시
         customerUI.ShowOrderImage(food);
+
+        // 기본 골드 보상 설정
+        StageManager.Instance.SetBaseReward(food.Difficulty * 100);
+
     } 
 }
