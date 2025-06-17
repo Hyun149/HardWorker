@@ -8,11 +8,11 @@ using UnityEngine;
 public class DamageTextPool : ObjectPoolManager
 {
     EnemyManager enemyManager;
-
+    EnemyProgress enemyProgress;
     protected override void Awake()
     {
         base.Awake(); // 부모의 Awake 실행되도록
-
+        enemyProgress = GetComponentInChildren<EnemyProgress>();
         enemyManager = GetComponentInChildren<EnemyManager>();
     }
     /// <summary>
@@ -22,8 +22,7 @@ public class DamageTextPool : ObjectPoolManager
     public override GameObject GetObject(int prefabIndex)
     {
         // 적이 생성되고 Spawn 될 수 있게끔 설정
-        if (enemyManager.enemy.gameObject.activeSelf == false
-            || enemyManager.enemy.isAttackEnd == true)
+        if (enemyManager.enemy.gameObject.activeSelf == false )
         {
             return null;
         }

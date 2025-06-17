@@ -13,6 +13,7 @@ public class CookingAttackHandler : MonoBehaviour
     [SerializeField] private PlayerStat playerstat;
     [SerializeField] private DamageTextPool damageTextPool;
     [SerializeField] private EnemyManager enemyManager;
+    [SerializeField] private EnemyProgress enemyProgress;
 
     /// <summary>
     /// 의존성 컴포넌트 초기화 (만약 에디터에서 할당되지 않은 경우)
@@ -20,6 +21,7 @@ public class CookingAttackHandler : MonoBehaviour
     void Start()
     {
         enemyManager = GetComponent<EnemyManager>();
+        enemyProgress = GetComponent<EnemyProgress>();
         damageTextPool = GetComponent<DamageTextPool>();
     }
 
@@ -32,7 +34,8 @@ public class CookingAttackHandler : MonoBehaviour
     public void TryPlayerAttack()
     {
         Debug.Log("기본 손질 호출");
-        if (enemyManager.enemy == null)
+        if (enemyManager.enemy == null 
+            || enemyProgress.TargetProgress >= enemyProgress.MaxProgress)
         {
             return;
         }
@@ -59,9 +62,10 @@ public class CookingAttackHandler : MonoBehaviour
 
         float baseDamage = playerstat.GetFinalStatValue(StatType.AssistSkill);
         float damage = CalculateDamage(baseDamage);
-
-        enemyManager.enemy.TakeDamage(damage);
+       
         ShowDamageText(damage);
+        enemyManager.enemy.TakeDamage(damage);
+      
     }
 
     /// <summary>
@@ -88,6 +92,7 @@ public class CookingAttackHandler : MonoBehaviour
         GameObject obj = damageTextPool.GetObject(0);
         if (obj == null)
         {
+            Debug.Log("데미지 텍스트가 없습니다");
             return;
         }
 
