@@ -15,10 +15,10 @@ MonoBehaviour:
   statType: 3
   baseValue: 0
   upgradeValues:
-  - 3
-  - 4
   - 5
+  - 6
   - 8
-  - 10
-  upgradeCosts: c8000000900100002003000040060000800c0000
+  - 12
+  - 15
+  upgradeCosts: c8000000900100005802000020030000e8030000
   maxLevel: 50
