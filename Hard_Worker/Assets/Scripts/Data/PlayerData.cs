@@ -10,7 +10,7 @@ public class PlayerData
 {
     public int stageIndex;                     // 현재 진행 중인 스테이지 인덱스
     public int currentGold;                    // 현재 보유 중인 골드
-    public int currentSkillPoint = 1000;       // 보유 스킬 포인트 (기본값 1000)
+    public int currentSkillPoint = 0;       // 보유 스킬 포인트 (기본값: 0)
 
     public List<SerializableStat> statLevels = new();  // 스탯별 강화 레벨 정보 리스트
     public string equippedWeaponId;                    // 현재 장착 중인 무기 ID
