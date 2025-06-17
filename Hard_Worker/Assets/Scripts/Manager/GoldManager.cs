@@ -11,13 +11,23 @@ public class GoldManager : MonoSingleton<GoldManager>
 
     public UnityEvent<int> onGoldChanged = new();
 
+    private void Start()
+    {
+        CurrentGold = GameManager.Instance.playerData.currentGold;
+        onGoldChanged.Invoke(CurrentGold);
+    }
+
     /// <summary>
     /// 골드를 추가합니다.
     /// </summary>
     public void AddGold(int amount)
     {
-        SFXManager.Instance.Play(SFXType.AddGold);
         CurrentGold += amount;
+     
+        GameManager.Instance.playerData.currentGold = CurrentGold;
+        GameManager.Instance.SaveGame();
+        
+        SFXManager.Instance.Play(SFXType.AddGold);
         onGoldChanged.Invoke(CurrentGold);
     }
 
@@ -33,6 +43,10 @@ public class GoldManager : MonoSingleton<GoldManager>
         }
 
         CurrentGold -= amount;
+
+        GameManager.Instance.playerData.currentGold = CurrentGold;
+        GameManager.Instance.SaveGame();
+
         onGoldChanged.Invoke(CurrentGold);
         return true;
     }

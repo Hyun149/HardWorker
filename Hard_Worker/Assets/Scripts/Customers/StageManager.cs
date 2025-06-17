@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -35,6 +35,11 @@ public class StageManager : MonoBehaviour
     {
         enemyManager = FindObjectOfType<EnemyManager>();
         lineController = GetComponent<LineController>();
+
+        stage = GameManager.Instance.playerData.stageIndex;
+
+        onStageChanged?.Invoke(stage + 1);
+
         StartStage();
     }
 
@@ -108,5 +113,8 @@ public class StageManager : MonoBehaviour
 
         // 보상을 증가시킵니다.
         UpdateReward();
+
+        GameManager.Instance.playerData.stageIndex = stage;
+        GameManager.Instance.SaveGame();
     }
 }

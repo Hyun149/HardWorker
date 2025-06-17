@@ -834,6 +834,10 @@ PrefabInstance:
       propertyPath: prefabs.Array.data[0]
       value: 
       objectReference: {fileID: 4957458811609911220, guid: 34ad77a85995da345a79a3d81c30a4f8, type: 3}
+    - target: {fileID: 1538661795331925243, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+      propertyPath: stage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2991690211613734492, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
       propertyPath: pos.x
       value: 15
@@ -3592,6 +3596,10 @@ PrefabInstance:
     - target: {fileID: 1882583171729383241, guid: d7cb7a81c9c8b604fb67675a522ade9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581120805945323061, guid: d7cb7a81c9c8b604fb67675a522ade9c, type: 3}
+      propertyPath: m_text
+      value: Stage
       objectReference: {fileID: 0}
     - target: {fileID: 6856413674289503761, guid: d7cb7a81c9c8b604fb67675a522ade9c, type: 3}
       propertyPath: m_Name
