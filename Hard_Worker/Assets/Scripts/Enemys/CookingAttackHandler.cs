@@ -73,7 +73,6 @@ public class CookingAttackHandler : MonoBehaviour
         }
         
         clickCount++;       //클릭 카운트
-        Debug.Log("clickCount:" + clickCount);
         float baseDamage = playerstat.GetFinalStatValue(StatType.Cut);
         float damage = CalculateDamage(baseDamage);
 

@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 3
   weaponName: "\uBD80\uC790\uC758 \uCE7C"
   description: "\uC138\uACC4\uC801\uC778 \uAC11\uBD80\uAC00 \uC37C\uB2E4\uACE0 \uC54C\uB824\uC9C0\uB294
-    \uCE7C.\uD669\uAE08\uC744 \uB0B3\uB294 \uCE7C\uC774\uB2E4."
+    \uCE7C.\uD669\uAE08\uC744 \uB0B3\uB294 \uCE7C\uC774\uB2E4.(7\uBC88 \uD074\uB9AD\uB9C8\uB2E4
+    \uD604\uC7AC\uACF5\uACA9\uB825 *10 \uACE8\uB4DC\uD68D\uB4DD)"
   icon: {fileID: -200604454, guid: 87618393348bce34db7e1edafd4c1458, type: 3}
   enhancementTable:
   - level: 0
