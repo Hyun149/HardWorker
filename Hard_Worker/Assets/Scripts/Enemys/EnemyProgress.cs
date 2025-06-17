@@ -8,23 +8,23 @@ using UnityEngine;
 /// </summary>
 public class EnemyProgress : MonoBehaviour
 {
-    EnemyManager enemyManager;
-
+    public GameObject boosProgressBar;              // 보스 전용 슬라이더 참조 (위치 지정용)
+    public UnityEngine.UI.Slider progressBar;       // 인스턴스화된 진행도 바
+    
+    [SerializeField] private UnityEngine.UI.Slider progressBarPrefab; // 진행도 UI 프리팹
+    
     [SerializeField] private float curProgress; // 현재 진행도 값
     [SerializeField] private float maxProgress; // 최대 진행도 값
-    private float targetProgress;              // 목표 진행도 (부드러운 이동용)
+    
+    [SerializeField] private Transform target; // Enemy 위치
+    [SerializeField] private Vector3 offset = new Vector3(0, 1.5f,0); 
 
-    public UnityEngine.UI.Slider progressBarPrefab; // 진행도 UI 프리팹
-    public UnityEngine.UI.Slider progressBar;       // 인스턴스화된 진행도 바
-    public GameObject boosProgressBar;              // 보스 전용 슬라이더 참조 (위치 지정용)
-
-    Camera cam;
-
-    public Transform target; // Enemy 위치
-    public Vector3 offset = new Vector3(0, 1.5f,0); 
-
+    private EnemyManager enemyManager;
+    private Camera cam;
     private RectTransform rt;
     private Coroutine hpCoroutine;
+
+    private float targetProgress;              // 목표 진행도 (부드러운 이동용)
 
     public float CurProgress => curProgress;
     public float MaxProgress => maxProgress;

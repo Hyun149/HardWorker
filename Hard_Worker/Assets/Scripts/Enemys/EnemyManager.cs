@@ -6,18 +6,19 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public Enemy enemy; // 현재 잡고있는 적
-    private int enemyCount = 0; // 스테이지 당 죽인 적의 개수
   
-    public Vector3 pos = new Vector3 (0.3f, -3f, 0); // 적이 생성될 위치
+    [SerializeField] private Vector3 pos = new Vector3 (0.3f, -3f, 0); // 적이 생성될 위치
 
+    private CustomerManager customerManager;
+    private int enemyCount = 0; // 스테이지 당 죽인 적의 개수
     public int EnemyCount => enemyCount;
-    CustomerManager customerManager;
 
     // Start is called before the first frame update
     void Start()
     {
         customerManager = FindObjectOfType<CustomerManager>();  
     }
+
     /// <summary>
     /// 적을 생성합니다.
     /// </summary>
@@ -31,6 +32,7 @@ public class EnemyManager : MonoBehaviour
         enemy.Init();
         FindObjectOfType<ClickEventHandler>()?.StartAutoAttack();
     }
+
     /// <summary>
     /// 죽인 적 개수를 증가시킵니다.
     /// </summary>

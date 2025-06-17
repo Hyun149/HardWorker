@@ -9,23 +9,25 @@ using Random = System.Random;
 /// </summary>
 public class Enemy : MonoBehaviour
 {
-    private CustomerManager customerManager;
-    private EnemyManager enemyManager;
-    private SpriteRenderer spriteRenderer;
-    private EnemyProgress enemyProgress;
-    private EnemyAni enemyAni;
     public EnemyData enemyData;
 
     public event Action<float, float> onChangeProgress; // 진행도 변경시 이벤트
     public event Action completedCooking; // 요리 완료시 이벤트
 
-    public Vector3 throwDirection = new Vector3(-2f, -2f, 0f); // 왼쪽 아래 방향
-    public float throwDistance = 3f; // 던지는 거리
-    public float duration = 0.5f; // 던지는데 걸리는 시간
-    public Ease easing = Ease.OutQuad; // 움직임 곡선
-    private bool isDead = false; //재료가 손질완료된 상태인지
-    public GameObject skillPointPopupPrefab;
+    [SerializeField] private Vector3 throwDirection = new Vector3(-2f, -2f, 0f); // 왼쪽 아래 방향
+    [SerializeField] private float throwDistance = 3f; // 던지는 거리
+    [SerializeField] private float duration = 0.5f; // 던지는데 걸리는 시간
+    [SerializeField] private Ease easing = Ease.OutQuad; // 움직임 곡선
+    [SerializeField] private GameObject skillPointPopupPrefab;
+
+    private CustomerManager customerManager;
+    private EnemyManager enemyManager;
+    private SpriteRenderer spriteRenderer;
+    private EnemyProgress enemyProgress;
+    private EnemyAni enemyAni;
     private Transform iconSpawnParent;
+
+    private bool isDead = false; //재료가 손질완료된 상태인지
 
     private void Awake()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class EnemyAni : MonoBehaviour
 {
-    Animator animator;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()

@@ -17,9 +17,12 @@ public class CookingAttackHandler : MonoBehaviour
 
     [Header("무기 스킬 관련")]
     [SerializeField] private WeaponManager weaponManager;
+
+    [SerializeField] private int clickCount;
+    
     private Weapon weapon; // 현재 무기 데이터
     private IWeaponSkill currentSkill;
-    public int clickCount;
+
     /// <summary>
     /// Awake : 무기 착용 이벤트 구독
     /// </summary>
@@ -27,6 +30,7 @@ public class CookingAttackHandler : MonoBehaviour
     {
         weaponManager.OnWeaponEquipped += OnWeaponEquipped;
     }
+
     /// <summary>
     /// 의존성 컴포넌트 초기화 (만약 에디터에서 할당되지 않은 경우)
     /// </summary>
@@ -36,6 +40,7 @@ public class CookingAttackHandler : MonoBehaviour
         enemyProgress = GetComponent<EnemyProgress>();
         damageTextPool = GetComponent<DamageTextPool>();
     }
+
     /// <summary>
     /// 무기 착용 이벤트 발생시 실행
     /// </summary>
@@ -55,6 +60,7 @@ public class CookingAttackHandler : MonoBehaviour
             Debug.LogWarning("currentSkill이 null입니다.");
         }
     }
+
     /// <summary>
     /// 마우스 클릭 시 플레이어의 기본 손질 공격을 수행합니다.
     /// - 적이 존재하지 않으면 아무 동작도 하지 않음
