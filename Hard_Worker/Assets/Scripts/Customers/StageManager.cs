@@ -38,7 +38,7 @@ public class StageManager : MonoBehaviour
 
         stage = GameManager.Instance.playerData.stageIndex;
 
-        onStageChanged?.Invoke(stage + 1);
+        onStageChanged?.Invoke(stage);
 
         StartStage();
     }
