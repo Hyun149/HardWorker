@@ -7,6 +7,7 @@ using UnityEngine;
 public class Customer : MonoBehaviour
 {
     CustomerManager customerManager;
+    FoodSelector foodSelector;
     CustomerAni customerAni;
     LineController lineController;
     EnemyManager enemyManager;
@@ -25,8 +26,10 @@ public class Customer : MonoBehaviour
     private void OnEnable()
     {
         customerManager = FindObjectOfType<CustomerManager>();
+        foodSelector = FindObjectOfType<FoodSelector>();
         lineController = FindObjectOfType<LineController>();
         enemyManager = FindObjectOfType<EnemyManager>();
+
         customerAni = GetComponent<CustomerAni>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         pool = GetComponent<CustomerPool>();
@@ -85,17 +88,17 @@ public class Customer : MonoBehaviour
     {
         yield return StartCoroutine(MoveCoroutine(targetPos));
 
-        customerManager.RamdomOrder(); // 랜덤 주문
+        foodSelector.RamdomOrder(); // 랜덤 주문
         enemyManager.SpawnEnemy();  // 적 생성 
 
         // 주문 완료까지 기다림
         yield return new WaitUntil(() => isOrderComplete == true);
+
         yield return new WaitForSeconds(2F);
         // 주문 완료시 걷기 이동
         StartCoroutine(Exit());
 
-        // 새로운 손님 생성
-        customerManager.AddNewCustomer(lineController.customers.Count);
+      
     }
     /// <summary>
     /// 주문을 완료하고 밖으로 나가는 스크립트 입니다.
@@ -108,7 +111,8 @@ public class Customer : MonoBehaviour
 
         // 밖으로 나가기
         StartCoroutine(MoveCoroutine(targetPos));
-
+        // 새로운 손님 생성
+        customerManager.AddNewCustomer(lineController.customers.Count);
         yield return new WaitForSeconds(walkingTime);
 
         // Pool에 반환

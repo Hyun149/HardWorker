@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.CanvasScaler;
 using DG.Tweening;
 
 /// <summary>
@@ -11,12 +10,13 @@ public class CustomerManager : MonoBehaviour
     CustomerPoolManager poolManager;
     public CustomerUI customerUI;
     LineController lineController;
-    //public List<GameObject> customerPrefabs = new List<GameObject>(); // 손님 프리팹
-   [HideInInspector] public GameObject customer; // 지금 주문 중인 손님
-    public Customer curCustomer;
-    public List<FoodData> foods = new List<FoodData>();
+
+    public Customer curCustomer; // 지금 주문 중인 손님
+
+    public List<FoodData> foods = new List<FoodData>(); // 요리 데이터들
     public FoodData food;
     public GameObject foodIconPrefab;
+    
     void Awake()
     {
         poolManager = GetComponent<CustomerPoolManager>();
@@ -31,8 +31,8 @@ public class CustomerManager : MonoBehaviour
         // 네명의 랜덤한 손님 프리팹 선택
         for (int i = 0; i < poolManager.prefabs.Length; i++)
         {
-            GetPoolCustomer();// Pool에서 손님 한명을 꺼내옴        
-            lineController.AddCustomer(customer.GetComponent<Customer>());
+            curCustomer = GetPoolCustomer();// Pool에서 손님 한명을 꺼내옴                                
+            lineController.AddCustomer(curCustomer);
         }
     }
     /// <summary>
@@ -43,61 +43,21 @@ public class CustomerManager : MonoBehaviour
     {
         Vector2 spawnPos = lineController.lineStartPos.position + new Vector3(lineController.spacing * index, 0, 0);
 
-        GetPoolCustomer(); // Pool에서 손님 한명을 꺼내옴
-        
-        Customer _customer = customer.GetComponent<Customer>();
-        _customer.targetPos = spawnPos; // 위치 지정
+        curCustomer = GetPoolCustomer(); // Pool에서 손님 한명을 꺼내옴
 
-        lineController.AddCustomer(_customer);
+        curCustomer.targetPos = spawnPos;
+        lineController.AddCustomer(curCustomer);
     }
     /// <summary>
     /// Pool에서 손님 한명을 꺼내옵니다.
     /// </summary>
-    void GetPoolCustomer()
+    Customer GetPoolCustomer()
     {
-        customer = poolManager.GetObject(0); // Pool에서 까내온 뒤
-        CustomerPool customerPool = customer.GetComponent<CustomerPool>();
-        customerPool.Init(customer => poolManager.ReturnObject(0, customer)); // 초기화 합니다.
+        var customer = poolManager.GetObject(0).GetComponent<Customer>(); // Pool에서 까내온 뒤
+        customer.GetComponent<CustomerPool>().Init(customer => poolManager.ReturnObject(0, customer)); // 초기화 합니다.
+        return customer;
     }
-    /// <summary>
-    /// 랜덤하게 요리를 주문합니다.
-    /// </summary>
-    public void RamdomOrder()
-    {
-        // 스테이지가 올라갈 수록 난이도가 높은 음식이 나오게
-        List<FoodData> probabilityFoods = new List<FoodData>();
-
-        foreach (var food in foods)
-        {
-            int stage = StageManager.Instance.Stage;
-           
-            if (food.Difficulty <= stage + 1)
-            {
-                // 난이도가 높은 음식일 수록 더 적게 나오게
-                int weight = Mathf.Clamp((stage + 1) - food.Difficulty + 1, 1, 10);// 최대치 제한
-                                                                                          
-                for (int i = 0; i < weight; i++)
-                {
-                    probabilityFoods.Add(food);
-                }
-            }
-        }
-        // 음식이 없다면 전체 중에서 랜덤
-        if (probabilityFoods.Count == 0)
-        {
-            probabilityFoods.AddRange(foods);
-        }
-
-        int value = Random.Range(0, probabilityFoods.Count);
-        food = probabilityFoods[value];
-        curCustomer.foodData = food;
-        // 음식 이미지 표시
-        customerUI.ShowOrderImage(food);
-
-        // 기본 골드 보상 설정
-        StageManager.Instance.SetBaseReward(food.Difficulty * 100);
-
-    } 
+   
     /// <summary>
     /// 요리 완료시 호출되는 애니메이션 : 손님만족 이모션포함 
     /// </summary>
@@ -123,5 +83,8 @@ public class CustomerManager : MonoBehaviour
 
         icon.transform.DOScale(Vector3.one * 0.5f, 1f);
         icon.transform.DORotate(new Vector3(0, 0, 360), 1f, RotateMode.FastBeyond360);
+       
+        // 손님 퇴장
+        curCustomer.CompleteOrder(true);
     }
 }
