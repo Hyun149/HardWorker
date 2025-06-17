@@ -12,10 +12,23 @@ public class OptionPanelUI : MonoBehaviour
     [SerializeField] private Button closeButton;
     [SerializeField] private UIAnimator optionPanelAnimator;
 
+    [Header("볼륨 설정")]
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private AudioMixerController mixerController;
+
     private void Awake()
     {
         openButton.onClick.AddListener(OpenOptionPanel);
         closeButton.onClick.AddListener(CloseOptionPanel);
+        bgmSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
+        sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+    }
+
+    private void Start()
+    {
+        bgmSlider.value = mixerController.GetBGMVolume();
+        sfxSlider.value = mixerController.GetSFXVolume();
     }
 
     /// <summary>
@@ -36,5 +49,15 @@ public class OptionPanelUI : MonoBehaviour
         cursorManager?.OnOtherUIClose();
         SFXManager.Instance.Play(SFXType.UIShow);
         optionPanelAnimator.Hide();
+    }
+
+    private void OnBGMVolumeChanged(float value)
+    {
+        
+    }
+
+    private void OnSFXVolumeChanged(float value)
+    {
+
     }
 }

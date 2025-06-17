@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     public bool isAttackEnd = false; // 플레이어의 공격이 끝났음을 나타냄
 
-    [SerializeField] private GameObject skillPointIconPrefab;
+    public GameObject skillPointPopupPrefab;
     private Transform iconSpawnParent;
 
     private void Awake()
@@ -160,7 +160,7 @@ public class Enemy : MonoBehaviour
         }
         // 전부 다 잡은 경우
         else
-        {
+        {   
             // 요리 완성 확인
             completedCooking?.Invoke();
             customerManager.ServeFoodAnimation(customerManager.curCustomer);
@@ -168,6 +168,8 @@ public class Enemy : MonoBehaviour
             StageManager.Instance.UpdateReward();  // 보상 골드 업데이트
             int reward = StageManager.Instance.ReturnReward();  // 보상 골드 가져오기
             GoldManager.Instance.AddGold(reward);  // 업데이트 된 값을 계산하여 골드 지급
+            
+            customerManager.customerUI.ShowRewardReaction(reward); // 보상 연출 UI 호출
         }
 
         enemyProgress.SetProgress(0);
@@ -194,32 +196,20 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void ShowSkillPointEffect()
     {
-        if (skillPointIconPrefab == null || iconSpawnParent == null)
+        if (skillPointPopupPrefab == null)
         {
-            Debug.LogWarning("Prefab 또는 SpawnParent가 null입니다.");
+            Debug.LogWarning("Prefab이 null입니다.");
             return;
         }
 
-        GameObject icon = Instantiate(skillPointIconPrefab);
-        icon.transform.SetParent(iconSpawnParent, false); //위치 유지 안함!
+        // 생성 위치: 현재 오브젝트 위
+        Vector3 spawnPos = transform.position + new Vector3(0, 2f, 0);
+        GameObject popup = Instantiate(skillPointPopupPrefab, spawnPos, Quaternion.identity);
+        
 
-        RectTransform iconRect = icon.GetComponent<RectTransform>();
-
-        // 월드 좌표 → 스크린 좌표 → 부모 기준 로컬 UI 좌표
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 1f, 0));
-        Vector2 anchoredPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            iconSpawnParent as RectTransform,
-            screenPos,
-            Camera.main,
-            out anchoredPos
-        );
-        iconRect.anchoredPosition = anchoredPos;
-
-        // 애니메이션
-        iconRect
-            .DOAnchorPosY(iconRect.anchoredPosition.y + 100f, 2f)
+        // 애니메이션: 위로 이동 후 제거
+        popup.transform.DOMoveY(spawnPos.y + 0.5f, 1f)
             .SetEase(Ease.OutQuad)
-            .OnComplete(() => { Destroy(icon); });
+            .OnComplete(() => Destroy(popup, 0.2f));
     }
 }

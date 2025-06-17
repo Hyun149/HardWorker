@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class CustomerUI : MonoBehaviour
     public Image[] enemyInfoImages = new Image[4];
 
     public GameObject heartEffectPrefab;
+    public GameObject rewardPopupPrefab;
     private void Start()
     {
         manager = GetComponent<CustomerManager>();
@@ -65,10 +67,31 @@ public class CustomerUI : MonoBehaviour
             enemyInfos[i].gameObject.SetActive(false);   
         }
     }
-    
-    public void ShowHappyReaction()
+
+    public void ShowServeReaction()
     {
-        GameObject heart = Instantiate(heartEffectPrefab, manager.curCustomer.transform.position + Vector3.up, Quaternion.identity);
-        Destroy(heart, 1.5f); // 하트 이펙트 자동 삭제
+        Vector3 basePos = manager.curCustomer.transform.position + Vector3.up;
+
+        //하트 이펙트
+        GameObject heart = Instantiate(heartEffectPrefab, basePos + new Vector3(0, -0.3f, 0), Quaternion.identity);
+        Destroy(heart, 1.5f);
+        
+    }
+    
+    public void ShowRewardReaction(int goldAmount)
+    {
+        Vector3 spawnPos = manager.curCustomer.transform.position + Vector3.up * 1.2f;
+
+        GameObject popup = Instantiate(rewardPopupPrefab, spawnPos, Quaternion.identity);
+
+        // 텍스트 세팅
+        TMPro.TextMeshPro text = popup.GetComponentInChildren<TMPro.TextMeshPro>();
+        if (text != null)
+            text.text = $"+{goldAmount}";
+
+        // 위로 뜨는 애니메이션
+        popup.transform.DOMoveY(spawnPos.y + 0.5f, 1f)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() => Destroy(popup, 0.2f));
     }
 }

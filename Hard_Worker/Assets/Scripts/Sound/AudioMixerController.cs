@@ -34,6 +34,25 @@ public class AudioMixerController : MonoBehaviour
         audioMixer.SetFloat("SFX", VolumeToDecibel(value));
     }
 
+    public float GetBGMVolume()
+    {
+        if (audioMixer.GetFloat("BGM", out float dB))
+        {
+            return Mathf.Pow(10f, dB / 20f);
+        }
+
+        return 1f;
+    }
+
+    public float GetSFXVolume()
+    {
+        if (audioMixer.GetFloat("SFX", out float dB))
+        {
+            return Mathf.Pow(10f, dB / 20f);
+        }
+        return 1f;
+    }
+
     /// <summary>
     /// 슬라이더 값(0.0 ~ 1.0)을 데시벨 값으로 변환합니다.
     /// AudioMixer는 데시벨 단위를 사용하므로 로그 변환이 필요합니다.
