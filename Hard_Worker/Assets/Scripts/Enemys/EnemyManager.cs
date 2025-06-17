@@ -29,6 +29,7 @@ public class EnemyManager : MonoBehaviour
 
         // 적 초기화
         enemy.Init();
+        FindObjectOfType<ClickEventHandler>()?.StartAutoAttack();
     }
     /// <summary>
     /// 죽인 적 개수를 증가시킵니다.

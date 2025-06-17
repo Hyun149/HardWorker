@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SkillPointManager : MonoBehaviour
+public class SkillPointManager : MonoSingleton<SkillPointManager>
 {
     [SerializeField] int currentSP;
-
     public UnityEvent OnSPChanged;
+    
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     private void Start()
     {
         SetSP(GameManager.Instance.playerData.currentSkillPoint);
@@ -28,7 +32,7 @@ public class SkillPointManager : MonoBehaviour
     public void AddSP(int amount)
     {
         currentSP += amount;
-
+        SFXManager.Instance.Play(SFXType.AddSP);
         GameManager.Instance.playerData.currentSkillPoint = currentSP;
         GameManager.Instance.SaveGame();
 
