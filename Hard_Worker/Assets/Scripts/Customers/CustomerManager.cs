@@ -57,7 +57,6 @@ public class CustomerManager : MonoBehaviour
         customer.GetComponent<CustomerPool>().Init(customer => poolManager.ReturnObject(0, customer)); // 초기화 합니다.
         return customer;
     }
-   
     /// <summary>
     /// 요리 완료시 호출되는 애니메이션 : 손님만족 이모션포함 
     /// </summary>
@@ -85,6 +84,6 @@ public class CustomerManager : MonoBehaviour
         icon.transform.DORotate(new Vector3(0, 0, 360), 1f, RotateMode.FastBeyond360);
        
         // 손님 퇴장
-        curCustomer.CompleteOrder(true);
+        curCustomer.GetComponent<CustomerController>().CompleteOrder(true);
     }
 }
