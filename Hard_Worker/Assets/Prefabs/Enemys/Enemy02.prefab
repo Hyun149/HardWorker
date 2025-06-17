@@ -126,8 +126,7 @@ MonoBehaviour:
   duration: 0.5
   easing: 6
   isAttackEnd: 0
-  skillPointIconPrefab: {fileID: 1337404047429044062, guid: 5c552bdabe4b88748ad96afea19219d0, type: 3}
-  iconSpawnParent: {fileID: 3719127241124491635, guid: 5f99b24bc310409408338d8582b9e8e9, type: 3}
+  skillPointPopupPrefab: {fileID: 5978779636434017984, guid: 236ed81d496a45349ac94cc3ba4610af, type: 3}
 --- !u!114 &-6161625688007402641
 MonoBehaviour:
   m_ObjectHideFlags: 0
