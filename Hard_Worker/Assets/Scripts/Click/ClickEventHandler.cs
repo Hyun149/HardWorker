@@ -102,7 +102,7 @@ public class ClickEventHandler : MonoBehaviour
         Vector3 clickPosition = GetClickWorldPosition();
         cursorManager?.PlayClickAnimation();
 
-        float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance), 0f, 0.9f);
+        float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance) * 0.01f, 0f, 0.95f);
         bool isCritical = Random.Range(0f, 1f) < critChance;
 
         float baseDamage = playerstat.GetStatValue(StatType.Cut);
@@ -230,7 +230,7 @@ public class ClickEventHandler : MonoBehaviour
             {
                 Vector3 targetPosition = GetAutoAttackTargetPosition();
 
-                float critChance = playerstat.GetStatValue(StatType.CritChance);
+                float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance) * 0.01f, 0f, 0.95f);
                 bool isCritical = Random.Range(0f, 1f) < critChance;
 
                 float assistPower = playerstat.GetStatValue(StatType.AssistSkill);
