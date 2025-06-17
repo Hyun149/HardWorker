@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +12,7 @@ public class EnemyAni : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
+
     /// <summary>
     /// 재료를 칼로 자르는 애니메이션을 재생합니다.
     /// </summary>

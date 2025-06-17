@@ -13,7 +13,14 @@ public class StatUIManager : MonoBehaviour
     [Header("스탯 UI 초기화")]
     [InspectorName("Stat UIs")]
     [SerializeField] private List<StatUI> statUIs;   // 씬 내 등록된 각 StatUI 오브젝트들
-
+    
+    /// <summary>
+    /// 스탯UI 켜질때 자동 갱신
+    /// </summary>
+    void OnEnable()
+    {
+        RefreshAllUI();
+    }
     // ================================
     // 🔁 시작 시 모든 StatUI를 초기화
     // ================================

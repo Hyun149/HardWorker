@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// PlayerStat : 플레이어의 능력치를 관리하는 클래스
-/// - StatData를 기반으로 현재 능력치 값 계산
-/// - 강화 레벨 저장 및 스탯 업그레이드 처리
+/// PlayerStat : 플레이어의 능력치를 관리하는 클래스입니다.
+/// - StatData를 기반으로 강화 수치와 최종 스탯을 계산합니다.
+/// - 강화 레벨 저장 및 스탯 업그레이드 처리 기능을 포함합니다.
+/// - 외부 시스템(무기, 자동 공격 등)과 연동되어 최종 스탯을 계산하거나 자동 공격 해금 조건 등을 관리합니다.
 /// </summary>
 public class PlayerStat : MonoBehaviour
 {
+    /// <summary>
+    /// 스탯 변경 시 호출되는 이벤트입니다.
+    /// - UI 갱신 등 외부 구독자들에게 스탯 변경 알림을 보냅니다.
+    /// </summary>
     public event Action onStatChanged;
 
     [Header("스탯 데이터 연결")]
@@ -16,14 +21,10 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private WeaponManager weaponManager;
 
     /// <summary>
-    /// GetStatValue : 최종 능력치 값 계산
+    /// 주어진 스탯 타입의 강화 수치를 기준으로 기본 능력치를 계산합니다.
     /// - baseValue + 업그레이드 수치 누적
     /// - 10레벨 단위로 UpgradeValues 값을 반복 사용
-    /// 
-    /// - 이 함수는 **강화 수치만 포함된 최종 능력치**를 계산하며,
-    ///   장비, 버프 등 외부 보정치는 포함하지 않는다.
-    /// - 외부에서 스탯을 저장하거나 활용할 경우 이 값을 기준으로 사용하면 된다.
-    ///   예: saveData.StatCut = GetStatValue(StatType.Cut);
+    /// 이 값은 무기나 버프와 같은 외부 보정치를 포함하지 않은 수치입니다.
     /// </summary>
     public float GetStatValue(StatType type)
     {
@@ -133,6 +134,12 @@ public class PlayerStat : MonoBehaviour
         return data != null ? data.MaxLevel : 0;
     }
 
+    /// <summary>
+    /// 최종 스탯 값을 반환합니다.
+    /// - 강화 수치 + 장비 보정치를 포함한 실제 적용 수치
+    /// </summary>
+    /// <param name="type">스탯 종류</param>
+    /// <returns>최종 적용되는 스탯 수치</returns>
     public float GetFinalStatValue(StatType type)
     {
         float baseStat = GetStatValue(type);
@@ -156,7 +163,8 @@ public class PlayerStat : MonoBehaviour
     }
 
     /// <summary>
-    /// 외부에서 스탯 변경을 알릴 때 호출 가능한 메서드입니다.
+    /// 외부에서 수동으로 스탯 변경 이벤트를 발생시킬 때 호출합니다.
+    /// - 예: 장비 장착, 저장 데이터 로드 후 UI 갱신 필요 시
     /// </summary>
     public void NotifyStatChanged()
     {

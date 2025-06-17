@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections.Generic;
-using System;
 
 /// <summary>
-/// 효과음 재생과 볼륨 조절을 관리하는 매니저 클래스입니다.
-/// - 싱글톤 구조로 전역에서 접근 가능
-/// - AudioMixer 연동을 통한 볼륨 조절 지원
+/// SFXManager : 효과음 재생과 볼륨 조절을 관리하는 싱글톤 매니저 클래스입니다.
+/// - 전역 접근 가능한 구조로 효과음 재생을 통합 관리합니다.
+/// - AudioMixer 연동으로 볼륨 조절을 지원하며, 외부 UI 슬라이더와의 연결이 가능합니다.
 /// </summary>
 public class SFXManager : MonoSingleton<SFXManager>
 {
@@ -46,12 +45,22 @@ public class SFXManager : MonoSingleton<SFXManager>
         }
     }
 
+    /// <summary>
+    /// AudioMixer에 설정된 SFX 볼륨을 변경합니다.
+    /// - 0~1 범위의 값을 dB(-80 ~ 0)로 변환하여 적용합니다.
+    /// </summary>
+    /// <param name="volume">0.0 ~ 1.0 사이의 슬라이더 값</param>
     public void SetVolume(float volume)
     {
         float dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f;
         audioMixer.SetFloat(sfxVolumeParam, dbVolume);
     }
 
+    /// <summary>
+    /// 현재 AudioMixer에서 설정된 SFX 볼륨 값을 가져옵니다.
+    /// - dB 단위를 다시 0~1 범위로 환산합니다.
+    /// </summary>
+    /// <returns>현재 SFX 볼륨 (0.0 ~ 1.0)</returns>
     public float GetVolume()
     {
         if (audioMixer.GetFloat(sfxVolumeParam, out float dbVolume))
@@ -63,9 +72,12 @@ public class SFXManager : MonoSingleton<SFXManager>
     }
 }
 
+/// <summary>
+/// SFXData : 효과음 타입과 해당 AudioClip을 묶어 에디터에서 등록할 수 있게 해주는 구조체입니다.
+/// </summary>
 [System.Serializable]
 public class SFXData
 {
-    public SFXType type;
-    public AudioClip clip;
+    public SFXType type;     // 효과음의 구분 타입
+    public AudioClip clip;   // 재생할 오디오 클립
 }

@@ -2,26 +2,28 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// 진행도를 관리하는 스크립트입니다.
+/// 적의 조리 진행도를 관리하고 UI에 표시하는 클래스입니다.
+/// - 일반 적/보스 적의 진행도를 슬라이더 UI로 표시합니다.
+/// - 진행도 값과 UI 위치를 실시간으로 갱신합니다.
 /// </summary>
 public class EnemyProgress : MonoBehaviour
 {
     EnemyManager enemyManager;
 
-    [SerializeField] private float curProgress; // 현재 진행도
-    [SerializeField] private float maxProgress; // 최대 진행도
-    private float targetProgress;
+    [SerializeField] private float curProgress; // 현재 진행도 값
+    [SerializeField] private float maxProgress; // 최대 진행도 값
+    private float targetProgress;              // 목표 진행도 (부드러운 이동용)
 
-    public UnityEngine.UI.Slider progressBarPrefab;
-    public UnityEngine.UI.Slider progressBar;
-    public GameObject boosProgressBar;
+    public UnityEngine.UI.Slider progressBarPrefab; // 진행도 UI 프리팹
+    public UnityEngine.UI.Slider progressBar;       // 인스턴스화된 진행도 바
+    public GameObject boosProgressBar;              // 보스 전용 슬라이더 참조 (위치 지정용)
 
     Camera cam;
 
     public Transform target; // Enemy 위치
     public Vector3 offset = new Vector3(0, 1.5f,0); 
-    private RectTransform rt;
 
+    private RectTransform rt;
     private Coroutine hpCoroutine;
 
     public float CurProgress => curProgress;
@@ -32,16 +34,22 @@ public class EnemyProgress : MonoBehaviour
     {
         cam = Camera.main;
         enemyManager = GetComponent<EnemyManager>();
-        // 진행도 UI 생성
+
+        // 진행도 UI 생성 및 RectTransform 캐싱
         progressBar = Instantiate(progressBarPrefab,GameObject.Find("BackGroundCanvas").transform);
         rt = progressBar.GetComponent<RectTransform>();
     }
+
+    /// <summary>
+    /// 진행도 수치와 UI를 초기화합니다.
+    /// </summary>
     public void Init()
     {
         curProgress = 0;
         targetProgress = curProgress;
         progressBar.value = curProgress / maxProgress;
     }
+
     /// <summary>
     /// 진행도 UI의 타겟을 설정합니다.
     /// </summary>
@@ -49,6 +57,7 @@ public class EnemyProgress : MonoBehaviour
     {
         target = _target;
     }
+
     /// <summary>
     /// 진행도 UI 위치를 갱신합니다.
     /// </summary>
@@ -79,6 +88,7 @@ public class EnemyProgress : MonoBehaviour
             rt.localPosition = localPoint;
         }
     }
+
     /// <summary>
     /// 진행도 Bar 값을 갱신 코루틴을 실행합니다.
     /// </summary>
@@ -89,6 +99,7 @@ public class EnemyProgress : MonoBehaviour
 
         hpCoroutine = StartCoroutine(SmoothProgressBarUpdate());
     }
+
     /// <summary>
     /// 부드럽게 진행도 Bar 값을 갱신합니다.
     /// </summary>
@@ -111,6 +122,7 @@ public class EnemyProgress : MonoBehaviour
         curProgress = targetProgress;
         progressBar.value = end;
     }
+
     /// <summary>
     /// 현재 진행도를 변경합니다.
     /// </summary>
@@ -120,6 +132,7 @@ public class EnemyProgress : MonoBehaviour
         targetProgress = progress;
         UpdateProgressBar(curProgress,maxProgress);
     }
+
     /// <summary>
     /// 최대 진행도를 변경합니다.
     /// </summary>
