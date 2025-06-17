@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CritBonus
   m_EditorClassIdentifier: 
   statType: 2
-  baseValue: 0
+  baseValue: 0.1
   upgradeValues:
   - 0.1
   - 0.2

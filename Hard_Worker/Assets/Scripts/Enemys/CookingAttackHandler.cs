@@ -74,10 +74,10 @@ public class CookingAttackHandler : MonoBehaviour
         float baseDamage = playerstat.GetFinalStatValue(StatType.Cut);
         float damage = CalculateDamage(baseDamage);
 
-        enemyManager.enemy.TakeDamage(baseDamage);
-        ShowDamageText(baseDamage);
+        enemyManager.enemy.TakeDamage(damage);
+        ShowDamageText(damage);
         //스킬 발동
-        currentSkill?.Activate(enemyManager.enemy, clickCount,baseDamage,ShowDamageText);
+        currentSkill?.Activate(enemyManager.enemy, clickCount,damage,ShowDamageText);
     }
 
     /// <summary>
@@ -89,7 +89,6 @@ public class CookingAttackHandler : MonoBehaviour
     {
         if (enemyManager.enemy == null || enemyManager.enemy == null)
         {
-            Debug.LogWarning("자동 공격 싪패: enemyManager 혹은 enemy가 비어있음");
             return;
         }
 
@@ -112,8 +111,6 @@ public class CookingAttackHandler : MonoBehaviour
         float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus);
 
         bool isCritical = Random.value < Mathf.Clamp01(critChance);
-        Debug.Log($"[AutoAttack] 크확: {critChance}, 크리떴냐: {isCritical}, 크뎀: {critBonus}");
-
         return isCritical ? baseDamage * (1f + critBonus) : baseDamage;
     }
 
