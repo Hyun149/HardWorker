@@ -52,17 +52,16 @@ public class LineController : MonoBehaviour
         {
             customerManager.curCustomer = customers.Dequeue();
             Customer customer = customerManager.curCustomer;
-
+           
             // 주문하기
             yield return StartCoroutine(customer.MakeOrder(lineStartPos.position));
 
             // 나머지 손님 이동
-            int i = 0;
-            foreach (var _customer in customers)
+            List<Customer> tempList = new List<Customer>(customers);
+            for (int i = 0; i < tempList.Count; i++)
             {
-                Vector2 newPos = lineStartPos.position + new Vector3(spacing * i, 0, 0);
-                yield return StartCoroutine(_customer.MoveCoroutine(newPos));
-                i++;
+                Vector3 newPos = lineStartPos.position + new Vector3(spacing * i, 0, 0);
+                yield return StartCoroutine(tempList[i].MoveCoroutine(newPos));
             }
         }
     }

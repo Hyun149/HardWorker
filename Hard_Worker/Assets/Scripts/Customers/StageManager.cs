@@ -103,9 +103,6 @@ public class StageManager : MonoBehaviour
         stage++;
         onStageChanged?.Invoke(stage + 1);
 
-        // 손님 퇴장
-        customerManager.curCustomer.CompleteOrder(true);
-
         // EnemyCount 초기화합니다.
         enemyManager.UpEnemyCount(-enemyManager.EnemyCount);
 
