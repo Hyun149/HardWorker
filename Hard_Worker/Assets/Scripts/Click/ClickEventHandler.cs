@@ -1,13 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
 /// 클릭 기반 공격 및 자동 공격을 처리하는 클래스입니다.
-/// - 플레이어 레벨에 따라 자동 공격 해금
-/// - 치명타 확률 처리
-/// - 클릭/자동 공격 시 파티클 및 사운드 출력
+/// - 클릭 또는 자동 공격 시 이펙트 및 사운드 출력
+/// - 플레이어 스탯 기반 데미지 및 치명타 처리
+/// - 플레이어 레벨 조건에 따라 자동 공격 해금
 /// </summary>
 public class ClickEventHandler : MonoBehaviour
 {
@@ -18,12 +18,12 @@ public class ClickEventHandler : MonoBehaviour
     [SerializeField] private bool isPaused = false;
 
     [Header("플레이어 레벨")]
-    [SerializeField] private int playerLevel = 0;
-    [SerializeField] private int autoAttackUnlockLevel = 1; // 자동 공격 해금 레벨
+    [SerializeField] private int playerLevel;
+    [SerializeField] private int autoAttackUnlockLevel; // 자동 공격 해금 레벨
 
     [Header("자동 공격 설정")]
-    [SerializeField] private int autoAttackLevel = 0;
-    [SerializeField] private float baseAutoAttackInterval = 1.0f;
+    [SerializeField] private int autoAttackLevel;
+    [SerializeField] private float baseAutoAttackInterval;
     [SerializeField] private bool isAutoAttackUnlocked = false;
 
     [Header("파티클 시스템")]
@@ -43,15 +43,15 @@ public class ClickEventHandler : MonoBehaviour
     
     private Camera mainCamera;
     private Coroutine autoAttackCoroutine;
-    private AutoAttackManager autoAttackManager; // 추가
+    private AutoAttackManager autoAttackManager;
 
     /// <summary>
-    /// 초기화: 메인 카메라 참조 및 자동 공격 상태 확인
+    /// 초기화: 메인 카메라 참조, 파티클 설정 적용, 자동 공격 상태 체크
     /// </summary>
     void Start()
     {
         mainCamera = Camera.main;
-        autoAttackManager = FindObjectOfType<AutoAttackManager>(); // 추가
+        autoAttackManager = FindObjectOfType<AutoAttackManager>();
 
         // 파티클 설정 적용 (추가된 부분)
         if (normalAttackParticle != null)
@@ -176,11 +176,9 @@ public class ClickEventHandler : MonoBehaviour
     public void CheckAutoAttackUnlock()
     {
         int currentAssistLevel = playerstat.GetStatLevel(StatType.AssistSkill);
-        Debug.Log($"CheckAutoAttackUnlock 실행됨 (현재 어시스트 레벨: {currentAssistLevel}, 필요레벨: {autoAttackUnlockLevel}, 해금 상태: {isAutoAttackUnlocked})");
         
         if (currentAssistLevel >= autoAttackUnlockLevel && !isAutoAttackUnlocked)
         {
-            Debug.Log("자동 공격 해금 조건 달성");
             isAutoAttackUnlocked = true;
             SetAutoAttackLevel(1);
 
@@ -269,7 +267,6 @@ public class ClickEventHandler : MonoBehaviour
     {
         if (!isAutoAttackUnlocked && level > 0)
         {
-            Debug.Log($"자동 공격 레벨 설정: {level}");
             return;
         }
 
@@ -311,6 +308,9 @@ public class ClickEventHandler : MonoBehaviour
         return isAutoAttackUnlocked;
     }
 
+    /// <summary>
+    /// 현재 가장 가까운 적의 위치 반환 (없으면 클릭 위치)
+    /// </summary>
     private Vector3 GetAutoAttackTargetPosition()
     {
         Enemy[] enemies = FindObjectsOfType<Enemy>();

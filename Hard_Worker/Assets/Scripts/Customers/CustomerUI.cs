@@ -27,6 +27,7 @@ public class CustomerUI : MonoBehaviour
         {
             StageManager.Instance.onStageChanged -= ShowStageText;
             StageManager.Instance.onStageChanged += ShowStageText;
+
             ShowStageText(StageManager.Instance.Stage + 1);
         }   
     }
