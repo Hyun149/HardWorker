@@ -49,4 +49,9 @@ public class GoldManager : MonoSingleton<GoldManager>
         onGoldChanged.Invoke(CurrentGold);
         return true;
     }
+
+    public void GiveReward()
+    {
+        float incomeBonus = FindAnyObjectByType<PlayerStat>().GetFinalStatValue(StatType.Income);
+    }
 }
