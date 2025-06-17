@@ -61,3 +61,4 @@ MonoBehaviour:
     attack: 46
     criticalRate: 12
     cost: 233
+  skillType: 1

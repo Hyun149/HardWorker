@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Lv3_knife
   m_EditorClassIdentifier: 
   id: 3
-  weaponName: "\uC804\uC124\uC758 \uCE7C"
-  description: "\uC804\uC124\uC758 \uC170\uD504\uAC00 \uC37C\uB2E4\uACE0 \uC54C\uB824\uC9C0\uB294
-    \uCE7C.\uBB34\uC5C7\uD558\uB098 \uBE60\uC9C0\uB294\uAC8C \uC5C6\uB2E4."
+  weaponName: "\uBD80\uC790\uC758 \uCE7C"
+  description: "\uC138\uACC4\uC801\uC778 \uAC11\uBD80\uAC00 \uC37C\uB2E4\uACE0 \uC54C\uB824\uC9C0\uB294
+    \uCE7C.\uD669\uAE08\uC744 \uB0B3\uB294 \uCE7C\uC774\uB2E4."
   icon: {fileID: -200604454, guid: 87618393348bce34db7e1edafd4c1458, type: 3}
   enhancementTable:
   - level: 0
@@ -62,3 +62,4 @@ MonoBehaviour:
     attack: 105
     criticalRate: 25
     cost: 3050
+  skillType: 3

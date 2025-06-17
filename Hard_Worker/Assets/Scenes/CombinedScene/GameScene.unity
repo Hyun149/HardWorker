@@ -979,6 +979,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1517122350}
     - target: {fileID: 8825768833017610390, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+      propertyPath: weaponManager
+      value: 
+      objectReference: {fileID: 568851811}
+    - target: {fileID: 8825768833017610390, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
       propertyPath: damageTextPool
       value: 
       objectReference: {fileID: 198144912}

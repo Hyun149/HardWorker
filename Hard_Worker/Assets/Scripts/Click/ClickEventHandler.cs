@@ -13,7 +13,7 @@ public class ClickEventHandler : MonoBehaviour
 {
     [SerializeField] private PlayerStat playerstat;
     [SerializeField] private CookingAttackHandler cookingAttackHandler;
-
+    
     [Header("클릭 설정")]
     [SerializeField] private bool isPaused = false;
 
@@ -104,7 +104,7 @@ public class ClickEventHandler : MonoBehaviour
         cursorManager?.PlayClickAnimation();
 
         cookingAttackHandler.TryPlayerAttack();
-
+        
         float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance) * 0.01f, 0f, 0.95f);
         bool isCritical = Random.Range(0f, 1f) < critChance;
 

@@ -15,6 +15,18 @@ public class CookingAttackHandler : MonoBehaviour
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private EnemyProgress enemyProgress;
 
+    [Header("무기 스킬 관련")]
+    [SerializeField] private WeaponManager weaponManager;
+    private Weapon weapon; // 현재 무기 데이터
+    private IWeaponSkill currentSkill;
+    public int clickCount;
+    /// <summary>
+    /// Awake : 무기 착용 이벤트 구독
+    /// </summary>
+    void Awake()
+    {
+        weaponManager.OnWeaponEquipped += OnWeaponEquipped;
+    }
     /// <summary>
     /// 의존성 컴포넌트 초기화 (만약 에디터에서 할당되지 않은 경우)
     /// </summary>
@@ -24,12 +36,33 @@ public class CookingAttackHandler : MonoBehaviour
         enemyProgress = GetComponent<EnemyProgress>();
         damageTextPool = GetComponent<DamageTextPool>();
     }
+    /// <summary>
+    /// 무기 착용 이벤트 발생시 실행
+    /// </summary>
+    private void OnWeaponEquipped()
+    {
+        weapon = weaponManager.GetEquippedWeapon();
 
+        if (weapon == null || weapon.data == null)
+        {
+            Debug.LogError("무기 또는 무기 데이터가 없습니다.");
+            return;
+        }
+
+        Debug.Log($"스킬 타입: {weapon.data.skillType}");
+        currentSkill = WeaponSkillFactory.GetSkill(weapon.data.skillType);
+
+        if (currentSkill == null)
+        {
+            Debug.LogWarning("currentSkill이 null입니다.");
+        }
+    }
     /// <summary>
     /// 마우스 클릭 시 플레이어의 기본 손질 공격을 수행합니다.
     /// - 적이 존재하지 않으면 아무 동작도 하지 않음
     /// - 손질 능력치 기반 데미지 계산 및 적용
     /// - 데미지 텍스트 출력
+    /// - 스킬 발동
     /// </summary>
     public void TryPlayerAttack()
     {
@@ -38,12 +71,16 @@ public class CookingAttackHandler : MonoBehaviour
         {
             return;
         }
-
+        
+        clickCount++;       //클릭 카운트
+        Debug.Log("clickCount:" + clickCount);
         float baseDamage = playerstat.GetFinalStatValue(StatType.Cut);
         float damage = CalculateDamage(baseDamage);
 
         enemyManager.enemy.TakeDamage(baseDamage);
         ShowDamageText(baseDamage);
+        //스킬 발동
+        currentSkill?.Activate(enemyManager.enemy, clickCount,baseDamage,ShowDamageText);
     }
 
     /// <summary>

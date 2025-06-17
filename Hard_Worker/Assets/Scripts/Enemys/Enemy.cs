@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using UnityEditor.Search;
 using UnityEngine;
 using Random = System.Random;
 
@@ -23,7 +24,7 @@ public class Enemy : MonoBehaviour
     public float throwDistance = 3f; // 던지는 거리
     public float duration = 0.5f; // 던지는데 걸리는 시간
     public Ease easing = Ease.OutQuad; // 움직임 곡선
-
+    private bool isDead = false; //재료가 손질완료된 상태인지
     public GameObject skillPointPopupPrefab;
     private Transform iconSpawnParent;
 
@@ -97,6 +98,7 @@ public class Enemy : MonoBehaviour
         // 적 애니메이션 재생
         EnemyAni(progress);
     }
+    
 
     /// <summary>
     /// 적 애니메이션을 재생합니다.
@@ -110,9 +112,10 @@ public class Enemy : MonoBehaviour
         if (ratio >= 0.9f) enemyAni.Cut(3);
         else if (ratio >= 0.6f) enemyAni.Cut(2);
         else if (ratio >= 0.3f) enemyAni.Cut(1);
-        if (progress >= enemyProgress.MaxProgress) // 진행도가 최고치일 경우
+        if (progress >= enemyProgress.MaxProgress && isDead == false) // 진행도가 최고치이고 손질완료된 상태가 아닐때
         {
             // 보상 지급
+            isDead = true;
             StartCoroutine(Ingredient());
         }
     }

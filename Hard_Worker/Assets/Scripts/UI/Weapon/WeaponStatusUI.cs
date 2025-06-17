@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class WeaponStatusUI : MonoBehaviour
 {
-    public static WeaponStatusUI Instance;
-    
     [Header("장착 무기 정보")]
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI attackText;
