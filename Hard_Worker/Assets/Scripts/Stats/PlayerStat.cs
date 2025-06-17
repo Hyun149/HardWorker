@@ -92,6 +92,11 @@ public class PlayerStat : MonoBehaviour
 
         GameManager.Instance.playerData.SetStatLevel(type, level + 1);
         GameManager.Instance.SaveGame(); // 능력치 강화 후 저장
+
+        if (type == StatType.AssistSkill)
+        {
+            FindObjectOfType<ClickEventHandler>()?.CheckAutoAttackUnlock();
+        }
     }
 
     /// <summary>

@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 /// <summary>
 /// 자동 공격 업그레이드 단계를 정의하는 데이터 클래스입니다.
@@ -48,6 +47,8 @@ public class AutoAttackManager : MonoBehaviour
 
         currentLevel++;
         ApplyLevel();
+
+        clickEventHandler.SetPlayerLevel(currentLevel);
     }
 
     /// <summary>

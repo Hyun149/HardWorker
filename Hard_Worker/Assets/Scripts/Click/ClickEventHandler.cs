@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,8 +17,8 @@ public class ClickEventHandler : MonoBehaviour
     [SerializeField] private bool isPaused = false;
 
     [Header("플레이어 레벨")]
-    [SerializeField] private int playerLevel = 1;
-    [SerializeField] private int autoAttackUnlockLevel = 5; // 자동 공격 해금 레벨
+    [SerializeField] private int playerLevel = 0;
+    [SerializeField] private int autoAttackUnlockLevel = 1; // 자동 공격 해금 레벨
 
     [Header("자동 공격 설정")]
     [SerializeField] private int autoAttackLevel = 0;
@@ -101,7 +102,7 @@ public class ClickEventHandler : MonoBehaviour
         Vector3 clickPosition = GetClickWorldPosition();
         cursorManager?.PlayClickAnimation();
 
-        float critChance = playerstat.GetStatValue(StatType.CritChance);
+        float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance), 0f, 0.9f);
         bool isCritical = Random.Range(0f, 1f) < critChance;
 
         float baseDamage = playerstat.GetStatValue(StatType.Cut);
@@ -169,16 +170,17 @@ public class ClickEventHandler : MonoBehaviour
     /// <summary>
     /// 자동 공격 해금 조건 확인 및 처리
     /// </summary>
-    void CheckAutoAttackUnlock()
+    public void CheckAutoAttackUnlock()
     {
-        if (playerLevel >= autoAttackUnlockLevel && !isAutoAttackUnlocked)
+        int currentAssistLevel = playerstat.GetStatLevel(StatType.AssistSkill);
+        Debug.Log($"CheckAutoAttackUnlock 실행됨 (현재 어시스트 레벨: {currentAssistLevel}, 필요레벨: {autoAttackUnlockLevel}, 해금 상태: {isAutoAttackUnlocked})");
+        
+        if (currentAssistLevel >= autoAttackUnlockLevel && !isAutoAttackUnlocked)
         {
+            Debug.Log("자동 공격 해금 조건 달성");
             isAutoAttackUnlocked = true;
-
-            // 자동 공격 레벨 1로 설정하여 시작
             SetAutoAttackLevel(1);
 
-            // AutoAttackManager에게 해금 알림 - 추가
             if (autoAttackManager != null)
             {
                 autoAttackManager.OnAutoAttackUnlocked();
@@ -221,13 +223,12 @@ public class ClickEventHandler : MonoBehaviour
     {
         while (true)
         {
-            float assistSpeed = playerstat.GetStatValue(StatType.AssistSpeed);
-            float attackInterval = baseAutoAttackInterval / Mathf.Max(1f, assistSpeed);
+            float attackInterval = GetAutoAttackInterval();
             yield return new WaitForSeconds(attackInterval);
 
             if (!isPaused)
             {
-                Vector3 centerPosition = mainCamera.ScreenToWorldPoint(new Vector3 (Screen.width / 2, Screen.height / 2, 10f));
+                Vector3 targetPosition = GetAutoAttackTargetPosition();
 
                 float critChance = playerstat.GetStatValue(StatType.CritChance);
                 bool isCritical = Random.Range(0f, 1f) < critChance;
@@ -238,11 +239,11 @@ public class ClickEventHandler : MonoBehaviour
 
                 if (isCritical)
                 {
-                    OnCriticalAttack(centerPosition, finalDamage);
+                    OnCriticalAttack(targetPosition, finalDamage);
                 }
                 else
                 {
-                    OnNormalAttack(centerPosition, finalDamage);
+                    OnNormalAttack(targetPosition, finalDamage);
                 }
             }
         }
@@ -263,6 +264,7 @@ public class ClickEventHandler : MonoBehaviour
     {
         if (!isAutoAttackUnlocked && level > 0)
         {
+            Debug.Log($"자동 공격 레벨 설정: {level}");
             return;
         }
 
@@ -290,15 +292,10 @@ public class ClickEventHandler : MonoBehaviour
     /// <summary>
     /// 현재 자동 공격 간격 반환
     /// </summary>
-    public float GetCurrentAutoAttackInterval()
+    public float GetAutoAttackInterval()
     {
-        if (autoAttackLevel <= 0)
-        {
-            return 0f;
-        }
-
-        float assistSpeed = playerstat.GetStatValue(StatType.AssistSpeed);
-        return baseAutoAttackInterval / Mathf.Max(1f, assistSpeed);
+        float interval = playerstat.GetStatLevel(StatType.AssistSpeed);
+        return Mathf.Clamp(interval, 0.3f, 15f);
     }
 
     /// <summary>
@@ -307,5 +304,17 @@ public class ClickEventHandler : MonoBehaviour
     public bool IsAutoAttackUnlocked()
     {
         return isAutoAttackUnlocked;
+    }
+
+    private Vector3 GetAutoAttackTargetPosition()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        if (enemies.Length == 0)
+        {
+            return GetClickWorldPosition();
+        }
+        
+        Enemy target = enemies.OrderBy(e => e.transform.position.x).FirstOrDefault();
+        return target != null ? target.transform.position : GetClickWorldPosition();
     }
 }

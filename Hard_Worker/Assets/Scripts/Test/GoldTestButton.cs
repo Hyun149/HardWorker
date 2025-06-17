@@ -7,6 +7,6 @@ public class GoldTestButton : MonoBehaviour
 
     private void Awake()
     {
-        addButton.onClick.AddListener(() => GoldManager.Instance.AddGold(100));
+        addButton.onClick.AddListener(() => GoldManager.Instance.AddGold(100000));
     }
 }
