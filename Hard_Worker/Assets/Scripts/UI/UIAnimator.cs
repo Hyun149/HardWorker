@@ -3,8 +3,8 @@ using DG.Tweening;
 
 /// <summary>
 /// UI 팝업의 등장/퇴장 애니메이션을 담당하는 범용 유틸리티 클래스입니다.
-/// - DOTween 기반으로 크기 + 투명도 애니메이션을 제공합니다.
-/// - 모든 팝업 UI에 재사용 가능합니다.
+/// - DOTween 기반으로 크기 및 투명도 애니메이션을 제공합니다.
+/// - CanvasGroup과 Transform을 활용하여 UI 팝업을 부드럽게 제어합니다.
 /// </summary>
 [RequireComponent(typeof(CanvasGroup))]
 public class UIAnimator : MonoBehaviour
@@ -18,6 +18,9 @@ public class UIAnimator : MonoBehaviour
     private Vector3 originalScale;
     private Tween currentTween;
 
+    /// <summary>
+    /// 컴포넌트 초기화 시 CanvasGroup을 설정하고 초기 상태를 비활성화로 설정합니다.
+    /// </summary>
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -29,7 +32,10 @@ public class UIAnimator : MonoBehaviour
     }
 
     /// <summary>
-    /// UI를 활성화하고 애니메이션을 재생합니다.
+    /// UI를 팝업 애니메이션과 함께 활성화합니다.
+    /// - 투명도 증가
+    /// - 크기 확대 후 원래 크기로 축소
+    /// - 인터랙션 및 클릭 감지 활성화
     /// </summary>
     public void Show()
     {
@@ -54,7 +60,10 @@ public class UIAnimator : MonoBehaviour
     }
 
     /// <summary>
-    /// UI를 비활성화하는 애니메이션을 재생합니다.
+    /// UI를 페이드아웃 애니메이션과 함께 비활성화합니다.
+    /// - 투명도 감소
+    /// - 크기 축소
+    /// - 인터랙션 및 클릭 감지 비활성화
     /// </summary>
     public void Hide()
     {

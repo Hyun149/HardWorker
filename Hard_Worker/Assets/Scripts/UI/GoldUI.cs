@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
 
 /// <summary>
 /// 보유 골드를 실시간으로 표시하는 UI 제어 스크립트입니다.
+/// - 골드 변화 시 자동으로 UI를 갱신합니다.
+/// - 한국식 숫자 단위(만, 억)로 보기 좋게 포맷팅됩니다.
 /// </summary>
 public class GoldUI : MonoBehaviour
 {

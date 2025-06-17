@@ -4,8 +4,9 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// 재료 공격 데미지 표시 스크립트입니다.
-/// 활성화시 위로 올라가는 애니메이션을 한 뒤 비활성화됩니다.
+/// 재료 공격 데미지를 표시하는 텍스트 UI입니다.
+/// - 텍스트가 위로 떠오르며 점점 사라지는 연출을 보여줍니다.
+/// - 연출이 끝나면 오브젝트 풀로 반환됩니다.
 /// </summary>
 public class DamageText : MonoBehaviour, IPoolable
 {
@@ -21,9 +22,10 @@ public class DamageText : MonoBehaviour, IPoolable
     public float attackDamage;
 
     /// <summary>
-    /// 초기화 스크립트 입니다.
+    /// 오브젝트를 풀에서 꺼낼 때 호출되는 초기화 메서드입니다.
     /// 위치와 투명도를 초기화합니다.
     /// </summary>
+    /// <param name="returnAction">풀로 반환할 때 호출될 액션입니다.</param>
     public void Init(Action<GameObject> returnAction)
     {
         damageTexts = GameObject.Find("DamageTexts");
@@ -38,8 +40,9 @@ public class DamageText : MonoBehaviour, IPoolable
 
         returnToPool = returnAction;
     }
+
     /// <summary>
-    /// 생성된 후 실행됩니다.
+    /// 오브젝트가 활성화된 직후 호출됩니다.
     /// </summary>
     public void OnSpawn()
     {
@@ -52,20 +55,27 @@ public class DamageText : MonoBehaviour, IPoolable
             OnDespawn();
         });
     }
+
+    /// <summary>
+    /// 오브젝트를 풀로 반환합니다.
+    /// </summary>
     public void OnDespawn()
     {
         returnToPool?.Invoke(gameObject); // 풀로 반환
     }
+
     /// <summary>
-    /// 위로 올라가는 애니메이션을 한 뒤 비활성화됩니다.
+    /// 텍스트를 위로 띄우고 점점 사라지게 한 후, 완료되면 콜백을 실행합니다.
     /// </summary>
+    /// <param name="value">표시할 데미지 수치</param>
+    /// <param name="onComplete">애니메이션 종료 후 실행할 콜백</param>
     public void FadeOutAndMove(float value, Action onComplete)
     {
         if (!gameObject.activeInHierarchy) { return; }
 
         damageText.text = value.ToString();
 
-        // 스피드 설정
+        // 애니메이션 지속 시간
         float duration = distance / speed;
 
         // x축 랜덤 설정
@@ -73,6 +83,7 @@ public class DamageText : MonoBehaviour, IPoolable
         Vector2 randomPos = new Vector2(startPos.x + randomX, startPos.y);
         rect.anchoredPosition = randomPos;
 
+        // 기존 트윈 제거
         damageText.DOKill();
         rect.DOKill();
 
@@ -92,6 +103,10 @@ public class DamageText : MonoBehaviour, IPoolable
         });
        
     }
+
+    /// <summary>
+    /// 텍스트에 현재 데미지 수치를 표시합니다.
+    /// </summary>
     public void ShowText()
     {
         damageText.text = attackDamage.ToString();

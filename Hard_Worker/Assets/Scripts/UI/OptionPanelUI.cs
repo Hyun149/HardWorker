@@ -21,8 +21,6 @@ public class OptionPanelUI : MonoBehaviour
     {
         openButton.onClick.AddListener(OpenOptionPanel);
         closeButton.onClick.AddListener(CloseOptionPanel);
-        bgmSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
-        sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
     }
 
     private void Start()
@@ -49,15 +47,5 @@ public class OptionPanelUI : MonoBehaviour
         cursorManager?.OnOtherUIClose();
         SFXManager.Instance.Play(SFXType.UIShow);
         optionPanelAnimator.Hide();
-    }
-
-    private void OnBGMVolumeChanged(float value)
-    {
-        
-    }
-
-    private void OnSFXVolumeChanged(float value)
-    {
-
     }
 }
