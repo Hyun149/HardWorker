@@ -12,4 +12,5 @@ public enum SFXType
     AddGold,
     Buy,
     EquipWeapon,
+    AddSP
 }

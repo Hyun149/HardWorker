@@ -183,7 +183,7 @@ public class Enemy : MonoBehaviour
         if (chance == 1)
         {
             Debug.Log("숙련도 포인트 획득");
-            //숙련도 포인트 획득 효과음
+            SFXManager.Instance.Play(SFXType.AddSP);//숙련도 포인트 획득 효과음
             ShowSkillPointEffect(); //포인트 드랍 이펙트
             GameManager.Instance.playerData.currentSkillPoint++;
         }
