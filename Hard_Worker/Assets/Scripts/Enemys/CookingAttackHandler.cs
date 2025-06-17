@@ -48,8 +48,6 @@ public class CookingAttackHandler : MonoBehaviour
             Debug.LogError("무기 또는 무기 데이터가 없습니다.");
             return;
         }
-
-        Debug.Log($"스킬 타입: {weapon.data.skillType}");
         currentSkill = WeaponSkillFactory.GetSkill(weapon.data.skillType);
 
         if (currentSkill == null)

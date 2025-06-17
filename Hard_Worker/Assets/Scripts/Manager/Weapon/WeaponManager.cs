@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// 무기 장착을 관리하는 매니저 클래스입니다.
