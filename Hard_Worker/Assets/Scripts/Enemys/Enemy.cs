@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -183,7 +183,6 @@ public class Enemy : MonoBehaviour
         int chance = random.Next(0, 2);
         if (chance == 1)
         {
-            Debug.Log("숙련도 포인트 획득");
             ShowSkillPointEffect(); //포인트 드랍 이펙트
             SkillPointManager.Instance.AddSP(1);
         }

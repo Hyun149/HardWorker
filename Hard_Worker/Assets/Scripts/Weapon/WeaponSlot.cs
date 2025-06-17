@@ -44,7 +44,6 @@ public class WeaponSlot : MonoBehaviour
     /// </summary>
     public void SetupSlot(WeaponDataSO dataSO, Weapon ownedWeapon)
     {
-        //Debug.Log($"Setting up slot for {dataSO.weaponName}, owned: {ownedWeapon != null}");
         data = dataSO;
         weapon = ownedWeapon;
         
@@ -150,10 +149,6 @@ public class WeaponSlot : MonoBehaviour
             SFXManager.Instance.Play(SFXType.Buy);
             GameManager.Instance.SaveGame();
         }
-        else
-        {
-            Debug.Log("Not enough SP");
-        }
     }
     
     
@@ -184,11 +179,8 @@ public class WeaponSlot : MonoBehaviour
                 GameManager.Instance.SaveGame();
             }
         }
-        else
-        {
-            Debug.Log("Not enough SP");
-        }
     }
+
     /// <summary>
     /// 무기 장착시 
     /// </summary>
