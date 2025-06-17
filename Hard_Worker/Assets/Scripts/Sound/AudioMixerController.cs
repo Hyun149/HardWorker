@@ -42,6 +42,10 @@ public class AudioMixerController : MonoBehaviour
         audioMixer.SetFloat("SFX", VolumeToDecibel(value));
     }
 
+    /// <summary>
+    /// 현재 AudioMixer에 설정된 BGM 볼륨 값을 0~1 범위로 환산하여 반환합니다.
+    /// </summary>
+    /// <returns>BGM 볼륨 (0.0 ~ 1.0)</returns>
     public float GetBGMVolume()
     {
         if (audioMixer.GetFloat("BGM", out float dB))
@@ -52,6 +56,10 @@ public class AudioMixerController : MonoBehaviour
         return 1f;
     }
 
+    /// <summary>
+    /// 현재 AudioMixer에 설정된 BGM 볼륨 값을 0~1 범위로 환산하여 반환합니다.
+    /// </summary>
+    /// <returns>BGM 볼륨 (0.0 ~ 1.0)</returns>
     public float GetSFXVolume()
     {
         if (audioMixer.GetFloat("SFX", out float dB))

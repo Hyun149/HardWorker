@@ -106,7 +106,7 @@ public class StageManager : MonoBehaviour
     public void NextStage()
     {
         stage++;
-        onStageChanged?.Invoke(stage + 1);
+        onStageChanged?.Invoke(stage);
 
         // EnemyCount 초기화합니다.
         enemyManager.UpEnemyCount(-enemyManager.EnemyCount);

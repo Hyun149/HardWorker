@@ -1,25 +1,30 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// WeaponStatusUI : 현재 장착 중인 무기의 정보를 UI에 표시하는 클래스입니다.
+/// - 무기 이름, 공격력, 크리티컬 수치, 아이콘 등을 표시합니다.
+/// - 인벤토리 열기/닫기 버튼을 통해 UI 상태를 토글합니다.
+/// </summary>
 public class WeaponStatusUI : MonoBehaviour
 {
     public static WeaponStatusUI Instance;
     
     [Header("장착 무기 정보")]
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI attackText;
-    public TextMeshProUGUI criticalText;
-    public Image icon;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI attackText;
+    [SerializeField] private TextMeshProUGUI criticalText;
+    [SerializeField] private Image icon;
     
     [Header("인벤토리버튼")]
-    public Button inventoryButton;
-    private Image buttonimage;
-    public List<Sprite> buttonImages;
+    [SerializeField] private Button inventoryButton;
+    [SerializeField] private List<Sprite> buttonImages;
+    [SerializeField] private WeaponInventoryUI inventoryUI;
+
     private TextMeshProUGUI buttonText;
-    public WeaponInventoryUI inventoryUI;
+    private Image buttonimage;
     
     [SerializeField] private CursorManager cursorManager;
     void Start()
