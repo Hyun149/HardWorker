@@ -3467,6 +3467,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1358890739 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3524205022964297197, guid: 996505ae160bbe546a0c758226f7fbee, type: 3}
+  m_PrefabInstance: {fileID: 802037697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1475287693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6621,6 +6632,9 @@ MonoBehaviour:
   openButton: {fileID: 360417601}
   closeButton: {fileID: 802037700}
   optionPanelAnimator: {fileID: 802037701}
+  bgmSlider: {fileID: 1358890739}
+  sfxSlider: {fileID: 406291031}
+  mixerController: {fileID: 989852512}
 --- !u!114 &8183835334412595471
 MonoBehaviour:
   m_ObjectHideFlags: 0
