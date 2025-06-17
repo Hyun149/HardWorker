@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -299,7 +299,7 @@ public class ClickEventHandler : MonoBehaviour
     /// </summary>
     public float GetAutoAttackInterval()
     {
-        float interval = playerstat.GetStatLevel(StatType.AssistSpeed);
+        float interval = playerstat.GetStatValue(StatType.AssistSpeed);
         return Mathf.Clamp(interval, 0.3f, 15f);
     }
 
