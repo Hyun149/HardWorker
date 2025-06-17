@@ -104,7 +104,7 @@ public class CustomerManager : MonoBehaviour
     /// <param name="customer">현재 손님 객체</param>
     public void ServeFoodAnimation(Customer customer)
     {
-        GameObject icon = Instantiate(foodIconPrefab, transform.position + Vector3.up, Quaternion.identity);
+        GameObject icon = Instantiate(foodIconPrefab, transform.position, Quaternion.identity);
         icon.transform.localScale = Vector3.one * 1.5f;
 
         SpriteRenderer sr = icon.GetComponent<SpriteRenderer>();
@@ -112,7 +112,7 @@ public class CustomerManager : MonoBehaviour
             sr.sprite = customer.foodData.FoodImage;
 
         icon.transform
-            .DOMove(customer.transform.position + Vector3.up, 1f)
+            .DOMove(customer.transform.position, 1f)
             .SetEase(Ease.InOutQuad)
             .OnComplete(() =>
             {
