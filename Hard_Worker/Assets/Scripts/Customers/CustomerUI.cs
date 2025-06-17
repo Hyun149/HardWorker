@@ -16,6 +16,7 @@ public class CustomerUI : MonoBehaviour
     public Image[] enemyInfos = new Image[4];
     public Image[] enemyInfoImages = new Image[4];
 
+    public GameObject heartEffectPrefab;
     private void Start()
     {
         manager = GetComponent<CustomerManager>();
@@ -63,5 +64,11 @@ public class CustomerUI : MonoBehaviour
             // 재료 개수만큼 UI 비활성화
             enemyInfos[i].gameObject.SetActive(false);   
         }
+    }
+    
+    public void ShowHappyReaction()
+    {
+        GameObject heart = Instantiate(heartEffectPrefab, manager.curCustomer.transform.position + Vector3.up, Quaternion.identity);
+        Destroy(heart, 1.5f); // 하트 이펙트 자동 삭제
     }
 }
