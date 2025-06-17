@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -13,33 +13,24 @@ using System.Collections;
 /// </summary>
 public class StatUI : MonoBehaviour
 {
-    // ================================
-    // 🔗 UI 연결 (Hierarchy에서 드래그 연결 필요)
-    // ================================
+    // UI 연결 (Hierarchy에서 드래그 연결 필요)
     [Header("UI 연결")]
     [SerializeField] private TextMeshProUGUI valueText;  // 최종 능력치 값 표시
     [SerializeField] private TextMeshProUGUI costText;   // 업그레이드 비용 표시
     [SerializeField] private TextMeshProUGUI levelText;  // 현재 레벨 표시
     [SerializeField] private Button upgradeButton;       // 강화 버튼
 
-    // ================================
-    // ⚙ 설정
-    // ================================
+    // 설정
     [Header("설정")]
     [SerializeField] private StatType statType;          // 이 UI가 관리하는 능력치 종류
     public StatType StatType => statType;                // 외부 접근용 프로퍼티
 
     private PlayerStat playerStat;                       // 능력치 계산 및 저장 시스템 참조
 
-    // ================================
-    // 🔁 롱클릭 강화용 변수
-    // ================================
+    // 롱클릭 강화용 변수
     private bool isHolding = false;                      // 현재 누르고 있는지 여부
     private Coroutine holdCoroutine;                     // 반복 실행 코루틴 참조
 
-    // ================================
-    // 📌 초기화
-    // ================================
     /// <summary>
     /// StatType과 PlayerStat 시스템 연결 및 초기 UI 세팅
     /// </summary>
@@ -59,9 +50,6 @@ public class StatUI : MonoBehaviour
         });
     }
 
-    // ================================
-    // 🔄 UI 갱신
-    // ================================
     /// <summary>
     /// 현재 능력치 수치, 레벨, 비용 정보를 가져와 UI에 출력
     /// </summary>
@@ -98,18 +86,18 @@ public class StatUI : MonoBehaviour
         costText.color = playerStat.CanUpgrade(statType) ? Color.black : Color.red;
     }
 
-    // ================================
-    // 롱클릭 시작 (EventTrigger에서 호출됨)
-    // ================================
+    /// <summary>
+    /// 버튼을 누른 상태일 때 호출됩니다. 롱클릭 강화를 시작합니다.
+    /// </summary>
     public void OnPointerDown()
     {
         isHolding = true;
         holdCoroutine = StartCoroutine(HoldUpgradeRoutine());
     }
 
-    // ================================
-    // 롱클릭 종료 (EventTrigger에서 호출됨)
-    // ================================
+    /// <summary>
+    /// 버튼에서 손을 뗐을 때 호출됩니다. 롱클릭 강화를 종료합니다.
+    /// </summary>
     public void OnPointerUp()
     {
         isHolding = false;
@@ -121,9 +109,10 @@ public class StatUI : MonoBehaviour
         }
     }
 
-    // ================================
-    // 강화 반복 실행 코루틴
-    // ================================
+    /// <summary>
+    /// 롱클릭 동안 일정 간격으로 반복 강화 실행을 처리하는 코루틴입니다.
+    /// </summary>
+    /// <returns>IEnumerator</returns>
     private IEnumerator HoldUpgradeRoutine()
     {
         yield return new WaitForSeconds(0.3f);        // 롱클릭 시작 지연

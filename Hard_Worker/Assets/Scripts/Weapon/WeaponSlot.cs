@@ -2,6 +2,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// WeaponSlot : 무기 UI 슬롯을 구성하고 상호작용을 처리하는 클래스
+/// - 아이콘, 텍스트, 버튼 등을 통해 무기 정보를 출력
+/// - 무기 보유 여부, 강화 가능 여부, 장착 여부에 따라 조건 분기하여 UI 표시
+/// - 구매, 강화, 장착 시 기능 실행 및 게임 상태 업데이트
+/// </summary>
 public class WeaponSlot : MonoBehaviour
 {
     [Header("Icon")]
@@ -28,9 +34,14 @@ public class WeaponSlot : MonoBehaviour
     
     private Weapon weapon;
     private WeaponDataSO data;
+
     /// <summary>
-    /// 슬롯 렌더링할때 슬롯스크립트에 inventory,skillpointmanager 주입
+    /// 슬롯에 필요한 의존성 컴포넌트를 외부에서 주입합니다.
     /// </summary>
+    /// <param name="inventory">WeaponInventory 인스턴스</param>
+    /// <param name="skillManager">SkillPointManager 인스턴스</param>
+    /// <param name="manager">WeaponManager 인스턴스</param>
+    /// <param name="weaponStatus">WeaponStatusUI 인스턴스</param>
     public void SetDependencies(WeaponInventory inventory, SkillPointManager skillManager,WeaponManager manager,WeaponStatusUI weaponStatus)
     {
         this.weaponInventory = inventory;
@@ -38,10 +49,12 @@ public class WeaponSlot : MonoBehaviour
         this.weaponManager = manager;
         this.weaponStatusUI = weaponStatus;
     }
-    
+
     /// <summary>
-    /// Slot 세팅: 가진거 or 기본무기일때 , 구매하지 않은 무기일때 나눠서 조건문탐
+    /// 무기 슬롯을 초기화하여 보유/미보유 상태에 따라 UI를 구성합니다.
     /// </summary>
+    /// <param name="dataSO">무기 데이터 (ScriptableObject)</param>
+    /// <param name="ownedWeapon">플레이어가 보유 중인 무기 인스턴스 (없으면 null)</param>
     public void SetupSlot(WeaponDataSO dataSO, Weapon ownedWeapon)
     {
         data = dataSO;
@@ -68,6 +81,7 @@ public class WeaponSlot : MonoBehaviour
         
         if (isOwned || isDefault)
         {
+            // 보유 상태
             icon.color = Color.white;
             hiddenText.gameObject.SetActive(false);
             
@@ -108,6 +122,7 @@ public class WeaponSlot : MonoBehaviour
         }
         else
         {
+            // 미보유 상태
             icon.color = new Color(0, 0, 0, 0.5f);
             hiddenText.text = "???";
             hiddenText.gameObject.SetActive(true);
@@ -126,10 +141,10 @@ public class WeaponSlot : MonoBehaviour
             buyButton.onClick.AddListener(() => TryPurchase());
         }
     }
-    
-    
+
+
     /// <summary>
-    /// 처음 구입시 해당 무기의 강화테이블 레벨0일때의 cost을 내고 구입가능
+    /// 무기 최초 구매 처리: SP 소모 후 무기 인벤토리에 추가하고 저장
     /// </summary>
     void TryPurchase()
     {
@@ -150,10 +165,10 @@ public class WeaponSlot : MonoBehaviour
             GameManager.Instance.SaveGame();
         }
     }
-    
-    
+
+
     /// <summary>
-    /// 처음 구입시 해당 무기의 강화테이블 레벨0의 비용을 내고 구입가능
+    /// 무기 강화 처리: SP 소모 후 강화 진행 및 UI, 세이브 데이터 갱신
     /// </summary>
     void TryEnhance()
     {
@@ -182,7 +197,7 @@ public class WeaponSlot : MonoBehaviour
     }
 
     /// <summary>
-    /// 무기 장착시 
+    /// 무기 장착 처리: 장착 후 저장 및 능력치 갱신
     /// </summary>
     void TryEquip()
     {
@@ -194,11 +209,11 @@ public class WeaponSlot : MonoBehaviour
 
         FindObjectOfType<PlayerStat>()?.NotifyStatChanged();
     }
-    
+
     /// <summary>
-    /// Icon 크기 조절
+    /// 무기 아이콘의 크기를 자동으로 조절합니다.
     /// </summary>
-    /// <param name="sprite">무기 데이터의 아이콘데이터</param>
+    /// <param name="sprite">무기 아이콘 스프라이트</param>
     private void AdjustIconSize(Sprite sprite)
     {
         if (sprite == null) return;
