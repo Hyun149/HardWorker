@@ -24,8 +24,6 @@ public class Enemy : MonoBehaviour
     public float duration = 0.5f; // 던지는데 걸리는 시간
     public Ease easing = Ease.OutQuad; // 움직임 곡선
 
-    public bool isAttackEnd = false; // 플레이어의 공격이 끝났음을 나타냄
-
     public GameObject skillPointPopupPrefab;
     private Transform iconSpawnParent;
 
@@ -55,7 +53,7 @@ public class Enemy : MonoBehaviour
 
         SetProgress(); // 진행도 UI 설정
 
-        isAttackEnd = false;
+      //  isAttackEnd = false;
     }
 
     /// <summary>
@@ -106,7 +104,7 @@ public class Enemy : MonoBehaviour
     /// <param name="progress"></param>
     void EnemyAni(float progress)
     {
-        if (isAttackEnd) return;
+        //if (isAttackEnd) return;
         float ratio = progress / enemyProgress.MaxProgress;
 
         if (ratio >= 0.9f) enemyAni.Cut(3);
@@ -115,7 +113,6 @@ public class Enemy : MonoBehaviour
         if (progress >= enemyProgress.MaxProgress) // 진행도가 최고치일 경우
         {
             // 보상 지급
-            isAttackEnd = true; // 진행도가 최고가 되면 공격못하도록 설정 
             StartCoroutine(Ingredient());
         }
     }
@@ -140,19 +137,19 @@ public class Enemy : MonoBehaviour
     /// <returns></returns>
     IEnumerator Ingredient()
     {
-        isAttackEnd = true;
         DropSkillPoints();
+       
         Throw();
         enemyProgress.SetProgress(enemyProgress.MaxProgress);
-
+        
         yield return new WaitForSeconds(0.15F);
         if (enemyProgress.progressBar.value >= 1f)
         {
             enemyProgress.progressBar.gameObject.SetActive(false);
         }
-
+       // isAttackEnd = true;
         yield return new WaitForSeconds(1F);
-
+        
         // 잡을 적이 남았을 경우 다음 적 생성
         if (enemyManager.EnemyCount < customerManager.food.Enemys.Count)
         {
