@@ -12,5 +12,6 @@ public enum SFXType
     AddGold,
     Buy,
     EquipWeapon,
-    AddSP
+    AddSP,
+    HappySound
 }

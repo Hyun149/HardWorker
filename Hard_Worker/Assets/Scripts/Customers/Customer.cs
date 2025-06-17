@@ -21,7 +21,7 @@ public class Customer : MonoBehaviour
     public bool isOrderComplete = false; // 주문 완료 여부
 
     private Coroutine moveCoroutine;
-
+    public FoodData foodData;
     private void OnEnable()
     {
         customerManager = FindObjectOfType<CustomerManager>();
@@ -90,7 +90,7 @@ public class Customer : MonoBehaviour
 
         // 주문 완료까지 기다림
         yield return new WaitUntil(() => isOrderComplete == true);
-
+        yield return new WaitForSeconds(2F);
         // 주문 완료시 걷기 이동
         StartCoroutine(Exit());
 

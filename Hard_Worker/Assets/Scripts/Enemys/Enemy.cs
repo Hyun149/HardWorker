@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour
         {
             // 요리 완성 확인
             completedCooking?.Invoke();
-
+            customerManager.ServeFoodAnimation(customerManager.curCustomer);
             int reward = customerManager.food.Difficulty * 100;
             GoldManager.Instance.AddGold(reward);
         }
@@ -183,12 +183,13 @@ public class Enemy : MonoBehaviour
         if (chance == 1)
         {
             Debug.Log("숙련도 포인트 획득");
-            SFXManager.Instance.Play(SFXType.AddSP);//숙련도 포인트 획득 효과음
             ShowSkillPointEffect(); //포인트 드랍 이펙트
-            GameManager.Instance.playerData.currentSkillPoint++;
+            SkillPointManager.Instance.AddSP(1);
         }
     }
-
+    /// <summary>
+    /// 스킬포인트 드랍 이펙트
+    /// </summary>
     private void ShowSkillPointEffect()
     {
         if (skillPointIconPrefab == null || iconSpawnParent == null)

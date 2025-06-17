@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using static UnityEngine.UI.CanvasScaler;
+using DG.Tweening;
 
 /// <summary>
 /// 손님 관리하는 스크립트입니다.
@@ -12,13 +13,12 @@ public class CustomerManager : MonoBehaviour
     CustomerPoolManager poolManager;
     CustomerUI customerUI;
     LineController lineController;
-
     //public List<GameObject> customerPrefabs = new List<GameObject>(); // 손님 프리팹
    [HideInInspector] public GameObject customer; // 지금 주문 중인 손님
     public Customer curCustomer;
     public List<FoodData> foods = new List<FoodData>();
     public FoodData food;
-
+    public GameObject foodIconPrefab;
     void Awake()
     {
         poolManager = GetComponent<CustomerPoolManager>();
@@ -92,7 +92,34 @@ public class CustomerManager : MonoBehaviour
 
         int value = Random.Range(0, probabilityFoods.Count);
         food = probabilityFoods[value];
+        curCustomer.foodData = food;
         // 음식 이미지 표시
         customerUI.ShowOrderImage(food);
     } 
+    /// <summary>
+    /// 요리 완료시 호출되는 애니메이션 : 손님만족 이모션포함 
+    /// </summary>
+    /// <param name="customer">현재 손님 객체</param>
+    public void ServeFoodAnimation(Customer customer)
+    {
+        GameObject icon = Instantiate(foodIconPrefab, transform.position + Vector3.up, Quaternion.identity);
+        icon.transform.localScale = Vector3.one * 1.5f;
+
+        SpriteRenderer sr = icon.GetComponent<SpriteRenderer>();
+        if (sr != null && customer.foodData != null)
+            sr.sprite = customer.foodData.FoodImage;
+
+        icon.transform
+            .DOMove(customer.transform.position + Vector3.up, 1f)
+            .SetEase(Ease.InOutQuad)
+            .OnComplete(() =>
+            {
+                Destroy(icon);
+                customerUI.ShowHappyReaction();// 만족 이모션
+                SFXManager.Instance.Play(SFXType.HappySound);// 효과음
+            });
+
+        icon.transform.DOScale(Vector3.one * 0.5f, 1f);
+        icon.transform.DORotate(new Vector3(0, 0, 360), 1f, RotateMode.FastBeyond360);
+    }
 }
