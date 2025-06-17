@@ -1,6 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 무기 아이콘 기반 커서 시스템을 관리하는 클래스입니다.
+/// - 무기 장착 시 커서 이미지 변경
+/// - 커서 위치를 마우스에 따라 실시간 갱신
+/// - UI 열림 여부에 따라 커서 표시 방식 전환
+/// </summary>
 public class CursorManager : MonoBehaviour
 {
     [Header("커서 이미지 UI")]
@@ -20,9 +26,11 @@ public class CursorManager : MonoBehaviour
         Cursor.SetCursor(CreateInvisibleCursor(), Vector2.zero, CursorMode.Auto);
         Cursor.visible = false;
 
+        // 커서 이미지에 Raycast 안 먹히게 설정
         if (cursorImage != null)
             cursorImage.raycastTarget = false;
 
+        // 무기 장착 시 커서 아이콘 자동 업데이트
         if (weaponManager != null)
         {
             weaponManager.OnWeaponEquipped += UpdateCursorSprite;
@@ -37,6 +45,9 @@ public class CursorManager : MonoBehaviour
         UpdateCursorPosition();
     }
 
+    /// <summary>
+    /// 현재 장착된 무기의 아이콘으로 커서 이미지를 업데이트합니다.
+    /// </summary>
     void UpdateCursorSprite()
     {
         if (isOtherUIOpen) return;
@@ -53,6 +64,9 @@ public class CursorManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 커서 이미지를 마우스 위치에 맞게 이동시킵니다.
+    /// </summary>
     void UpdateCursorPosition()
     {
         if (cursorImage == null) return;
@@ -105,6 +119,7 @@ public class CursorManager : MonoBehaviour
             UpdateCursorSprite();
         }
     }
+
     /// <summary>
     /// 클릭 애니메이션 플레이
     /// </summary>

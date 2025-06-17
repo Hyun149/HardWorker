@@ -187,6 +187,7 @@ public class Enemy : MonoBehaviour
             SkillPointManager.Instance.AddSP(1);
         }
     }
+
     /// <summary>
     /// 스킬포인트 드랍 이펙트
     /// </summary>
