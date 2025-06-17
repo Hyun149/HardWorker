@@ -111,7 +111,7 @@ public class Customer : MonoBehaviour
 
         yield return new WaitForSeconds(walkingTime);
 
+        // Pool에 반환
         pool.OnDespawn();
-       // Destroy(gameObject);
     }
 }
