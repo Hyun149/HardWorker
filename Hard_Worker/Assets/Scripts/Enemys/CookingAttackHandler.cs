@@ -33,7 +33,6 @@ public class CookingAttackHandler : MonoBehaviour
     /// </summary>
     public void TryPlayerAttack()
     {
-        Debug.Log("기본 손질 호출");
         if (enemyManager.enemy == null 
             || enemyProgress.TargetProgress >= enemyProgress.MaxProgress)
         {
@@ -92,7 +91,6 @@ public class CookingAttackHandler : MonoBehaviour
         GameObject obj = damageTextPool.GetObject(0);
         if (obj == null)
         {
-            Debug.Log("데미지 텍스트가 없습니다");
             return;
         }
 

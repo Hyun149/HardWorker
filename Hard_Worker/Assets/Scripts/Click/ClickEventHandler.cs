@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -176,11 +176,9 @@ public class ClickEventHandler : MonoBehaviour
     public void CheckAutoAttackUnlock()
     {
         int currentAssistLevel = playerstat.GetStatLevel(StatType.AssistSkill);
-        Debug.Log($"CheckAutoAttackUnlock 실행됨 (현재 어시스트 레벨: {currentAssistLevel}, 필요레벨: {autoAttackUnlockLevel}, 해금 상태: {isAutoAttackUnlocked})");
         
         if (currentAssistLevel >= autoAttackUnlockLevel && !isAutoAttackUnlocked)
         {
-            Debug.Log("자동 공격 해금 조건 달성");
             isAutoAttackUnlocked = true;
             SetAutoAttackLevel(1);
 
@@ -269,7 +267,6 @@ public class ClickEventHandler : MonoBehaviour
     {
         if (!isAutoAttackUnlocked && level > 0)
         {
-            Debug.Log($"자동 공격 레벨 설정: {level}");
             return;
         }
 
