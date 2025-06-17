@@ -51,6 +51,7 @@ public class StatUI : MonoBehaviour
         RefreshUI();
 
         // 버튼 클릭 시: 강화 → UI 갱신
+        upgradeButton.onClick.RemoveAllListeners();
         upgradeButton.onClick.AddListener(() =>
         {
             playerStat.UpgradeStat(statType);
