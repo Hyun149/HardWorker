@@ -108,10 +108,12 @@ public class CookingAttackHandler : MonoBehaviour
     /// <returns>최종 계산된 데미지 (크리티컬 반영)</returns>
     public float CalculateDamage(float baseDamage)
     {
-        float critChance = playerstat.GetFinalStatValue(StatType.CritChance);
+        float critChance = playerstat.GetFinalStatValue(StatType.CritChance) / 100f;
         float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus);
 
-        bool isCritical = Random.value < critChance;
+        bool isCritical = Random.value < Mathf.Clamp01(critChance);
+        Debug.Log($"[AutoAttack] 크확: {critChance}, 크리떴냐: {isCritical}, 크뎀: {critBonus}");
+
         return isCritical ? baseDamage * (1f + critBonus) : baseDamage;
     }
 
