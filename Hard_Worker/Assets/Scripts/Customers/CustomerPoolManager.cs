@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+/// <summary>
+/// 손님의 Pool을 관리하는 스크립트 입니다.
+/// </summary>
 public class CustomerPoolManager : ObjectPoolManager
 {
     CustomerManager customerManager;
@@ -43,7 +45,7 @@ public class CustomerPoolManager : ObjectPoolManager
         {
             prefabIndex = UnityEngine.Random.Range(0, prefabs.Length);
             obj = Instantiate(prefabs[prefabIndex], pos, Quaternion.identity);
-            obj.GetComponent<Customer>().Init(customerManager, foodSelector, lineController, enemyManager);
+            obj.GetComponent<CustomerController>().Init(customerManager, foodSelector, lineController, enemyManager);
             obj.GetComponent<IPoolable>()?.Init(o => ReturnObject(prefabIndex, o));
 
         }
