@@ -157,6 +157,17 @@ public class PlayerStat : MonoBehaviour
                     baseStat += equipped.GetCriticalRate();
                 }
             }
+            else 
+            {
+                if (type == StatType.Cut)
+                {
+                    baseStat += equipped.GetAttack();
+                }
+                else if (type == StatType.CritChance)
+                {
+                    baseStat += equipped.GetCriticalRate();
+                }
+            }
         }
 
         return baseStat;

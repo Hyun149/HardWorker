@@ -40,8 +40,8 @@ public class WeaponStatusUI : MonoBehaviour
     {
         var data = weapon.GetData();
         nameText.text = data.weaponName;
-        attackText.text = $"{weapon.GetAttack()}";
-        criticalText.text = $"{weapon.GetCriticalRate()}%";
+        attackText.text = $"+ {weapon.GetAttack()}";
+        criticalText.text = $"+ {weapon.GetCriticalRate()}%";
         icon.sprite = data.icon;
         icon.preserveAspect = true;
         AdjustIconSize(data.icon);

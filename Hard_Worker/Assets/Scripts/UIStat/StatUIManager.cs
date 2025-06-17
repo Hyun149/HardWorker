@@ -17,10 +17,7 @@ public class StatUIManager : MonoBehaviour
     /// <summary>
     /// 스탯UI 켜질때 자동 갱신
     /// </summary>
-    void OnEnable()
-    {
-        RefreshAllUI();
-    }
+   
     // ================================
     // 🔁 시작 시 모든 StatUI를 초기화
     // ================================

@@ -8,7 +8,7 @@ public class FinalStatUIController : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private GameObject finalStatPanel;
     [SerializeField] private UIAnimator finalStatPanelAnimator;
-
+    [SerializeField] private FinalStatUI finalStatUI;
     private void Awake()
     {
         finalStatButton.onClick.AddListener(OpenFinalStatPanel);
@@ -20,6 +20,7 @@ public class FinalStatUIController : MonoBehaviour
         cursorManager.OnOtherUIOpen();
         SFXManager.Instance.Play(SFXType.UIShow);
         finalStatPanelAnimator.Show();
+        finalStatUI.RefreshAllUI();
     }
 
     private void CloseFinalStatPanel()
