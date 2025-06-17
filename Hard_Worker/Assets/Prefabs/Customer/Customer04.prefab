@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4795677586227896532}
   - component: {fileID: 779886301437355800}
   - component: {fileID: 2676636243255900683}
+  - component: {fileID: 4324943880662674109}
   - component: {fileID: 5137004525538378928}
   - component: {fileID: -5276083890802392153}
   m_Layer: 0
@@ -121,11 +122,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90195f369da56514e8ba536222c32c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodData: {fileID: 0}
+  isOrderComplete: 0
+  moveSpeed: 20
   targetPos: {x: 0, y: 0}
   exitPos: {x: 15, y: -0.81}
+--- !u!114 &4324943880662674109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8351427662974754496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356c782691eca0b4295584117cf0d9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   walkingTime: 10
-  moveSpeed: 20
-  isOrderComplete: 0
 --- !u!114 &5137004525538378928
 MonoBehaviour:
   m_ObjectHideFlags: 0

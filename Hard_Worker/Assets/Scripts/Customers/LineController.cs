@@ -8,6 +8,8 @@ using UnityEngine;
 public class LineController : MonoBehaviour
 {
     CustomerManager customerManager;
+
+
     public Transform lineStartPos; // 줄의 시작 위치
     public float spacing = 3f; // 손님 간 간격
 
@@ -26,7 +28,7 @@ public class LineController : MonoBehaviour
         foreach (var customer in customers) 
         {
             Vector3 targetPos = lineStartPos.position + new Vector3(spacing * i, 0, 0);
-            StartCoroutine(customer.MoveCoroutine(targetPos));
+            customer.GetComponent<CustomerController>().StartMove(targetPos);
             i++;
         }    
     }
@@ -52,16 +54,20 @@ public class LineController : MonoBehaviour
         {
             customerManager.curCustomer = customers.Dequeue();
             Customer customer = customerManager.curCustomer;
-           
+            CustomerController controller = customer.GetComponent<CustomerController>(); 
             // 주문하기
-            yield return StartCoroutine(customer.MakeOrder(lineStartPos.position));
+            yield return StartCoroutine(controller.MakeOrder(lineStartPos.position));
 
             // 나머지 손님 이동
             List<Customer> tempList = new List<Customer>(customers);
             for (int i = 0; i < tempList.Count; i++)
             {
                 Vector3 newPos = lineStartPos.position + new Vector3(spacing * i, 0, 0);
-                yield return StartCoroutine(tempList[i].MoveCoroutine(newPos));
+
+                controller = tempList[i].GetComponent<CustomerController>();
+               // yield return StartCoroutine(controller.MoveCoroutine(newPos));===============
+                controller.StartMove(newPos);
+                yield return null;
             }
         }
     }

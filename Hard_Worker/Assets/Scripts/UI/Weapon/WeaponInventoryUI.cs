@@ -1,17 +1,34 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// WeaponInventoryUI : 무기 인벤토리 UI를 관리하는 클래스입니다.
+/// - 슬롯 프리팹을 기반으로 현재 보유 중인 무기를 동적으로 표시합니다.
+/// - 무기 장착/구매/강화 후 UI를 자동으로 갱신합니다.
+/// - 무기 장착 시 WeaponManager 이벤트를 구독하여 동기화 처리합니다.
+/// </summary>
 public class WeaponInventoryUI : MonoBehaviour
 {
-    public Transform slotContainer; // SlotContainer
-    public GameObject slotPrefab;
-    public TextMeshProUGUI spAmountText;
+    [Header("UI 구성요소")]
+    [Tooltip("무기 슬롯이 배치될 부모 컨테이너")]
+    [SerializeField] private Transform slotContainer;
+
+    [Tooltip("무기 슬롯 프리팹")]
+    [SerializeField] private GameObject slotPrefab;
+
+    [Tooltip("보유 중인 스킬 포인트 텍스트")]
+    [SerializeField] private TextMeshProUGUI spAmountText;
+
+    [Header("의존성")]
     [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private WeaponInventory weaponInventory;
     [SerializeField] private SkillPointManager skillPointManager;
     [SerializeField] private WeaponStatusUI weaponStatusUI;
     [SerializeField] private CursorManager cursorManager;
 
+    /// <summary>
+    /// 시작 시 저장된 무기 데이터를 불러오고 인벤토리 UI를 렌더링합니다.
+    /// </summary>
     private void Start()
     {
         weaponInventory.LoadFromPlayerData(GameManager.Instance.playerData);
@@ -27,12 +44,19 @@ public class WeaponInventoryUI : MonoBehaviour
         weaponManager.OnWeaponEquipped += RenderInventory;
     }
 
+    /// <summary>
+    /// 이벤트 구독을 해제하여 메모리 누수나 중복 호출을 방지합니다.
+    /// </summary>
     private void OnDisable()
     {
         weaponManager.OnWeaponEquipped -= RenderInventory;
     }
+
     /// <summary>
-    /// 인벤에서 장착,업글,구매 등 버튼을 눌렀을때호출, 슬롯들 UI를 업데이트해줌
+    /// 인벤토리를 다시 렌더링하여 슬롯을 갱신합니다.
+    /// - 기존 슬롯들을 제거한 뒤, 현재 보유한 무기를 기준으로 슬롯을 재생성합니다.
+    /// - 슬롯에는 무기 데이터, 소유 여부, 강화 상태가 반영됩니다.
+    /// - 스킬 포인트도 최신 값으로 갱신됩니다.
     /// </summary>
     public void RenderInventory()
     {
