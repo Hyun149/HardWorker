@@ -37,7 +37,10 @@ public class LineController : MonoBehaviour
 
     public void RemoveCustomer(Customer customer)
     {
-        customers.Dequeue();
+        if (customers.Count > 0 && customers.Peek() == customer)
+        {
+            customers.Dequeue();
+        }
     }
     /// <summary>
     /// 줄세우기 관리 하는 부분입니다.
