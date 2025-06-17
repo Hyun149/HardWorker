@@ -10,14 +10,7 @@ public class SkillPointManager : MonoSingleton<SkillPointManager>
 {
     [SerializeField] private int currentSP; // 현재 보유 중인 스킬 포인트
     public UnityEvent OnSPChanged;          // SP 변경 시 호출되는 이벤트 (UI 연동 등)
-
-    /// <summary>
-    /// 싱글톤 기반 초기화 처리 (기본 Awake 호출)
-    /// </summary>
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    
 
     /// <summary>
     /// 시작 시 저장된 플레이어 SP 정보를 로드하여 초기화합니다.

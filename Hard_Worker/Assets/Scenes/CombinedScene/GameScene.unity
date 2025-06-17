@@ -1640,6 +1640,10 @@ PrefabInstance:
       propertyPath: weaponInventory
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8945108131785193839, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
+      propertyPath: currentSP
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9203509876420481208, guid: a7be0793b18316c45b191c05f74ace5e, type: 3}
       propertyPath: cursorImage
       value: 
