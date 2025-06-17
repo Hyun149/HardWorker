@@ -15,7 +15,16 @@ public class FinalStatUI : MonoBehaviour
     private void Start()
     {
         playerStat = FindObjectOfType<PlayerStat>();
+        playerStat.onStatChanged += RefreshAllUI;
         RefreshAllUI();
+    }
+
+    private void OnDestroy()
+    {
+        if (playerStat != null)
+        {
+            playerStat.onStatChanged -= RefreshAllUI;
+        }
     }
 
     public void RefreshAllUI()

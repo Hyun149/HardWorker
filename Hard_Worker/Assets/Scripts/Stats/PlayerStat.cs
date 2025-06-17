@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ using UnityEngine;
 /// </summary>
 public class PlayerStat : MonoBehaviour
 {
+    public event Action onStatChanged;
+
     [Header("스탯 데이터 연결")]
     [SerializeField] private List<StatData> statDataList; // 능력치 종류별 ScriptableObject 리스트
     [SerializeField] private WeaponManager weaponManager;
@@ -92,6 +95,8 @@ public class PlayerStat : MonoBehaviour
 
         GameManager.Instance.playerData.SetStatLevel(type, level + 1);
         GameManager.Instance.SaveGame(); // 능력치 강화 후 저장
+
+        onStatChanged?.Invoke();
 
         if (type == StatType.AssistSkill)
         {
