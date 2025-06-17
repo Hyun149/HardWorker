@@ -903,9 +903,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1475287695}
     - target: {fileID: 5908969035960290506, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+      propertyPath: CoinIconPrefab
+      value: 
+      objectReference: {fileID: 1541275561482636046, guid: ea4916accf1cf3e43913b8bcc6c515e6, type: 3}
+    - target: {fileID: 5908969035960290506, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
       propertyPath: heartEffectPrefab
       value: 
       objectReference: {fileID: 8617451682801799161, guid: 2894c88255277654ebee5bcb96bd3d88, type: 3}
+    - target: {fileID: 5908969035960290506, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+      propertyPath: rewardPopupPrefab
+      value: 
+      objectReference: {fileID: 3997469138986136221, guid: b074aeb80b0dc0740a0a79d2aabecd46, type: 3}
     - target: {fileID: 5908969035960290506, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
       propertyPath: enemyInfos.Array.data[0]
       value: 

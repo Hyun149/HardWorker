@@ -160,7 +160,7 @@ public class Enemy : MonoBehaviour
         }
         // 전부 다 잡은 경우
         else
-        {
+        {   
             // 요리 완성 확인
             completedCooking?.Invoke();
             customerManager.ServeFoodAnimation(customerManager.curCustomer);
@@ -168,6 +168,8 @@ public class Enemy : MonoBehaviour
             StageManager.Instance.UpdateReward();  // 보상 골드 업데이트
             int reward = StageManager.Instance.ReturnReward();  // 보상 골드 가져오기
             GoldManager.Instance.AddGold(reward);  // 업데이트 된 값을 계산하여 골드 지급
+            
+            customerManager.customerUI.ShowRewardReaction(reward); // 보상 연출 UI 호출
         }
 
         enemyProgress.SetProgress(0);

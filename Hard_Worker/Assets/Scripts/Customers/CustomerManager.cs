@@ -9,7 +9,7 @@ using DG.Tweening;
 public class CustomerManager : MonoBehaviour
 {
     CustomerPoolManager poolManager;
-    CustomerUI customerUI;
+    public CustomerUI customerUI;
     LineController lineController;
     //public List<GameObject> customerPrefabs = new List<GameObject>(); // 손님 프리팹
    [HideInInspector] public GameObject customer; // 지금 주문 중인 손님
@@ -117,7 +117,7 @@ public class CustomerManager : MonoBehaviour
             .OnComplete(() =>
             {
                 Destroy(icon);
-                customerUI.ShowHappyReaction();// 만족 이모션
+                customerUI.ShowServeReaction();// 서빙시 손님 반응
                 SFXManager.Instance.Play(SFXType.HappySound);// 효과음
             });
 
