@@ -103,22 +103,22 @@ public class ClickEventHandler : MonoBehaviour
         Vector3 clickPosition = GetClickWorldPosition();
         cursorManager?.PlayClickAnimation();
 
-        cookingAttackHandler.TryPlayerAttack();
-        
         float critChance = Mathf.Clamp(playerstat.GetStatValue(StatType.CritChance) * 0.01f, 0f, 0.95f);
-        bool isCritical = Random.Range(0f, 1f) < critChance;
+        bool isCritical = Random.value < critChance;
+
+        cookingAttackHandler.TryPlayerAttack(isCritical);
 
         float baseDamage = playerstat.GetStatValue(StatType.Cut);
+        float critBonus = playerstat.GetStatValue(StatType.CritBonus);
+        float finalDamage = isCritical ? baseDamage * (1f + critBonus) : baseDamage;
 
         if (isCritical)
         {
-            float critBonus = playerstat.GetStatValue(StatType.CritBonus);   
-            float critDamage = baseDamage * (1f + critBonus);
-            OnCriticalAttack(clickPosition, critDamage);
+            OnCriticalAttack(clickPosition, finalDamage);
         }
         else
         {
-            OnNormalAttack(clickPosition, baseDamage);
+            OnNormalAttack(clickPosition, finalDamage);
         }
     }
 
@@ -152,7 +152,7 @@ public class ClickEventHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// 치명타 공격 처리: 이펙트, 사운드 실행
+    /// 크리티컬 공격 처리: 이펙트, 사운드 실행
     /// </summary>
     void OnCriticalAttack(Vector3 position, float damage)
     {

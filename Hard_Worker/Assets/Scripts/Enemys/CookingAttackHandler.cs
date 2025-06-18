@@ -68,7 +68,7 @@ public class CookingAttackHandler : MonoBehaviour
     /// - 데미지 텍스트 출력
     /// - 스킬 발동
     /// </summary>
-    public void TryPlayerAttack()
+    public void TryPlayerAttack(bool isCritical)
     {
         if (enemyManager.enemy == null 
             || enemyProgress.TargetProgress >= enemyProgress.MaxProgress)
@@ -78,12 +78,13 @@ public class CookingAttackHandler : MonoBehaviour
         
         clickCount++;       //클릭 카운트
         float baseDamage = playerstat.GetFinalStatValue(StatType.Cut);
-        float damage = CalculateDamage(baseDamage);
+        float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus);
+        float finalDamage = isCritical ? baseDamage * (1f + critBonus) : baseDamage;
 
-        enemyManager.enemy.TakeDamage(damage);
-        ShowDamageText(damage);
+        enemyManager.enemy.TakeDamage(finalDamage);
+        ShowDamageText(finalDamage, isCritical);
         //스킬 발동
-        currentSkill?.Activate(enemyManager.enemy, clickCount,damage,ShowDamageText);
+        currentSkill?.Activate(enemyManager.enemy, clickCount, finalDamage, dmg => ShowDamageText(dmg, isCritical));
     }
 
     /// <summary>
@@ -99,9 +100,14 @@ public class CookingAttackHandler : MonoBehaviour
         }
 
         float baseDamage = playerstat.GetFinalStatValue(StatType.AssistSkill);
-        float damage = CalculateDamage(baseDamage);
+
+        float critChance = playerstat.GetFinalStatValue(StatType.CritChance) * 0.01f;
+        float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus);
+        bool isCritical = Random.value < Mathf.Clamp01(critChance);
+
+        float damage = isCritical ? baseDamage * (1f + critBonus) : baseDamage;
        
-        ShowDamageText(damage);
+        ShowDamageText(damage, isCritical);
         enemyManager.enemy.TakeDamage(damage);
       
     }
@@ -125,7 +131,7 @@ public class CookingAttackHandler : MonoBehaviour
     /// - 공격 데미지를 숫자로 띄워줍니다.
     /// </summary>
     /// <param name="damage">표시할 데미지 값</param>
-    private void ShowDamageText(float damage)
+    private void ShowDamageText(float damage, bool isCritical)
     {
         GameObject obj = damageTextPool.GetObject(0);
         if (obj == null)
@@ -135,7 +141,7 @@ public class CookingAttackHandler : MonoBehaviour
 
         DamageText damageText = obj.GetComponent<DamageText>();
         damageText.attackDamage = damage;
-        damageText.ShowText();
+        damageText.ShowText(isCritical);
         damageText.Init(obj => damageTextPool.ReturnObject(0, obj));
     }
 }
