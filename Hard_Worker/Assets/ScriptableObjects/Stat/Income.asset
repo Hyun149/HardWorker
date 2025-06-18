@@ -21,4 +21,4 @@ MonoBehaviour:
   - 12
   - 15
   upgradeCosts: c8000000900100005802000020030000e8030000
-  maxLevel: 50
+  maxLevel: 1000
