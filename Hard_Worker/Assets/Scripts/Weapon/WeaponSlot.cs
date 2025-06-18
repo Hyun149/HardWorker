@@ -55,7 +55,7 @@ public class WeaponSlot : MonoBehaviour
     /// 무기 슬롯을 초기화하여 보유/미보유 상태에 따라 UI를 구성합니다.
     /// </summary>
     /// <param name="dataSO">무기 데이터 (ScriptableObject)</param>
-    /// <param name="ownedWeapon">플레이어가 보유 중인 무기 인스턴스 (없으면 null)</param>
+    /// <param name="ownedWeapon">플레이어가 보유 중인 무기 인스턴스</param>
     public void SetupSlot(WeaponDataSO dataSO, Weapon ownedWeapon)
     {
         data = dataSO;
@@ -165,6 +165,10 @@ public class WeaponSlot : MonoBehaviour
             SFXManager.Instance.Play(SFXType.Buy);
             GameManager.Instance.SaveGame();
         }
+        else
+        {
+            WarningUI.Instance.Show("숙련도가 부족합니다!");
+        }
     }
 
 
@@ -194,6 +198,10 @@ public class WeaponSlot : MonoBehaviour
                 saveData.enhanceLevel = weapon.GetLevel();
                 GameManager.Instance.SaveGame();
             }
+        }
+        else
+        {
+            WarningUI.Instance.Show("숙련도가 부족합니다!");
         }
     }
 
