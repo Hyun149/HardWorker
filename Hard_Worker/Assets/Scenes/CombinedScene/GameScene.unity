@@ -487,9 +487,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponInventory
       objectReference: {fileID: 0}
+    - target: {fileID: 3847568699938483923, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4526490481371147779, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5701602206478339732, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084884940457262712, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6101803661378427683, guid: 8cbafaab7e96bf141b90a9791a183eaa, type: 3}
       propertyPath: m_Pivot.x
