@@ -10,13 +10,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Vector3 pos = new Vector3 (0.3f, -3f, 0); // 적이 생성될 위치
 
     private CustomerManager customerManager;
+    private EnemyProgress enemyProgress;
+
     private int enemyCount = 0; // 스테이지 당 죽인 적의 개수
     public int EnemyCount => enemyCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        customerManager = FindObjectOfType<CustomerManager>();  
+        customerManager = FindObjectOfType<CustomerManager>();
+        enemyProgress = GetComponent<EnemyProgress>();
     }
 
     /// <summary>
@@ -29,7 +32,7 @@ public class EnemyManager : MonoBehaviour
         UpEnemyCount(1);
 
         // 적 초기화
-        enemy.Init();
+        enemy.Init(customerManager,this, enemyProgress);
         FindObjectOfType<ClickEventHandler>()?.StartAutoAttack();
     }
 

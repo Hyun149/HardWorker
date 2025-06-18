@@ -52,7 +52,7 @@ public class DamageText : MonoBehaviour, IPoolable
         // 위로 올라가는 애니메이션 후, Pool에 return
         FadeOutAndMove(attackDamage, () =>
         {
-            // damageTextPool.ReturnObject(0,this.gameObject);
+            // 풀로 반환
             OnDespawn();
         });
     }
