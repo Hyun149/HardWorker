@@ -5,8 +5,8 @@
 public class Weapon
 {
     public WeaponDataSO data;
-    private int enhanceLevel;
 
+    private int enhanceLevel;
 
     /// <summary>
     /// 무기 인스턴스를 생성합니다.

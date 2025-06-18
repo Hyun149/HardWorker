@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("툴팁 오브젝트 연결")]
-    // UI에서 드래그로 연결할 툴팁 오브젝트
     [SerializeField] private GameObject tooltipObject;
 
     /// <summary>

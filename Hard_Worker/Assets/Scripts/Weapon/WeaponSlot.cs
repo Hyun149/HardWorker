@@ -11,21 +11,22 @@ using UnityEngine.UI;
 public class WeaponSlot : MonoBehaviour
 {
     [Header("Icon")]
-    public Image icon;
-    public TextMeshProUGUI hiddenText;
+    [SerializeField] private Image icon;
+    [SerializeField] private TextMeshProUGUI hiddenText;
 
     [Header("Text")]
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI descriptionText;
-    public TextMeshProUGUI attackValue;
-    public TextMeshProUGUI criticalValue;
-    public GameObject infoText;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI attackValue;
+    [SerializeField] private TextMeshProUGUI criticalValue;
+    [SerializeField] private GameObject infoText;
+
     [Header("InteractContainer")]
-    public Button buyButton;
-    public Button upgradeButton;
-    public Button equipButton;
-    public TextMeshProUGUI maxUpgradeText;
-    public TextMeshProUGUI[] requireSPTexts;
+    [SerializeField] private Button buyButton;
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private Button equipButton;
+    [SerializeField] private TextMeshProUGUI maxUpgradeText;
+    [SerializeField] private TextMeshProUGUI[] requireSPTexts;
 
     private WeaponInventory weaponInventory;
     private SkillPointManager skillPointManager;

@@ -23,13 +23,15 @@ public class StatUI : MonoBehaviour
     // 설정
     [Header("설정")]
     [SerializeField] private StatType statType;          // 이 UI가 관리하는 능력치 종류
-    public StatType StatType => statType;                // 외부 접근용 프로퍼티
+
+    // 롱클릭 강화용 변수
+    private Coroutine holdCoroutine;                     // 반복 실행 코루틴 참조
+    private bool isHolding = false;                      // 현재 누르고 있는지 여부
 
     private PlayerStat playerStat;                       // 능력치 계산 및 저장 시스템 참조
 
-    // 롱클릭 강화용 변수
-    private bool isHolding = false;                      // 현재 누르고 있는지 여부
-    private Coroutine holdCoroutine;                     // 반복 실행 코루틴 참조
+    public StatType StatType => statType;                // 외부 접근용 프로퍼티
+
 
     /// <summary>
     /// StatType과 PlayerStat 시스템 연결 및 초기 UI 세팅

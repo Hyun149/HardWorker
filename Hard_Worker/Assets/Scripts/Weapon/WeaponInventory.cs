@@ -10,6 +10,7 @@ using UnityEngine;
 public class WeaponInventory : MonoBehaviour
 {
     public List<WeaponDataSO> allWeaponData;
+
     private List<Weapon> ownedWeapons = new();
     
     public List<Weapon> GetWeapons() => ownedWeapons;
