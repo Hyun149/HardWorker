@@ -238,7 +238,7 @@ public class ClickEventHandler : MonoBehaviour
                 float critBonus = playerstat.GetStatValue(StatType.CritBonus);
                 float finalDamage = isCritical ? assistPower * (1f + critBonus) : assistPower;
 
-                cookingAttackHandler.TryAutoAttack();
+                cookingAttackHandler.TryAutoAttack(isCritical);
 
                 if (isCritical)
                 {

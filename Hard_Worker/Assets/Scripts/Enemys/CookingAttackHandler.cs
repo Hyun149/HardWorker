@@ -92,7 +92,7 @@ public class CookingAttackHandler : MonoBehaviour
     /// - 어시스트 능력치 기반 공격
     /// - 적이 없는 경우 경고 로그 출력
     /// </summary>
-    public void TryAutoAttack()
+    public void TryAutoAttack(bool isCritical)
     {
         if (enemyManager.enemy == null || enemyManager.enemy == null)
         {
@@ -100,16 +100,11 @@ public class CookingAttackHandler : MonoBehaviour
         }
 
         float baseDamage = playerstat.GetFinalStatValue(StatType.AssistSkill);
-
-        float critChance = playerstat.GetFinalStatValue(StatType.CritChance) * 0.01f;
         float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus);
-        bool isCritical = Random.value < Mathf.Clamp01(critChance);
-
         float damage = isCritical ? baseDamage * (1f + critBonus) : baseDamage;
        
         ShowDamageText(damage, isCritical);
         enemyManager.enemy.TakeDamage(damage);
-      
     }
 
     /// <summary>
