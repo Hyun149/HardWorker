@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: CritBonus
   m_EditorClassIdentifier: 
   statType: 2
-  baseValue: 0.1
+  baseValue: 1
   upgradeValues:
-  - 0.1
-  - 0.2
-  - 0.3
-  - 0.4
-  - 0.5
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
   upgradeCosts: 2c01000058020000e80300004006000098080000
   maxLevel: 50
