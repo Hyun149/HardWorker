@@ -3,7 +3,7 @@
 /// </summary>
 public interface IWeaponSkill
 {
-    void Activate(Enemy target, int clickCount, float damage,System.Action<float> showDamageText);
+    void Activate(Enemy target, int clickCount, float finalDamage,System.Action<float> showDamageText);
 }
 /// <summary>
 /// 무기 스킬 타입에 따라 해당 스킬 인스턴스를 생성하여 반환하는 팩토리 클래스
