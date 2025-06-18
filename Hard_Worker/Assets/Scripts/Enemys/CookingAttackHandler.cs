@@ -78,7 +78,7 @@ public class CookingAttackHandler : MonoBehaviour
         
         clickCount++;       //클릭 카운트
         float baseDamage = playerstat.GetFinalStatValue(StatType.Cut);
-        float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus);
+        float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus) * 0.01f;
         float finalDamage = isCritical ? baseDamage * (1f + critBonus) : baseDamage;
 
         enemyManager.enemy.TakeDamage(finalDamage);
@@ -100,7 +100,7 @@ public class CookingAttackHandler : MonoBehaviour
         }
 
         float baseDamage = playerstat.GetFinalStatValue(StatType.AssistSkill);
-        float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus);
+        float critBonus = playerstat.GetFinalStatValue(StatType.CritBonus) * 0.01f;
         float damage = isCritical ? baseDamage * (1f + critBonus) : baseDamage;
        
         ShowDamageText(damage, isCritical);
