@@ -106,10 +106,22 @@ public class DamageText : MonoBehaviour, IPoolable
     }
 
     /// <summary>
-    /// 텍스트에 현재 데미지 수치를 표시합니다.
+    /// 크리티컬 여부에 따라 강조된 텍스트를 표시합니다.
     /// </summary>
-    public void ShowText()
+    /// <param name="isCritical">크리티컬 여부</param>
+    public void ShowText(bool isCritical)
     {
         damageText.text = attackDamage.ToString();
+
+        if (isCritical)
+        {
+            damageText.color = Color.yellow;
+            damageText.fontSize += 10;
+        }
+        else
+        {
+            damageText.color = Color.white;
+            damageText.fontSize = 62.2f;
+        }
     }
 }
