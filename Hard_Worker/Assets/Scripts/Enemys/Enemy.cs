@@ -43,11 +43,11 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// 적을 초기화합니다.
     /// </summary>
-    public void Init()
+    public void Init(CustomerManager _customerManager, EnemyManager _enemyManager, EnemyProgress _enemyProgress)
     {
-        customerManager = FindObjectOfType<CustomerManager>();
-        enemyManager = FindObjectOfType<EnemyManager>();
-        enemyProgress = FindObjectOfType<EnemyProgress>();
+        customerManager = _customerManager;
+        enemyManager = _enemyManager;
+        enemyProgress = _enemyProgress;
         enemyAni = GetComponent<EnemyAni>();
 
         SetImage(); // 적 이미지 변경
@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
     {
         // 진행도 UI 설정
         enemyProgress.progressBar.gameObject.SetActive(true);
-        enemyProgress.SetMaxProgress(StageManager.Instance.UpdateMaxProgress());
+        enemyProgress.SetMaxProgress(StageManager.Instance.UpdateMaxProgress(), enemyData.IsBoss);
         enemyProgress.Init(); // 진행도 0으로 변경
 
         onChangeProgress += enemyProgress.UpdateProgressBar;
@@ -151,7 +151,6 @@ public class Enemy : MonoBehaviour
         {
             enemyProgress.progressBar.gameObject.SetActive(false);
         }
-       // isAttackEnd = true;
         yield return new WaitForSeconds(1F);
         
         // 잡을 적이 남았을 경우 다음 적 생성

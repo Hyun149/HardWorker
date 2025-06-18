@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class EnemyProgress : MonoBehaviour
 {
-    public GameObject boosProgressBar;              // 보스 전용 슬라이더 참조 (위치 지정용)
+    public GameObject bossProgressBar;               // 보스 전용 슬라이더 참조 (위치 지정용)
     public UnityEngine.UI.Slider progressBar;       // 인스턴스화된 진행도 바
     
     [SerializeField] private UnityEngine.UI.Slider progressBarPrefab; // 진행도 UI 프리팹
@@ -70,7 +70,7 @@ public class EnemyProgress : MonoBehaviour
 
         if (target.GetComponent<Enemy>().enemyData.IsBoss == true)
         {
-            target = boosProgressBar.transform;
+            target = bossProgressBar.transform;
             rt.sizeDelta = new Vector2(900, 200);
         }
         else
@@ -121,6 +121,8 @@ public class EnemyProgress : MonoBehaviour
 
         curProgress = targetProgress;
         progressBar.value = end;
+
+        hpCoroutine = null;
     }
 
     /// <summary>
@@ -136,11 +138,11 @@ public class EnemyProgress : MonoBehaviour
     /// <summary>
     /// 최대 진행도를 변경합니다.
     /// </summary>
-    public void SetMaxProgress(float progress)
+    public void SetMaxProgress(float progress, bool isBoss)
     {
         maxProgress = progress;
 
-        if (enemyManager.enemy.enemyData.IsBoss == true)
+        if (isBoss)
         {
             maxProgress = maxProgress * 5;
         }

@@ -58,7 +58,6 @@ public class CustomerController : MonoBehaviour
     /// <summary>
     ///  재사용시 코루틴의 중복 사용을 막기 위한 부분입니다.
     /// </summary>
-    /// <param name="targetPos"></param>
     /// <returns></returns>
     public void StartMove(Vector2 targetPos)
     {

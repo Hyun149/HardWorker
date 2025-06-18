@@ -999,6 +999,10 @@ PrefabInstance:
       propertyPath: boosProgressBar
       value: 
       objectReference: {fileID: 1117944073}
+    - target: {fileID: 8884439746618279214, guid: 498cb7618075ee844aa0dd92a54f785a, type: 3}
+      propertyPath: bossProgressBar
+      value: 
+      objectReference: {fileID: 1117944073}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3879,7 +3883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0, y: -45.03}
+  m_AnchoredPosition: {x: 0, y: -45.03}
   m_SizeDelta: {x: -129.7, y: -190.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1682627461
@@ -7038,10 +7042,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e9682c2686f794196dbd32190999ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSP: 0
   OnSPChanged:
     m_PersistentCalls:
       m_Calls: []
+  currentSP: 0
 --- !u!114 &9203509875889434074
 MonoBehaviour:
   m_ObjectHideFlags: 0
