@@ -85,12 +85,10 @@ public class CustomerController : MonoBehaviour
             isArrived = true;
             yield return null; // 다음 프레임까지 대기
         }
-
         customerAni.Idle();
 
         // 도착 후 정확히 위치 보정
         transform.position = targetPos;
-
     }
 
     /// <summary>
