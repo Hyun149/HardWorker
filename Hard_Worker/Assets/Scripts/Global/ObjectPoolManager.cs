@@ -6,10 +6,11 @@ using UnityEngine;
 /// </summary>
 public class ObjectPoolManager : MonoBehaviour
 {
-    public GameObject[] prefabs; // 프리팹
-    protected Dictionary<int, Queue<GameObject>> pools = new Dictionary<int, Queue<GameObject>>();
-
     public static ObjectPoolManager Instance { get; private set; }
+
+    public GameObject[] prefabs; // 프리팹
+    
+    protected Dictionary<int, Queue<GameObject>> pools = new Dictionary<int, Queue<GameObject>>();
 
     protected virtual void Awake()
     {

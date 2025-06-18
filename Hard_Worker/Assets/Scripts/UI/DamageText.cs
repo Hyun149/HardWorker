@@ -10,16 +10,17 @@ using UnityEngine;
 /// </summary>
 public class DamageText : MonoBehaviour, IPoolable
 {
-    private Action<GameObject> returnToPool;
-    GameObject damageTexts;
-
-    public TMP_Text damageText;
-    public RectTransform rect;
-    public Vector2 startPos = new Vector3(0f, -3f, 0); // 적이 생성될 위치
-    public float distance = 15f; // 위로 이동할 거리
-    public float duration = 1.5f; // 사라지는데 걸리는 시간
-    float speed = 100f;
     public float attackDamage;
+
+    [SerializeField] private float duration = 1.5f; // 사라지는데 걸리는 시간
+    [SerializeField] private TMP_Text damageText;
+    [SerializeField] private RectTransform rect;
+    [SerializeField] private Vector2 startPos = new Vector3(0f, -3f, 0); // 적이 생성될 위치
+    [SerializeField] private float distance = 15f; // 위로 이동할 거리
+
+    private Action<GameObject> returnToPool;
+    private GameObject damageTexts;
+    private float speed = 100f;
 
     /// <summary>
     /// 오브젝트를 풀에서 꺼낼 때 호출되는 초기화 메서드입니다.

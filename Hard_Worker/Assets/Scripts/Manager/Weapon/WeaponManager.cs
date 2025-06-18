@@ -9,13 +9,13 @@ using UnityEngine;
 /// </summary>
 public class WeaponManager : MonoBehaviour
 {
+    public event Action OnWeaponEquipped;   //착용 이벤트 
+    
     [Header("무기")]
     [SerializeField] WeaponDataSO defaultWeaponData;  // 기본무기
 
     [SerializeField] private WeaponInventory weaponInventory;
     [SerializeField] private WeaponStatusUI weaponStatusUI;
-    
-    public event Action OnWeaponEquipped;   //착용 이벤트 
 
     private Weapon equippedWeapon;
 

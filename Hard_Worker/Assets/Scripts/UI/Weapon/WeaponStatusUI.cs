@@ -21,10 +21,11 @@ public class WeaponStatusUI : MonoBehaviour
     [SerializeField] private List<Sprite> buttonImages;
     [SerializeField] private WeaponInventoryUI inventoryUI;
 
+    [SerializeField] private CursorManager cursorManager;
+    
     private TextMeshProUGUI buttonText;
     private Image buttonimage;
     
-    [SerializeField] private CursorManager cursorManager;
     void Start()
     {
         inventoryButton.onClick.AddListener(OnClickInventoryButton);

@@ -9,7 +9,7 @@ using DG.Tweening;
 public class BlinkText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI targetText;
-    [SerializeField] private float duration = 1f;
+    [SerializeField] private float duration;
 
     /// <summary>
     /// 시작 시 텍스트 컴포넌트를 초기화하고 깜빡임을 시작합니다.

@@ -4359,6 +4359,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1309029429}
     m_Modifications:
+    - target: {fileID: 449748166602846533, guid: 34ad77a85995da345a79a3d81c30a4f8, type: 3}
+      propertyPath: speed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 449748166602846533, guid: 34ad77a85995da345a79a3d81c30a4f8, type: 3}
+      propertyPath: distance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 449748166602846533, guid: 34ad77a85995da345a79a3d81c30a4f8, type: 3}
+      propertyPath: duration
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4957458811609911220, guid: 34ad77a85995da345a79a3d81c30a4f8, type: 3}
       propertyPath: m_Name
       value: DamageText

@@ -10,10 +10,10 @@ using UnityEngine.UI;
 public class CursorManager : MonoBehaviour
 {
     [Header("커서 이미지 UI")]
-    public Image cursorImage;
+    [SerializeField] private Image cursorImage;
 
     [Header("무기 매니저")]
-    public WeaponManager weaponManager;
+    [SerializeField] private WeaponManager weaponManager;
     
     [Header("애니메이션")]
     [SerializeField] private Animator cursorAnimator;

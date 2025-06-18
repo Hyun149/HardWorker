@@ -6,8 +6,8 @@ using UnityEngine;
 /// </summary>
 public class DamageTextPool : ObjectPoolManager
 {
-    EnemyManager enemyManager;
-    EnemyProgress enemyProgress;
+    private EnemyManager enemyManager;
+    private EnemyProgress enemyProgress;
 
     /// <summary>
     /// 풀 매니저 초기화 시 호출됩니다.
