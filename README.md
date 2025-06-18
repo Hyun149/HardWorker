@@ -18,7 +18,7 @@
 ---
 
 ## 🍞 플레이 영상
-(업로드 예정)
+[![유튜브 영상 보기](https://img.youtube.com/vi/-YaOQCJJoZg/0.jpg)](https://www.youtube.com/watch?v=-YaOQCJJoZg)
 
 ---
 
