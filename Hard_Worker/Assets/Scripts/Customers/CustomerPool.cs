@@ -45,8 +45,6 @@ public class CustomerPool : MonoBehaviour, IPoolable
     /// </summary>
     public void OnDespawn()
     {
-        // 손님을 큐에서 해제
-
         returnToPool?.Invoke(gameObject); // 풀로 반환
     }
 }
